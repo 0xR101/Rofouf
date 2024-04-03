@@ -1,0 +1,163 @@
+body,
+p,
+a {
+  padding: 0px;
+  margin: 0px;
+  text-decoration: none;
+  color: white;
+}
+a {
+  text-align: center;
+}
+nav {
+  gap: 10px;
+  padding: 10px;
+  background-color: #533737;
+  color: white;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position: fixed;
+}
+input {
+  flex: 1;
+  padding-left: 10px;
+  border-radius: 10px;
+  background-color: white;
+
+  color: #5a5a5a;
+  opacity: 0.4;
+  height: 40px;
+  border-style: none;
+}
+
+#options {
+  align-items: center;
+  gap: 10px;
+  flex: 2;
+  display: flex;
+  gap: 50px;
+}
+
+#options a:hover {
+  color: #978686;
+}
+.option {
+  font-weight: bold;
+}
+
+.avatar {
+  background-color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid black;
+  overflow: hidden;
+}
+
+.nav-btn {
+  padding: 5px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+  background-color: red;
+  visibility: none;
+  opacity: 0;
+  font-size: 1.8rem;
+}
+
+#postOfferButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  background-color: #978686;
+  border-style: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+}
+
+#showbutton {
+  display: none;
+  padding: 5px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 1.7rem;
+}
+
+#closeButton {
+  display: none;
+  padding: 5px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 1.7rem;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  #postOfferButtonText {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  #options {
+    position: fixed;
+    top: -100vh;
+    left: 0;
+    height: 100%;
+    background-color: #533737;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    transition: 0.5s;
+  }
+  /* 
+  #options {
+    display: none;
+  } */
+  #postOfferButton {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+  }
+  .avatar {
+    /* display: none; */
+  }
+  #notficaitonButton {
+    /* display: none; */
+  }
+
+  #showbutton {
+    display: flex;
+  }
+
+  #closeButton {
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+  }
+
+  #logo {
+    display: none;
+  }
+
+  .responsive_nav {
+    transform: translateY(100vh);
+  }
+}
