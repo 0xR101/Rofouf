@@ -1,0 +1,42 @@
+header {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ul {
+  list-style: none;
+  padding: unset;
+  margin: unset;
+}
+
+li {
+  padding: 10px;
+  transition: all linear 0.3s;
+  font-weight: normal;
+}
+
+li:hover {
+  background: rgb(205, 205, 205);
+  cursor: pointer;
+  color: #fff;
+}
+
+.dropdown-menu {
+  background: rgb(209, 207, 207);
+  transition: all linear 0.3s;
+  position: absolute;
+  /* opacity: 0.9; */
+  /* width: 20%; */
+  top: 50px;
+
+  /* z-index: 99999; */
+}
+
+@media only screen and (max-width: 767px) {
+  .dropdown-menu {
+    top: 410px;
+  }
+}

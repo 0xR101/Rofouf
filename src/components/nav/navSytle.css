@@ -19,7 +19,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  position: fixed;
+  position: sticky;
 }
 input {
   flex: 1;
@@ -42,6 +42,10 @@ input {
 }
 
 #options a:hover {
+  color: #978686;
+}
+
+#options div:hover {
   color: #978686;
 }
 .option {
@@ -103,6 +107,12 @@ input {
   font-size: 1.7rem;
 }
 
+#gen {
+  color: #fff;
+  padding: 12px;
+  cursor: pointer;
+}
+
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
   #postOfferButtonText {
     display: none;
@@ -116,6 +126,7 @@ input {
     left: 0;
     height: 100%;
     background-color: #533737;
+    /* opacity: 0.9; */
     width: 100%;
     display: flex;
     flex-direction: column;

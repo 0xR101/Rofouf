@@ -1,11 +1,25 @@
 import { FaBars, FaTimes } from "react-icons/fa";
+import DropdownMenu from './../dropdown/dropDown.jsx';
 import { useRef } from "react";
+import { useState } from "react";
 import "./navSytle.css";
+
+
 function NavBar() {
   const navRef = useRef();
 
   const showNavbar = () => {
     navRef.current.classList.toggle("responsive_nav");
+  };
+
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
+
+  const handleMouseEnter = () => {
+    setDropdownVisible(true);
+  };
+
+  const handleMouseLeave = () => {
+    setDropdownVisible(false);
   };
 
   return (
@@ -31,7 +45,22 @@ function NavBar() {
             <a className="option" href="">
               Commmunity
             </a>
-            <p className="option">Genres</p>
+            <div
+              id="gen"
+              className="option"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              onClick={() => {
+                if (!isDropdownVisible) {
+                  handleMouseEnter();
+                } else {
+                  handleMouseLeave();
+                }
+              }}
+            >
+              genres
+              {isDropdownVisible && <DropdownMenu />}
+            </div>
 
             <button id="closeButton" onClick={showNavbar}>
               <FaTimes />
