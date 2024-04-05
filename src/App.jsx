@@ -1,7 +1,11 @@
 import "./App.css";
 import NavBar from "./components/nav/NavBar";
 import Ad from "./components/ad/Ad.jsx";
-import ActiveGroupCard from "./components/activeGroupCard/ActiveGroupCard.jsx";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+// import React from "react";
+import GroupSlider from "./components/slider/slider.jsx";
 
 function App() {
   return (
@@ -14,17 +18,21 @@ function App() {
         }}
       >
         <Ad></Ad>
-
         <h1>Active Groups</h1>
+
         <div
           style={{
-            display: "flex",
+            marginTop: "20px",
+            backgroundColor: "#cabdb3",
+            padding: "20px",
+            borderRadius: "10px",
+            gap: "10px",
           }}
         >
-          <ActiveGroupCard />
+          <GroupSlider/>
         </div>
+        <h1>Recommendations</h1>
       </div>
-
     </>
   );
 }
