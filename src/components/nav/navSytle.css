@@ -20,6 +20,8 @@ nav {
   justify-content: space-between;
   width: 100%;
   position: sticky;
+
+  z-index: 50;
 }
 input {
   flex: 1;
@@ -171,6 +173,9 @@ input {
 
   .responsive_nav {
     transform: translateY(100vh);
-    z-index: 10000;
+    /* overflow: hidden;
+     */
+    position: relative;
+    z-index: 9999999999;
   }
 }
