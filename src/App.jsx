@@ -7,7 +7,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 // import React from "react";
 import GroupSlider from "./components/slider/slider.jsx";
-import BookCard from './components/bookCard/BookCard.jsx';
+import BookCard from "./components/bookCard/BookCard.jsx";
+import Footer from './components/footer/Footer.jsx';
+
+
 
 function App() {
   return (
@@ -33,8 +36,16 @@ function App() {
           <BookCard></BookCard>
           <BookCard></BookCard>
           <BookCard></BookCard>
+          <BookCard></BookCard>
+          <BookCard></BookCard>
+          <BookCard></BookCard>
+          <BookCard></BookCard>
         </div>
       </div>
+
+      <Footer></Footer>
+
+
     </>
   );
 }
