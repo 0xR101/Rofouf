@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 // import React from "react";
 import GroupSlider from "./components/slider/slider.jsx";
+import BookCard from './components/bookCard/BookCard.jsx';
 
 function App() {
   return (
@@ -21,30 +22,17 @@ function App() {
         <Ad></Ad>
         <h1>Active Groups</h1>
 
-        <div
-          style={{
-            marginTop: "20px",
-            backgroundColor: "#cabdb3",
-            padding: "20px",
-            borderRadius: "10px",
-            gap: "10px",
-            position: "relative",
-            zIndex: "0",
-          }}
-        >
+        <div className="mt-5 bg-secondaryColor p-5 rounded-lg gap-2 relative z-0">
           <GroupSlider />
         </div>
         <h1>Recommendations</h1>
-
-        <div style={{ width: "300px", height: "400px" }}>
-          <img
-            className="object-cover w-full h-full rounded-2xl"
-            src="\src\assets\bookCover.jpg"
-            alt="hi"
-          />
-          <div className="relative bottom-14 rounded-b-2xl  p-4 font-bold bg-gray-500 h-5 opacity-60 text-opacity-0">
-            For Selling
-          </div>
+        <div className="grid   gap-3 md:grid-cols-2 sm:grid-cols-1">
+          <BookCard></BookCard>
+          <BookCard></BookCard>
+          <BookCard></BookCard>
+          <BookCard></BookCard>
+          <BookCard></BookCard>
+          <BookCard></BookCard>
         </div>
       </div>
     </>

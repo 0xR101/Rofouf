@@ -6,7 +6,7 @@ function ActiveGroupCard() {
       <div className="card">
         <div>
           <a href="">
-            <img className="groupImage" src="\src\assets\Group.png" alt="" />
+            <img className="object-cover w-full h-full rounded-3xl" src="\src\assets\Group.png" alt="" />
           </a>
         </div>
 
