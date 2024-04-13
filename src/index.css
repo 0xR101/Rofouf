@@ -1,5 +1,6 @@
 body {
   margin: 0px;
+  width: 100%;
 }
 
 /* we might use this for tailwind */
