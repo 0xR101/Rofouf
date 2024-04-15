@@ -1,5 +1,15 @@
 import NavBar from "./../components/nav/NavBar.jsx";
 import Footer from "./../components/footer/Footer.jsx";
+import Comment from "./../components/Comment/Comment.jsx";
+
+
+
+
+
+import { FaWhatsapp } from "react-icons/fa";
+
+import { IoChatbubble } from "react-icons/io5";
+import dropDown from './../components/dropdown/dropDown.jsx';
 
 function BookDescription() {
   return (
@@ -34,13 +44,15 @@ function BookDescription() {
                 <img src="\src\assets\loc.svg" alt="" />
                 <div className="text-black">location</div>
               </div>
-
-              <div
-                onClick={{}}
-                className="bg-primary font-extrabold text-center hover:bg-orange-400 h-10 pt-4 rounded-lg"
-              >
-                Contact
-              </div>
+              <a target="_blank" href="https://wa.me/0553731017">
+                <div
+                  onClick={{}}
+                  className="bg-primary font-extrabold text-center hover:bg-orange-400 h-10 pt-4 rounded-lg flex gap-2 justify-center"
+                >
+                  <div>Contact</div>
+                  <FaWhatsapp className="w-5 h-5 text-green-300" />
+                </div>
+              </a>
             </div>
           </div>
 
@@ -65,9 +77,9 @@ function BookDescription() {
               <div className="flex flex-col w-full gap-5 text-primary">
                 <ol>
                   Gener
-                  <li>f</li>
-                  <li>f</li>
-                  <li>f</li>
+                  <li>health</li>
+                  <li>Fitness</li>
+                  <li>Self help </li>
                 </ol>
 
                 <div className=" w-full flex flex-row  justify-between items-center">
@@ -92,7 +104,7 @@ function BookDescription() {
               </div>
 
               <div className="flex flex-col">
-                <div>Additional details</div>
+                <h2>Additional details</h2>
 
                 <div className="flex flex-col bg-primary bg-opacity-70 text-white p-5 gap-4 w-80 h-full">
                   <div>
@@ -110,22 +122,10 @@ function BookDescription() {
         </div>
 
         <h2>Comments</h2>
-        <div className="bg-primary bg-opacity-30 rounded-md p-8 flex flex-col">
-          <div className="bg-backGround p-4 rounded-md flex gap-10 text-primary items-center">
-            <div className="flex flex-col justify-center items-center">
-              <div>
-                <img
-                  className="w-9 h-8 rounded-full"
-                  src="src\assets\profile.png"
-                  alt=""
-                />
-              </div>
-              <div>Name</div>
-            </div>
-            <div className="flex-grow min-h-0 overflow-y-auto overflow-x-hidden">
-              This book is exciting I finished 20 pages so far and it is fun!
-            </div>
-          </div>
+        <div className="bg-primary bg-opacity-30 rounded-md p-8 flex flex-col gap-5 ">
+          <Comment></Comment>
+          <Comment></Comment>
+          <Comment></Comment>
         </div>
         <div className="w-full ">
           <form className="w-full">

@@ -14,7 +14,7 @@ function Ad() {
             height: "auto",
             display: "block",
           }}
-          src="src\assets\ad.png"
+          src="src\assets\image\ad.png"
           alt=""
         />
       </div>

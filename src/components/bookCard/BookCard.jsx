@@ -8,7 +8,7 @@ function BookCard() {
             src="\src\assets\bookCover.jpg"
             alt="hi"
           />
-          <div className="relative bottom-14 rounded-b-2xl  p-4 font-extrabold bg-gray-400 h-5 bg-opacity-30">
+          <div className="relative bottom-14 rounded-b-2xl  p-4 font-bold bg-gray-400 h-5 bg-opacity-30">
             For Selling
           </div>
         </div>
@@ -35,10 +35,11 @@ function BookCard() {
                 Good
               </div>
             </div>
-
-            <div className="bg-primary hover:bg-orange-400 text-white font-extrabold py-2 px-6 rounded ">
-              Show Details
-            </div>
+            <a href="/bookDescription">
+              <div className="bg-primary hover:bg-orange-400 text-white font-extrabold py-2 px-6 rounded ">
+                Show Details
+              </div>
+            </a>
           </div>
         </div>
       </div>

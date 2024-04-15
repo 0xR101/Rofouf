@@ -41,33 +41,12 @@ function Chat() {
           {/* the above div only for person bar or card */}
 
           {/* this div for the messages */}
-          <div className="flex flex-col">
-            <h1>chat</h1>
-            <h1>chat</h1>
-            <h1>chat</h1>
-            <h1>chat</h1>
-            <h1>chat</h1>
-            <h1>chat</h1>
-            <h1>chat</h1>
-          </div>
+          <div className="flex flex-col"></div>
 
-          <div className="relative flex items-center gap-2 border rounded-md bg-white">
-            <span className="left-0 pl-3">
-              {/* <svg
-
-                className="h-5 w-5 text-gray-400"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path d="\src\assets\attachment.svg"></path>
-              </svg> */}
-
+          <div className="relative bottom-0  flex items-center gap-2 border rounded-md bg-white">
+            <div className="w-10 h-10">
               <img src="\src\assets\attachment.svg" alt="" />
-            </span>
+            </div>
 
             <input
               type="text"

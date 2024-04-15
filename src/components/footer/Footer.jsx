@@ -1,3 +1,6 @@
+import { FaInstagram } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa6";
+
 function Footer() {
   return (
     <>
@@ -7,15 +10,20 @@ function Footer() {
 
           borderTop: "1px solid rgba(13, 8, 66, 0.2)",
         }}
-        className="bg-backGround p-4"
+        className="bg-backGround  p-4 h-10"
       >
-        <ul className="flex text-fontColorDarkBlue">
-          <li>About</li>
-          <li>Feautres</li>
-          <li>Team</li>
-          <li>Privacy Policy</li>
-          <li>Terms of Use</li>
-        </ul>
+        <div className="flex text-fontColorDarkBlue justify-center items-center gap-4 max-sm:flex-col">
+          <div>© 2024 Rofouf. All rights reserved</div>
+
+          <div className="flex gap-2">
+            <div>
+              <FaInstagram className="w-8 h-8 text-pink-500" />
+            </div>
+            <div>
+              <FaFacebook className="w-8 h-8  text-blue-400" />
+            </div>
+          </div>
+        </div>
       </footer>
     </>
   );

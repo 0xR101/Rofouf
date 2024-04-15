@@ -18,10 +18,10 @@ function Home() {
       >
         <Ad></Ad>
         <h1>Active Groups</h1>
-
+{/* 
         <div className="mt-5 bg-secondaryColor p-5 rounded-lg gap-2 relative z-0">
           <GroupSlider />
-        </div>
+        </div> */}
         <h1>Recommendations</h1>
         <div className="grid   gap-3 md:grid-cols-2 sm:grid-cols-1">
           <BookCard></BookCard>

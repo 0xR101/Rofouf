@@ -1,9 +1,8 @@
 import { FaBars, FaTimes } from "react-icons/fa";
-import DropdownMenu from './../dropdown/dropDown.jsx';
+import DropdownMenu from "./../dropdown/dropDown.jsx";
 import { useRef } from "react";
 import { useState } from "react";
 import "./navSytle.css";
-
 
 function NavBar() {
   const navRef = useRef();
@@ -25,7 +24,7 @@ function NavBar() {
   return (
     <>
       <nav>
-        <a href="" id="logo">
+        <a href="/" id="logo">
           <img src="src\assets\logo.svg" alt="the logo is lost" />
         </a>
 
@@ -39,7 +38,7 @@ function NavBar() {
         >
           <input type="text" placeholder="Search Books..." />
           <div id="options" ref={navRef}>
-            <a className="option" href="">
+            <a className="option" href="/">
               home
             </a>
             <a className="option" href="">
@@ -81,7 +80,7 @@ function NavBar() {
             <img src="\src\assets\add.svg" width="40" height="40" alt="" />
             <div id="postOfferButtonText">Post Offer</div>
           </button>
-          <a href="" id="notficaitonButton">
+          <a href="/chat" id="notficaitonButton">
             <img src="\src\assets\notficaiton.svg" alt="" />
           </a>
           <a href="">
