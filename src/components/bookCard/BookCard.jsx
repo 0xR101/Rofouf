@@ -1,7 +1,7 @@
 function BookCard() {
   return (
     <>
-      <div className="flex flex-row gap-3">
+      <div className="flex flex-row w-full max-sm:flex-col max-sm:shadow-bottom-lg">
         <div className="w-60 h-80">
           <img
             className="object-cover w-full h-full rounded-2xl"
@@ -15,7 +15,7 @@ function BookCard() {
 
         <div className="flex flex-col gap-4 items-start justify-between p-4">
           <div className="flex flex-col gap-3">
-            <div className="text-2xl font-bold text-fontColorDarkBlue">
+            <div className="text-2xl font-bold text-fontColorDarkBlue line-clamp-1">
               I Want a Better Catastrophe
             </div>
             <div className="text-fontColorDarkBlue text-opacity-40 line-clamp-1">

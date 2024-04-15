@@ -24,14 +24,14 @@ function Home() {
           <GroupSlider />
         </div>
 
-        <div className="flex gap-4">
-          <div className="flex-1 rounded-md bg-secondaryColor w-60 p-2 h-20 flex flex-col items-center justify-center text-primary shadow-2xl hover:bg-primary hover:text-white">
+        <div className="flex gap-4 max-sm:flex-col max-sm:items-center">
+          <div className="flex-1 rounded-md bg-secondaryColor w-80 p-2 h-20 flex flex-col items-center justify-center text-primary shadow-2xl hover:bg-primary hover:text-white">
             <div className="font-bold">Most recent offers</div>
           </div>
-          <div className="flex-1 rounded-md bg-secondaryColor w-60 p-2 h-20 flex flex-col items-center justify-center text-primary shadow-2xl hover:bg-primary hover:text-white">
+          <div className="flex-1 rounded-md bg-secondaryColor w-80 p-2 h-20 flex flex-col items-center justify-center text-primary shadow-2xl hover:bg-primary hover:text-white">
             <div className="font-bold">Most recent offers</div>
           </div>
-          <div className="flex-1 rounded-md bg-secondaryColor w-60 p-2 h-20 flex flex-col items-center justify-center text-primary shadow-2xl hover:bg-primary hover:text-white">
+          <div className="flex-1 rounded-md bg-secondaryColor w-80 p-2 h-20 flex flex-col items-center justify-center text-primary shadow-2xl hover:bg-primary hover:text-white">
             <div className="font-bold">Most recent offers</div>
           </div>
         </div>
