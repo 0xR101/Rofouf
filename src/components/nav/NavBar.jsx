@@ -23,7 +23,7 @@ function NavBar() {
 
   return (
     <>
-      <nav>
+      <nav className="">
         <a href="/" id="logo">
           <img src="src\assets\logo.svg" alt="the logo is lost" />
         </a>
@@ -38,13 +38,13 @@ function NavBar() {
         >
           <input type="text" placeholder="Search Books..." />
           <div id="options" ref={navRef}>
-            <a className="option" href="/">
+            {/* <a className="option" href="/">
               home
-            </a>
-            <a className="option" href="">
+            </a> */}
+            {/* <a className="option" href="">
               Commmunity
-            </a>
-            <div
+            </a> */}
+            {/* <div
               id="gen"
               className="option"
               onMouseEnter={handleMouseEnter}
@@ -59,11 +59,11 @@ function NavBar() {
             >
               genres
               {isDropdownVisible && <DropdownMenu />}
-            </div>
+            </div> */}
 
-            <button id="closeButton" onClick={showNavbar}>
+            {/* <button id="closeButton" onClick={showNavbar}>
               <FaTimes />
-            </button>
+            </button> */}
           </div>
         </div>
 

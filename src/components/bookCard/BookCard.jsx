@@ -31,12 +31,12 @@ function BookCard() {
           <div className="flex flex-col gap-3">
             <div className="flex flex-row items-center gap-3">
               <div className=" text-lg text-fontColorDarkBlue">Condtion:</div>
-              <div className="bg-green-500 text-white font-extrabold py-2 px-6 rounded ">
+              <div className="bg-green-500 text-white font-extrabold py-2 px-6 rounded shadow-2xl ">
                 Good
               </div>
             </div>
             <a href="/bookDescription">
-              <div className="bg-primary hover:bg-orange-400 text-white font-extrabold py-2 px-6 rounded ">
+              <div className="bg-primary hover:bg-orange-400 text-white font-extrabold py-2 px-6 rounded shadow-2xl">
                 Show Details
               </div>
             </a>
