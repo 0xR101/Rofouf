@@ -9,6 +9,7 @@ export default {
         secondaryColor: "#cabdb3",
         fontColorDarkBlue: "#0D0842",
         fontColorGray: "#6C6C6C",
+        lightBrown50: "rgba(151, 134, 134, 0.5)",
       },
     },
   },

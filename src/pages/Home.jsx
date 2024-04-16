@@ -4,9 +4,6 @@ import GroupSlider from "./../components/slider/slider.jsx";
 import BookCard from "./../components/bookCard/BookCard.jsx";
 import Footer from "./../components/footer/Footer.jsx";
 
-import { LuSword } from "react-icons/lu";
-import GenreCard from "./../components/genre/GenreCard.jsx";
-
 function Home() {
   return (
     // this code will be replaced by routes for all pages, but for now we keep it like this

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
 import "./index.css";
+import Seller from "./pages/Seller.jsx";
 
 
 
@@ -26,6 +26,10 @@ const router = createBrowserRouter([
     path: "chat",
     element: <Chat />,
   },
+  {
+    path: "seller",
+    element: <Seller />,
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

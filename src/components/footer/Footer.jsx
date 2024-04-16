@@ -9,13 +9,18 @@ function Footer() {
           // borderTop: "1px solid #0D0842"
 
           borderTop: "1px solid rgba(13, 8, 66, 0.2)",
+          backgroundColor: "#533737",
+          color: "#ECE1D1",
         }}
         className="bg-backGround  p-4 h-10"
       >
-        <div className="flex text-fontColorDarkBlue justify-center items-center gap-4 max-sm:flex-col">
+        <div className="flex  justify-center items-center gap-4 max-sm:flex-col">
           <div>© 2024 Rofouf. All rights reserved</div>
 
-          <div className="flex gap-2">
+          <div 
+          
+           className="flex gap-2 rounded-lg p-1 bg-lightBrown50" 
+            >
             <div>
               <FaInstagram className="w-8 h-8 text-pink-500" />
             </div>
