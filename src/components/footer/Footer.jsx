@@ -12,15 +12,12 @@ function Footer() {
           backgroundColor: "#533737",
           color: "#ECE1D1",
         }}
-        className="bg-backGround  p-4 h-10"
+        className="bg-backGround  p-2 h-10"
       >
         <div className="flex  justify-center items-center gap-4 max-sm:flex-col">
           <div>© 2024 Rofouf. All rights reserved</div>
 
-          <div 
-          
-           className="flex gap-2 rounded-lg p-1 bg-lightBrown50" 
-            >
+          <div className="flex gap-2 rounded-full p-1 bg-lightBrown50">
             <div>
               <FaInstagram className="w-8 h-8 text-pink-500" />
             </div>
