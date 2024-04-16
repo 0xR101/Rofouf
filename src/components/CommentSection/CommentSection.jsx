@@ -37,7 +37,7 @@ const CommentsSection = () => {
   };
 
   return (
-    <div className="  my-4 p-4 space-y-8 bg-lightBrown50 rounded-xl">
+    <div className=" p-4 space-y-8 bg-lightBrown50 rounded-xl">
       <div className="space-y-4">
         {comments.map((comment, index) => (
           <Comments key={index} {...comment} />

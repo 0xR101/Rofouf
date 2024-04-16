@@ -4,19 +4,16 @@ import CommentsSection from "../components/CommentSection/CommentSection.jsx";
 
 function Seller() {
   return (
-    <>
+    <div className=" flex bg-backGround flex-col min-h-screen w-full">
       <NavBar></NavBar>
-      <div
-        className="bg-backGround "
-        style={{
-          padding: "50px",
-        }}
-      >
-        <h1 className="text-2xl font-bold mb-4 text-primary">Comments</h1>
+
+      <main className=" flex-grow m-10 space-y-5 ">
+        <h1 className="text-2xl font-bold mb-4 text-primary">All Comments</h1>
         <CommentsSection></CommentsSection>
-      </div>
+      </main>
+
       <Footer> </Footer>
-    </>
+    </div>
   );
 }
 
