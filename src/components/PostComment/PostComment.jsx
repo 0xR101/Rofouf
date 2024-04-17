@@ -50,7 +50,7 @@ const PostComment = ({ onNewComment }) => {
         })}
       </div>
       <textarea
-        className="w-3/4 p-2 border border-gray-300 rounded-lg resize-none"
+        className="w-3/4 p-2  rounded-lg resize-none shadow-md border-none resize-none focus:outline-none text-gray-700 pl-4"
         placeholder="Write a comment ..."
         value={commentText}
         onChange={(e) => setCommentText(e.target.value)}
