@@ -10,6 +10,8 @@ import Seller from "./pages/Seller.jsx";
 import Chat from './pages/Chat.jsx';
 import BookDescription from "./pages/BookDescription.jsx";
 import Home from "./pages/Home.jsx";
+import SignIn from "./pages/SignIn.jsx";
+import SignUp from "./pages/SignUp.jsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
   {
     path: "seller",
     element: <Seller />,
+  },
+  {
+    path: "signIn",
+    element: <SignIn />,
+  },
+  {
+    path: "signUp",
+    element: <SignUp />,
   }
 ]);
 
