@@ -1,7 +1,18 @@
+import { useState } from "react";
+import DropdownMenu from "../dropdown/dropDown";
+
 function NavBar() {
+  const [isProfileListVisible, setProfileListVisible] = useState(false);
+  const handleProfileListEnter = () => {
+    setProfileListVisible(true);
+  };
+
+  const handleProfileListLeave = () => {
+    setProfileListVisible(false);
+  };
   return (
     <header className="bg-primary text-white">
-      <nav className="flex justify-between items-center mx-4">
+      <nav style={{width: "100%"}} className="flex justify-between mx-4">
         {" "}
         {/* Removed padding and reduced margin */}
         <div className="flex flex-grow items-center gap-4">
@@ -34,12 +45,24 @@ function NavBar() {
               className="h-8" // Icon height
             />
           </a>
-          <div className="avatar rounded-full">
-            <img
-              src="src\assets\profile.png"
-              alt="Profile"
-              className="h-10 w-10 rounded-full" // Adjusted profile size and shape
-            />
+          <div>
+            <div
+              className="avatar rounded-full"
+              onClick={() => {
+                if (!isProfileListVisible) {
+                  handleProfileListEnter();
+                } else {
+                  handleProfileListLeave();
+                }
+              }}
+            >
+              <img
+                src="src\assets\profile.png"
+                alt="Profile"
+                className="h-10 w-10 rounded-full" // Adjusted profile size and shape
+              />
+            </div>
+            {isProfileListVisible ? <DropdownMenu names = {["login", "profile"]}/> : null}
           </div>
         </div>
       </nav>
