@@ -21,30 +21,30 @@ const books = [
   },
   {
     name: "The Great Gatsby",
-    status: "Sale",
+    status: "For Sale",
     title: "The Great Gatsby",
-    picture: "/path/to/great-gatsby.jpg",
+    picture: "src/assets/bookCover.jpg",
     link: "/great-gatsby",
   },
   {
     name: "Pride and Prejudice",
-    status: "New Arrival",
+    status: "For Exshange",
     title: "Pride and Prejudice",
-    picture: "/path/to/pride-prejudice.jpg",
+    picture: "src/assets/bookCover.jpg",
     link: "/pride-and-prejudice",
   },
   {
     name: "The Catcher in the Rye",
-    status: "Limited Stock",
+    status: "For Rent",
     title: "The Catcher in the Rye",
-    picture: "/path/to/catcher-in-the-rye.jpg",
+    picture: "src/assets/bookCover.jpg",
     link: "/the-catcher-in-the-rye",
   },
   {
     name: "The Hobbit",
-    status: "On Sale",
+    status: "For Sale",
     title: "The Hobbit",
-    picture: "/path/to/the-hobbit.jpg",
+    picture: "src/assets/bookCover.jpg",
     link: "/the-hobbit",
   },
 ];
@@ -54,23 +54,31 @@ function HorizontalBookSlider() {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 5,
     slidesToScroll: 1,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1030,
+        settings: {
+          slidesToShow: 4,
+        },
+      },
+      {
+        breakpoint: 850,
         settings: {
           slidesToShow: 3,
         },
       },
+
       {
-        breakpoint: 600,
+        breakpoint: 650,
         settings: {
           slidesToShow: 2,
         },
       },
+
       {
-        breakpoint: 480,
+        breakpoint: 460,
         settings: {
           slidesToShow: 1,
         },
@@ -79,7 +87,7 @@ function HorizontalBookSlider() {
   };
 
   return (
-    <Slider className="bg-lightBrown50 rounded m-4" {...settings}>
+    <Slider className="bg-lightBrown50 rounded-xl   " {...settings}>
       {books.map((book, index) => (
         <BookItem key={index} {...book} />
       ))}

@@ -1,30 +1,25 @@
 import PropTypes from "prop-types";
 
-function BookItem({ name, status, title, picture, link }) {
-  // Define the aspect ratio you want for the images
-  const imageHeight = "h-64"; // This is an example height. Adjust as needed.
-  const imageWidth = "w-48"; // This is half of the example height.
-
-  const statusHight = "h-6";
-
+function BookItem({ status, title, picture, link }) {
   return (
-    <div className={`relative m-2 ${imageHeight} ${imageWidth}`}>
-      <a href={link} className="block h-full">
-        <img
-          src={picture}
-          alt={title}
-          className="object-cover object-center w-full h-full rounded-lg shadow-lg"
-        />
-        <div
-          className={`absolute bottom-0 ${statusHight} ${imageWidth} bg-gray-700 bg-opacity-50 text-white text-sm  text-center rounded-b-lg`}
-        >
-          {status}
+    <div className="flex flex-col items-center relative p-5 ">
+      <a href={link} className="block group no-underline">
+        <div className="relative  w-48 h-72">
+          <img
+            src={picture}
+            alt={title}
+            className="object-cover object-center w-full h-full rounded-xl shadow-lg transition-opacity duration-300 ease-in-out group-hover:opacity-75"
+          />
+          <div className="absolute h-10 bottom-0 left-0 right-0 bg-gray-700 bg-opacity-50 text-white text-sm flex items-center justify-center font-bold rounded-b-xl">
+            {status}
+          </div>
+        </div>
+        <div className="text-center mt-2">
+          <h3 className=" m-0 p-0 text-lg font-bold text-fontColorDarkBlue text-black no-underline">
+            {title}
+          </h3>
         </div>
       </a>
-      <div className="text-center mt-2">
-        <h3 className="text-lg font-bold">{title}</h3>
-        <p className="text-gray-500">{name}</p>
-      </div>
     </div>
   );
 }
