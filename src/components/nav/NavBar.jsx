@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 import { FaBars } from "react-icons/fa";
 import { IoHomeSharp } from "react-icons/io5";
 import "./navSytle.css";
-=======
 import { useState } from "react";
 import DropdownMenu from "../dropdown/dropDown";
->>>>>>> 120ca83eb4821b16d7313d16641da9bc7afcacab
 
 function NavBar() {
   const [isProfileListVisible, setProfileListVisible] = useState(false);
@@ -70,38 +67,9 @@ function NavBar() {
             </div>
             {isProfileListVisible ? <DropdownMenu names = {["login", "profile"]}/> : null}
           </div>
-<<<<<<< HEAD
-
-          <div className="flex gap-2 items-center mr-3 ">
-            <button id="postOfferButton" className="shadow-xl">
-              <img src="\src\assets\add.svg" width="40" height="40" alt="" />
-              <div id="postOfferButtonText">Post Offer</div>
-            </button>
-            <a href="/chat" id="notficaitonButton">
-              <img src="\src\assets\notficaiton.svg" alt="" />
-            </a>
-            <a href="">
-              <div className="avatar">
-                <img src="\src\assets\profile.svg" alt="" />
-              </div>
-            </a>
-            <button id="showbutton" onClick={{}}>
-              <a
-                href="
-              "
-              >
-                <IoHomeSharp />
-              </a>
-            </button>
-          </div>
-        </nav>
-      </header>
-    </>
-=======
         </div>
       </nav>
     </header>
->>>>>>> 120ca83eb4821b16d7313d16641da9bc7afcacab
   );
 }
 
