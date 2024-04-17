@@ -12,7 +12,7 @@ function NavBar() {
           <div className="flex-grow max-w-lg   ">
             <input
               type="search"
-              className="w-full h-10 placeholder-Placeholder placeholder-bold   pl-4 pr-3 rounded-full bg-plaster text-black-600 border-none " // Adjusted height and padding
+              className="w-full h-10 placeholder-Placeholder placeholder-bold   pl-4 pr-3 rounded-full bg-plaster shadow-md border-none resize-none focus:outline-none text-gray-700" // Adjusted height and padding
               placeholder="Search Books..."
             />
           </div>
@@ -20,7 +20,7 @@ function NavBar() {
         <div className="flex items-center gap-4">
           {" "}
           {/* Adjusted gap between icons */}
-          <button className="flex items-center gap-2 h-10  p-2 rounded-full border-none  bg-plaster">
+          <button className="flex items-center gap-2 h-10  p-2 rounded-full border-none  bg-plaster ">
             <img src="src\assets\add.svg" alt="Post Offer" className="h-8" />{" "}
             {/* Icon height */}
             <span className="hidden sm:block text-primary font-bold">
