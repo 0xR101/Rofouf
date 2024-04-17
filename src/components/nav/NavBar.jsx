@@ -1,4 +1,5 @@
 import { FaBars } from "react-icons/fa";
+import { IoHomeSharp } from "react-icons/io5";
 import "./navSytle.css";
 
 function NavBar() {
@@ -34,7 +35,12 @@ function NavBar() {
               </div>
             </a>
             <button id="showbutton" onClick={{}}>
-              <FaBars />
+              <a
+                href="
+              "
+              >
+                <IoHomeSharp />
+              </a>
             </button>
           </div>
         </nav>
