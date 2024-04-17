@@ -1,4 +1,4 @@
-function Comment() {
+function Massage() {
   return (
     <>
       <div className="bg-backGround p-4 rounded-md flex gap-10 text-primary items-center">
@@ -20,4 +20,4 @@ function Comment() {
   );
 }
 
-export default Comment;
+export default Massage;

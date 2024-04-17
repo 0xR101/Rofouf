@@ -1,15 +1,8 @@
 import NavBar from "./../components/nav/NavBar.jsx";
 import Footer from "./../components/footer/Footer.jsx";
-import Comment from "./../components/Comment/Comment.jsx";
-
-
-
-
 
 import { FaWhatsapp } from "react-icons/fa";
-
-import { IoChatbubble } from "react-icons/io5";
-import dropDown from './../components/dropdown/dropDown.jsx';
+import Massage from "../components/Massage/Massage.jsx";
 
 function BookDescription() {
   return (
@@ -60,11 +53,11 @@ function BookDescription() {
             <h1>The book title</h1>
             <h3>discritpion</h3>
             <p className="text-primary">
-              Outlive: The Science and Art of Longevity" is a book that explores
-              the intersection of science and lifestyle in achieving a longer,
-              healthier life. It offers insights into the latest research on
-              aging and provides practical advice on diet, exercise, and mental
-              well-being to enhance longevity and vitality.
+              Outlive: The Science and Art of Longevity&quot; is a book that
+              explores the intersection of science and lifestyle in achieving a
+              longer, healthier life. It offers insights into the latest
+              research on aging and provides practical advice on diet, exercise,
+              and mental well-being to enhance longevity and vitality.
             </p>
             <h3 className="span">Autours</h3>
             <div
@@ -123,9 +116,9 @@ function BookDescription() {
 
         <h1>Comments</h1>
         <div className="bg-primary bg-opacity-30 rounded-md p-8 flex flex-col gap-5 ">
-          <Comment></Comment>
-          <Comment></Comment>
-          <Comment></Comment>
+          <Massage></Massage>
+          <Massage></Massage>
+          <Massage></Massage>
         </div>
         <div className="w-full ">
           <form className="w-full">
