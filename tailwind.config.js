@@ -12,6 +12,7 @@ export default {
         fontColorGray: "#6C6C6C",
         plaster: "#978686",
         danger: "#ED4337",
+        bookStatus: "#D9D9D9",
         Placeholder: "#5A5A5A",
         lightBrown50: "rgba(151, 134, 134, 0.5)",
         offWhite: "#fffaf2",
