@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-
+import "./../HorizontalBookSlider/style.css";
 function BookItem({ status, title, picture, link }) {
   return (
     <div className="flex flex-col items-center relative p-5 ">
@@ -15,7 +15,7 @@ function BookItem({ status, title, picture, link }) {
           </div>
         </div>
         <div className="text-center mt-2">
-          <h3 className=" m-0 p-0 text-lg font-bold text-fontColorDarkBlue text-black no-underline">
+          <h3 className=" m-0 p-0 text-lg font-bold text-primary text-black no-underline">
             {title}
           </h3>
         </div>
