@@ -2,6 +2,7 @@ import BookItem from "./../BookItem/BookItem.jsx";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "./style.css";
 
 const books = [
   {
@@ -87,7 +88,7 @@ function HorizontalBookSlider() {
   };
 
   return (
-    <Slider className="bg-lightBrown50 rounded-xl   " {...settings}>
+    <Slider className="bg-lightBrown50 rounded-xl shadow-md   " {...settings}>
       {books.map((book, index) => (
         <BookItem key={index} {...book} />
       ))}

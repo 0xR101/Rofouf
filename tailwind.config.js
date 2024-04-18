@@ -14,10 +14,11 @@ export default {
         danger: "#ED4337",
         Placeholder: "#5A5A5A",
         lightBrown50: "rgba(151, 134, 134, 0.5)",
+        offWhite: "#fffaf2",
       },
     },
     fontFamily: {
-      poppins: ['poppins'],
+      poppins: ["poppins"],
     },
   },
   plugins: [],
