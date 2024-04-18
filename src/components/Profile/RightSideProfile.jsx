@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 export default function RightSideProfile() {
+  const navigate = useNavigate();
+
   return (
     <>
       <div
@@ -25,10 +29,12 @@ export default function RightSideProfile() {
             />
           </div>
           <div className="h-36" />
+
           <div class="mt-2">
             <input
               type="button"
-              value="Books Borrowed- Rented by me"
+              onClick={() => navigate("/booksList")}
+              value="All Listed Books"
               name="last-name"
               id="last-name"
               autocomplete="family-name"
@@ -40,30 +46,7 @@ export default function RightSideProfile() {
           <div class="mt-2">
             <input
               type="button"
-              value="Bought-Exchanged books"
-              name="last-name"
-              id="last-name"
-              autocomplete="family-name"
-              class="bg-primary block w-full rounded-md border-0 py-1.5 text-white shadow-sm  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            />
-          </div>
-          <div className="h-4" />
-
-          <div class="mt-2">
-            <input
-              type="button"
-              value="Listed Books"
-              name="last-name"
-              id="last-name"
-              autocomplete="family-name"
-              class="bg-primary block w-full rounded-md border-0 py-1.5 text-white shadow-sm  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            />
-          </div>
-          <div className="h-4" />
-
-          <div class="mt-2">
-            <input
-              type="button"
+              onClick={() => navigate("/newOffer")}
               value="Create a New Offer"
               name="last-name"
               id="last-name"
