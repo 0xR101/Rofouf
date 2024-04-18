@@ -11,6 +11,8 @@ import Home from "./pages/Home.jsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Profile from "./pages/Profile.jsx";
+import BooksList from "./pages/BooksList.jsx";
+import NewOffer from "./pages/NewOffer.jsx";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,14 @@ const router = createBrowserRouter([
   {
     path: "profile",
     element: <Profile />,
+  },
+  {
+    path: "booksList",
+    element: <BooksList />,
+  },
+  {
+    path: "newOffer",
+    element: <NewOffer />,
   },
 ]);
 
