@@ -18,6 +18,9 @@ h1 {
   color: #533737;
   font-weight: bolder;
 }
+a {
+  text-decoration: none;
+}
 
 @tailwind base;
 @tailwind components;
