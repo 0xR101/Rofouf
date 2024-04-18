@@ -1,6 +1,5 @@
 import { FaBars } from "react-icons/fa";
 import { IoHomeSharp } from "react-icons/io5";
-import "./navSytle.css";
 import { useState } from "react";
 import DropdownMenu from "../dropdown/dropDown";
 
