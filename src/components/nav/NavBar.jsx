@@ -14,15 +14,15 @@ function NavBar() {
   };
   return (
     <header className="bg-primary text-white">
-      <nav style={{ width: "100%" }} className="flex justify-between mx-4">
+      <nav style={{ width: "100%" }} className="flex justify-between mx-4 gap-2">
         {" "}
         {/* Removed padding and reduced margin */}
-        <div className="flex flex-grow items-center gap-4">
+        <div className="flex flex-grow items-center gap-4 max-sm:flex-col max-sm:items-start max-sm:justify-center max-sm:mt-2">
           <a href="/" className="shrink-0 px-0">
             <img src="src\assets\logo.svg" alt="Logo" className="h-8" />{" "}
             {/* Adjusted logo size */}
           </a>
-          <div className="flex-grow max-w-lg   ">
+          <div className="flex-grow max-w-lg  max-sm:w-full max-sm:m-2 ">
             <input
               type="search"
               className="w-full h-10 placeholder-Placeholder placeholder-bold   pl-4 pr-3 rounded-full bg-plaster shadow-md border-none resize-none focus:outline-none text-gray-700" // Adjusted height and padding
@@ -30,7 +30,7 @@ function NavBar() {
             />
           </div>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 max-sm:mb-12">
           {" "}
           {/* Adjusted gap between icons */}
           <button className="flex items-center gap-2 h-10  p-2 rounded-full border-none  bg-plaster ">
