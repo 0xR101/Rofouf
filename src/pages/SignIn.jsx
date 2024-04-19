@@ -7,7 +7,7 @@ function SignIn() {
 		<>
 			<section className="gradient-form h-full bg-white">
 				<NavBar />
-				<div className="container size-6/12 py-20 m-auto">
+				<div className="container size-6/12 py-20 m-auto max-sm:size-9/12 max-md:size-9/12 max-lg:size-9/12 ">
 					<div className="flex flex-wrap h-full shadow-2xl  rounded-lg  items-center justify-center text-neutral-800 dark:text-neutral-200">
 						<div className="w-full">
 							<div className=" block rounded-lg  bg-backGround shadow-lg light:bg-neutral-800">
@@ -15,7 +15,7 @@ function SignIn() {
 									<div className="px-4 md:px-0 lg:w-">
 										<div className="">
 											<div className="grid grid-cols-2 max-md:flex max-sm:flex">
-												<form className="p-12 my-auto max-md:w-full max-sm:w-full">
+												<form className="p-12 max-md:p-4 my-auto max-md:w-full max-sm:w-full">
 													{/* the input for the email */}
 													<div
 														className="relative mb-4 mt-6 "

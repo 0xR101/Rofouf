@@ -10,7 +10,7 @@ function BookDescription() {
       <NavBar></NavBar>
 
       <div className="flex flex-col p-7 gap-4">
-        <div className="flex flex-row gap-10 max-md:flex-col  max-sm:flex-col max-sm:items-center">
+        <div className="flex flex-row gap-10 max-md:flex-col  max-sm:flex-col max-sm:items-center max-lg:flex-col">
           <div className="flex flex-col gap-2">
             {/* here we should add the cover of the book */}
             <div>
