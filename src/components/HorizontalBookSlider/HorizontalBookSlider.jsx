@@ -59,27 +59,27 @@ function HorizontalBookSlider() {
     slidesToScroll: 1,
     responsive: [
       {
-        breakpoint: 1030,
+        breakpoint: 1079,
         settings: {
           slidesToShow: 4,
         },
       },
       {
-        breakpoint: 850,
+        breakpoint: 880,
         settings: {
           slidesToShow: 3,
         },
       },
 
       {
-        breakpoint: 650,
+        breakpoint: 680,
         settings: {
           slidesToShow: 2,
         },
       },
 
       {
-        breakpoint: 460,
+        breakpoint: 490,
         settings: {
           slidesToShow: 1,
         },
