@@ -66,7 +66,7 @@ function BookDescription() {
               }}
             ></div>
 
-            <div className=" flex flex-row gap-20 max-md:flex-col max-sm:flex-col ">
+            <div className=" flex flex-row gap-20 max-md:flex-col max-sm:flex-col">
               <div className="flex flex-col w-full gap-5 text-primary">
                 <ul>
                   Gener

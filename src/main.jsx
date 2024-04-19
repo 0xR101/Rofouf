@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "./App.css";
 import "./index.css";
 import Seller from "./pages/Seller.jsx";
 
@@ -8,6 +9,8 @@ import Seller from "./pages/Seller.jsx";
 import Chat from "./pages/Chat.jsx";
 import BookDescription from "./pages/BookDescription.jsx";
 import Home from "./pages/Home.jsx";
+import SignIn from "./pages/SignIn.jsx";
+import SignUp from "./pages/SignUp.jsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Profile from "./pages/Profile.jsx";
@@ -30,6 +33,14 @@ const router = createBrowserRouter([
   {
     path: "seller",
     element: <Seller />,
+  },
+  {
+    path: "signIn",
+    element: <SignIn />,
+  },
+  {
+    path: "signUp",
+    element: <SignUp />,
   },
   {
     path: "profile",
