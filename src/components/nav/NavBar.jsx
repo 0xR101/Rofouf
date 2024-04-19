@@ -1,5 +1,7 @@
+import { FaBars } from "react-icons/fa";
+import { IoHomeSharp } from "react-icons/io5";
 import { useState } from "react";
-import DropdownMenu from "../dropdown/dropDown";
+import DropdownMenu from "../dropdown/DropDownMenu";
 
 function NavBar() {
   const [isProfileListVisible, setProfileListVisible] = useState(false);
@@ -12,7 +14,7 @@ function NavBar() {
   };
   return (
     <header className="bg-primary text-white">
-      <nav style={{width: "100%"}} className="flex justify-between mx-4">
+      <nav style={{ width: "100%" }} className="flex justify-between mx-4">
         {" "}
         {/* Removed padding and reduced margin */}
         <div className="flex flex-grow items-center gap-4">
@@ -62,7 +64,9 @@ function NavBar() {
                 className="h-10 w-10 rounded-full" // Adjusted profile size and shape
               />
             </div>
-            {isProfileListVisible ? <DropdownMenu names = {["login", "profile"]}/> : null}
+            {isProfileListVisible ? (
+              <DropdownMenu names={["login", "profile"]} />
+            ) : null}
           </div>
         </div>
       </nav>

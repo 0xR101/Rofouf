@@ -11,7 +11,7 @@ function Footer() {
           backgroundColor: "#533737",
           color: "#ECE1D1",
         }}
-        className="bg-backGround  p-2 h-10"
+        className="bg-backGround  p-2 h-12  min-h-10 max-sm:min-h-20 relative"
       >
         <div className="flex  justify-center items-center gap-4 max-sm:flex-col">
           <div>© 2024 Rofouf. All rights reserved</div>

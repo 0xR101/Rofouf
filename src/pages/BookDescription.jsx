@@ -66,14 +66,14 @@ function BookDescription() {
               }}
             ></div>
 
-            <div className=" flex flex-row gap-20 max-md:flex-col max-sm:flex-col ">
+            <div className=" flex flex-row gap-20 max-md:flex-col max-sm:flex-col">
               <div className="flex flex-col w-full gap-5 text-primary">
-                <ol>
+                <ul>
                   Gener
                   <li>health</li>
                   <li>Fitness</li>
                   <li>Self help </li>
-                </ol>
+                </ul>
 
                 <div className=" w-full flex flex-row  justify-between items-center">
                   <div>Book condtion:</div>
@@ -114,7 +114,7 @@ function BookDescription() {
           </div>
         </div>
 
-        <h2>Comments</h2>
+        <h1>Comments</h1>
         <div className="bg-primary bg-opacity-30 rounded-md p-8 flex flex-col gap-5 ">
           <Massage></Massage>
           <Massage></Massage>
