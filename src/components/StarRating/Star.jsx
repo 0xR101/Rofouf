@@ -29,7 +29,7 @@ function Star({ filled }) {
           <stop offset="0%" style={{ stopColor: "#FFD700", stopOpacity: 1 }} />
           <stop
             offset="100%"
-            style={{ stopColor: "#FFA500", stopOpacity: 1 }}
+            style={{ stopColor: "#FFD700", stopOpacity: 1 }}
           />
         </linearGradient>
         <linearGradient
@@ -48,10 +48,10 @@ function Star({ filled }) {
       </defs>
       <path
         fill={fill}
-        stroke="#ffc107"
+        stroke="#FFA500"
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeWidth={2}
+        strokeWidth={1}
         d="M12 17.27l-6.18 3.73 1.64-7.03-5.46-4.73 7.04-.73L12 2l2.96 6.54 7.04.73-5.46 4.73 1.64 7.03z"
       />
     </svg>
