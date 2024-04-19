@@ -30,7 +30,7 @@ function NavBar() {
             />
           </div>
         </div>
-        <div className="flex items-center gap-4 max-sm:mb-12">
+        <div className="flex items-center pr-4 gap-4 max-sm:mb-12">
           {" "}
           {/* Adjusted gap between icons */}
           <button className="flex items-center gap-2 h-10  p-2 rounded-full border-none  bg-plaster ">
