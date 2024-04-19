@@ -7,7 +7,6 @@ function Footer() {
       <footer
         style={{
           // borderTop: "1px solid #0D0842"
-
           borderTop: "1px solid rgba(13, 8, 66, 0.2)",
           backgroundColor: "#533737",
           color: "#ECE1D1",
