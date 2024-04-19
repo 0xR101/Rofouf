@@ -46,7 +46,7 @@ function Home() {
         }}
       >
         <Ad></Ad>
-        <h1>Genres</h1>
+        <div className="font-extrabold text-primary text-3xl mt-5 max-sm:text-2xl">Genres</div>
 
         <div className="mt-5 mb-5 p-4 mr-3 ml-3 rounded-lg gap-2 ">
           <GroupSlider />
@@ -57,13 +57,15 @@ function Home() {
             <div className="font-bold">Most recent offers</div>
           </div>
           <div className="flex-1 rounded-md bg-secondaryColor w-80 p-2 h-20 flex flex-col items-center justify-center text-primary shadow-2xl hover:bg-primary hover:text-white">
-            <div className="font-bold">Most recent offers</div>
+            <div className="font-bold">others</div>
           </div>
           <div className="flex-1 rounded-md bg-secondaryColor w-80 p-2 h-20 flex flex-col items-center justify-center text-primary shadow-2xl hover:bg-primary hover:text-white">
-            <div className="font-bold">Most recent offers</div>
+            <div className="font-bold">others</div>
           </div>
         </div>
-        <h1>Recommendations</h1>
+        <div className="font-extrabold text-primary text-3xl mt-5 max-sm:text-2xl mb-5">Recommendations</div>
+
+        
         <div className="grid   gap-6 md:grid-cols-2 sm:grid-cols-1 max-sm:justify-center">
           {books.map((book, index) => (
             <BookCard
