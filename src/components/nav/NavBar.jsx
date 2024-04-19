@@ -1,7 +1,7 @@
 import { FaBars } from "react-icons/fa";
 import { IoHomeSharp } from "react-icons/io5";
 import { useState } from "react";
-import DropdownMenu from "../dropdown/dropDown";
+import DropdownMenu from "../dropdown/DropDownMenu";
 
 function NavBar() {
   const [isProfileListVisible, setProfileListVisible] = useState(false);
