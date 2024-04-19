@@ -14,7 +14,7 @@ function NavBar() {
   };
   return (
     <header className="bg-primary text-white">
-      <nav style={{ width: "100%" }} className="flex justify-between mx-4 gap-2">
+      <nav style={{ width: "100%" }} className="flex justify-between mx-4 gap-2 shadow-2xl">
         {" "}
         {/* Removed padding and reduced margin */}
         <div className="flex flex-grow items-center gap-4 max-sm:flex-col max-sm:items-start max-sm:justify-center max-sm:mt-2">

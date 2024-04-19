@@ -48,7 +48,7 @@ function Home() {
         <Ad></Ad>
         <h1>Genres</h1>
 
-        <div className="mt-5 mb-5 p-4 rounded-lg gap-2 ">
+        <div className="mt-5 mb-5 p-4 mr-3 ml-3 rounded-lg gap-2 ">
           <GroupSlider />
         </div>
 
