@@ -11,6 +11,7 @@ const sellerInfo = {
   joinDate: "2024",
   rating: 3.8,
   profilePic: "./src/assets/person.png", // Replace with actual image path
+  location: "Amman, Jordan",
 };
 
 function Seller() {
