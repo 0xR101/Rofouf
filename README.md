@@ -14,6 +14,7 @@
 
 - [About the Project](#star2-about-the-project)
 - [Roadmap](#compass-roadmap)
+- [Getting Starte](#toolbox-Getting-Started)
 
 
 ## :star2: About the Project
