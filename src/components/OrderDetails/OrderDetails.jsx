@@ -2,6 +2,7 @@ import { useState } from "react";
 import Select from "react-select";
 import { AiOutlineCalendar } from "react-icons/ai"; // Ensure you have react-icons installed
 
+import { AiOutlineCamera } from "react-icons/ai";
 import { useEffect } from "react";
 
 const popularBookGenres = [
@@ -172,185 +173,205 @@ const OrderDetails = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <form
-        onSubmit={handleSubmit}
-        className={`flex flex-col space-y-6 ${formContainerResponsive}`}
-      >
-        <h1 className="text-2xl font-bold text-primary text-left mb-5">
-          Add Order Details
-        </h1>
+      <form onSubmit={handleSubmit} className="flex items-center space-x-20">
+        <div className="flex flex-col items-center p-6">
+          <div className="w-96 h-128 bg-gray-200 rounded-lg shadow-md flex items-center justify-center overflow-hidden">
+            {imagePreviewUrl ? (
+              <img
+                src={imagePreviewUrl}
+                alt="Preview"
+                className="object-scale-down h-full w-full rounded-lg"
+              />
+            ) : (
+              // Show a placeholder or icon if no image is selected
+              <AiOutlineCamera className="text-gray-400" size="40" />
+            )}
+          </div>
 
-        <div className="flex items-center space-x-4">
+          {/* Attach image button */}
           <label
-            className="block text-primary font-bold xs:w-1/4"
             htmlFor="bookImage"
+            className="mt-4 inline-block bg-primary text-white py-2 px-6 rounded-full cursor-pointer text-lg leading-normal uppercase shadow-md hover:bg-primary-dark hover:shadow-lg focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
           >
             Attach Image
           </label>
+
+          {/* Hidden file input */}
           <input
             id="bookImage"
             name="bookImage"
             type="file"
-            accept="image/*" // Accept images only
+            accept="image/*"
             onChange={handleImageChange}
-            className="block w-full text-sm text-gray-900
-              file:mr-4 file:py-2 file:px-4
-              file:rounded-full file:border-0
-              file:text-sm file:font-semibold
-              file:bg-violet-50 file:text-violet-700
-              hover:file:bg-violet-100
-            " // Tailwind CSS File Input classes
+            className="hidden"
           />
+
+          {/* Display the file name */}
+          {selectedFile && (
+            <p className="text-sm text-gray-500 mt-2">{selectedFile.name}</p>
+          )}
         </div>
 
-        <div className="flex space-x-15 flex-row items-center">
-          <label className={labelClassName}>Book&s Name</label>
-          <input
-            className={inputClassName}
-            name="bookName"
-            placeholder="Enter book name"
-            value={formData.bookName}
-            onChange={handleInputChange}
-            // Add the rest of your styling classes here
-          />
-        </div>
+        <div className={`flex flex-col space-y-6 ${formContainerResponsive}`}>
+          <h1 className="text-2xl font-bold text-primary text-left mb-5">
+            Add Order Details
+          </h1>
 
-        <div className="flex space-x-15 flex-row items-center">
-          <label className={labelClassName}>Book&s Author</label>
-          <input
-            className={inputClassName}
-            type="text"
-            placeholder="Enter book author"
-            name="bookAuthor"
-            value={formData.bookAuthor}
-            onChange={handleInputChange}
-            // Add the rest of your styling classes here
-          />
-        </div>
-
-        <div className="flex  space-x-15 flex-row items-center ">
-          <label className={`${labelClassName} `}>Book&apos; Description</label>
-          <textarea
-            className={`${inputClassName} py-2 h-20 `}
-            name="bookDescription"
-            placeholder="Enter book description"
-            value={formData.bookDescription}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <div className="flex space-x-15 flex-row items-center ">
-          <label className={labelClassName}>Genre</label>
-          <Select
-            isMulti
-            name="bookGenre"
-            options={popularBookGenres}
-            styles={customSelectStyles}
-            value={formData.bookGenre}
-            placeholder="Select book genre"
-            onChange={handleGenreChange}
-            className="w-3/4"
-          />
-        </div>
-
-        <div className="flex space-x-15 flex-row items-center">
-          <label className={labelClassName}>Number of Pages</label>
-          <input
-            className={inputClassName}
-            type="number"
-            placeholder="Enter number of pages"
-            name="numberOfPages"
-            value={formData.numberOfPages}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <div className="flex space-x-15 flex-row items-center">
-          <label className={labelClassName}>Order Type</label>
-          <Select
-            name="orderType"
-            options={orderTypeOptions}
-            styles={customSelectStyles}
-            placeholder="Select order type"
-            value={orderTypeOptions.find(
-              (option) => option.value === formData.orderType
-            )}
-            onChange={handleSelectChange("orderType")}
-            className="w-3/4"
-          />
-        </div>
-
-        <div className="flex space-x-15 flex-row items-center">
-          <label className={labelClassName}>Book Condition</label>
-          <Select
-            name="bookCondition"
-            options={bookConditionOptions}
-            styles={customSelectStyles}
-            placeholder="Select book condition"
-            value={bookConditionOptions.find(
-              (option) => option.value === formData.bookCondition
-            )}
-            onChange={handleSelectChange("bookCondition")}
-            className="w-3/4"
-          />
-        </div>
-
-        <div className="m-0 flex space-x-15 flex-row items-center">
-          <label className={labelClassName}>Book Price:</label>
-          <div className=" flex space-x-5 flex-row items-center">
+          <div className="flex space-x-15 flex-row items-center">
+            <label className={labelClassName}>Book&s Name</label>
             <input
-              className="pl-5 w-1/2 h-10 placeholder-white placeholder-opacity-50     rounded-lg bg-form shadow-md border-none resize-none focus:outline-none text-white"
-              type="number"
-              name="bookPrice"
-              placeholder="Enter price"
-              value={formData.bookPrice}
+              className={inputClassName}
+              name="bookName"
+              placeholder="Enter book name"
+              value={formData.bookName}
               onChange={handleInputChange}
+              // Add the rest of your styling classes here
             />
-
-            {formData.orderType === "rent" && (
-              <input
-                className="pl-5 w-1/2 h-10 placeholder-white placeholder-opacity-50     rounded-lg bg-form shadow-md border-none resize-none focus:outline-none text-white"
-                type="number"
-                placeholder="Enter max days"
-                value={formData.maxNumberOfDays}
-                onChange={handleInputChange}
-              />
-            )}
           </div>
-        </div>
 
-        <div className="flex space-x-15 flex-row items-center">
-          <label className={labelClassName}>Publication Info</label>
-          <div className=" flex space-x-5 flex-row items-center">
+          <div className="flex space-x-15 flex-row items-center">
+            <label className={labelClassName}>Book&s Author</label>
             <input
               className={inputClassName}
               type="text"
-              name="publicationInfo"
-              placeholder="Enter ISBN(s)"
-              value={formData.publicationInfo}
+              placeholder="Enter book author"
+              name="bookAuthor"
+              value={formData.bookAuthor}
               onChange={handleInputChange}
+              // Add the rest of your styling classes here
             />
-            <span className="">
-              <AiOutlineCalendar />
-            </span>
-            <input
-              className={inputClassName}
-              id="publicationYear"
-              name="publicationYear"
-              type="number"
-              placeholder="YYYY"
-              value={formData.publicationYear}
+          </div>
+
+          <div className="flex  space-x-15 flex-row items-center ">
+            <label className={`${labelClassName} `}>
+              Book&apos; Description
+            </label>
+            <textarea
+              className={`${inputClassName} py-2 h-20 `}
+              name="bookDescription"
+              placeholder="Enter book description"
+              value={formData.bookDescription}
               onChange={handleInputChange}
             />
           </div>
+
+          <div className="flex space-x-15 flex-row items-center ">
+            <label className={labelClassName}>Genre</label>
+            <Select
+              isMulti
+              name="bookGenre"
+              options={popularBookGenres}
+              styles={customSelectStyles}
+              value={formData.bookGenre}
+              placeholder="Select book genre"
+              onChange={handleGenreChange}
+              className="w-3/4"
+            />
+          </div>
+
+          <div className="flex space-x-15 flex-row items-center">
+            <label className={labelClassName}>Number of Pages</label>
+            <input
+              className={inputClassName}
+              type="number"
+              placeholder="Enter number of pages"
+              name="numberOfPages"
+              value={formData.numberOfPages}
+              onChange={handleInputChange}
+            />
+          </div>
+
+          <div className="flex space-x-15 flex-row items-center">
+            <label className={labelClassName}>Order Type</label>
+            <Select
+              name="orderType"
+              options={orderTypeOptions}
+              styles={customSelectStyles}
+              placeholder="Select order type"
+              value={
+                orderTypeOptions.find(
+                  (option) => option.value === formData.orderType
+                ) || ""
+              }
+              onChange={handleSelectChange("orderType")}
+              className="w-3/4"
+            />
+          </div>
+
+          <div className="flex space-x-15 flex-row items-center">
+            <label className={labelClassName}>Book Condition</label>
+            <Select
+              name="bookCondition"
+              options={bookConditionOptions}
+              styles={customSelectStyles}
+              placeholder="Select book condition"
+              value={
+                bookConditionOptions.find(
+                  (option) => option.value === formData.bookCondition
+                ) || ""
+              }
+              onChange={handleSelectChange("bookCondition")}
+              className="w-3/4"
+            />
+          </div>
+
+          <div className="m-0 flex space-x-15 flex-row items-center">
+            <label className={labelClassName}>Book Price:</label>
+            <div className=" flex space-x-5 flex-row items-center">
+              <input
+                className="pl-5 w-1/2 h-10 placeholder-white placeholder-opacity-50     rounded-lg bg-form shadow-md border-none resize-none focus:outline-none text-white"
+                type="number"
+                name="bookPrice"
+                placeholder="Enter price"
+                value={formData.bookPrice}
+                onChange={handleInputChange}
+              />
+
+              {formData.orderType === "rent" && (
+                <input
+                  className="pl-5 w-1/2 h-10 placeholder-white placeholder-opacity-50     rounded-lg bg-form shadow-md border-none resize-none focus:outline-none text-white"
+                  type="number"
+                  placeholder="Enter max days"
+                  value={formData.maxNumberOfDays}
+                  onChange={handleInputChange}
+                />
+              )}
+            </div>
+          </div>
+
+          <div className="flex space-x-15 flex-row items-center">
+            <label className={labelClassName}>Publication Info</label>
+            <div className=" flex space-x-5 flex-row items-center">
+              <input
+                className={inputClassName}
+                type="text"
+                name="publicationInfo"
+                placeholder="Enter ISBN(s)"
+                value={formData.publicationInfo}
+                onChange={handleInputChange}
+              />
+              <span className="">
+                <AiOutlineCalendar />
+              </span>
+              <input
+                className={inputClassName}
+                id="publicationYear"
+                name="publicationYear"
+                type="number"
+                placeholder="YYYY"
+                value={formData.publicationYear}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
+          <button
+            onSubmit={handleSubmit}
+            type="submit"
+            className="w-full text-xl bg-primary text-white px-6 py-3 rounded-md border-none transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl focus:outline-none hover:bg-primary  hover:bg-opacity-75"
+          >
+            Submit Order
+          </button>
         </div>
-        <button
-          onSubmit={handleSubmit}
-          type="submit"
-          className="w-full text-xl bg-primary text-white px-6 py-3 rounded-md border-none transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl focus:outline-none hover:bg-primary  hover:bg-opacity-75"
-        >
-          Submit Order
-        </button>
       </form>
     </div>
   );
