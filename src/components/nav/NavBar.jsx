@@ -1,5 +1,6 @@
 import { useState } from "react";
 import DropdownMenu from "../dropdown/DropDownMenu";
+import { useNavigate } from "react-router-dom";
 
 function NavBar() {
   const [isProfileListVisible, setProfileListVisible] = useState(false);
@@ -10,6 +11,13 @@ function NavBar() {
   const handleProfileListLeave = () => {
     setProfileListVisible(false);
   };
+
+  const navigate = useNavigate();
+
+  const handlePostOfferClick = () => {
+    navigate("/newOffer");
+  };
+
   return (
     <header className="bg-primary text-white">
       <nav
@@ -34,7 +42,10 @@ function NavBar() {
         <div className="flex items-center pr-4 gap-4 max-sm:mb-12">
           {" "}
           {/* Adjusted gap between icons */}
-          <button className="flex items-center gap-2 h-10  p-2 rounded-full border-none  bg-plaster ">
+          <button
+            className="flex items-center gap-2 h-10  p-2 rounded-full border-none  bg-plaster "
+            onClick={handlePostOfferClick}
+          >
             <img src="src\assets\add.svg" alt="Post Offer" className="h-8" />{" "}
             {/* Icon height */}
             <span className="hidden sm:block text-primary font-bold">
