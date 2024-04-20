@@ -38,22 +38,6 @@
 
 ## :toolbox: Getting Started
 
-### :bangbang: Prerequisites
-
-- vite+react<a href="https://vitejs.dev/"> Here</a>
-```bash
-$ npm create vite@latest
-```
-
-
-### :gear: Installation
-
-using vite
-```bash
-npm install or npm i
-```
-
-
 ### :running: Run Locally
 
 Clone the project
@@ -61,10 +45,20 @@ Clone the project
 ```bash
 https://github.com/0xR101/Rofouf.git
 ```
+### :gear: Installation
+
+```bash
+npm install or npm i
+```
+
 
 ```bash
 npm run dev
 ```
+
+
+
+
 
 
 ## :compass: Roadmap
