@@ -16,6 +16,7 @@ export default {
         Placeholder: "#5A5A5A",
         lightBrown50: "rgba(151, 134, 134, 0.5)",
         offWhite: "#fffaf2",
+        form: "rgba(83, 55, 55,0.5)",
       },
 
       screens: {

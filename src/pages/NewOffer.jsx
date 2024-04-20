@@ -6,7 +6,6 @@ export default function NewOffer() {
     <>
       <NavBar></NavBar>
       <div>
-        <h1>Create new offer </h1>
         <OrderDetails></OrderDetails>
       </div>
       <Footer></Footer>
