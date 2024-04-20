@@ -18,6 +18,15 @@
 
 ## :star2: About the Project
 
+### :camera: Screenshots
+<div align="center"> <a href=""><img src="https://raw.githubusercontent.com/0xR101/Rofouf/main/src/assets/snapshots/chat.png?token=GHSAT0AAAAAACPUSYQUFKIW56CRADOEDXM6ZRDUKFQ" alt='image' width='800'/></a> </div>
+<div align="center"> <a href=""><img src="https://raw.githubusercontent.com/0xR101/Rofouf/main/src/assets/snapshots/home1.png?token=GHSAT0AAAAAACPUSYQU26USUWOY2KQ5U2UOZRDUKUA" alt='image' width='800'/></a> </div>
+<div align="center"> <a href=""><img src="https://raw.githubusercontent.com/0xR101/Rofouf/main/src/assets/snapshots/home2.png?token=GHSAT0AAAAAACPUSYQUNRWQ54ZM2PE7QJMKZRDUK5A" alt='image' width='800'/></a> </div>
+<div align="center"> <a href=""><img src="https://raw.githubusercontent.com/0xR101/Rofouf/main/src/assets/snapshots/image.png?token=GHSAT0AAAAAACPUSYQUYOCOMKRLN7T6KWSCZRDULRQ" alt='image' width='800'/></a> </div>
+<div align="center"> <a href=""><img src="https://raw.githubusercontent.com/0xR101/Rofouf/main/src/assets/snapshots/login.png?token=GHSAT0AAAAAACPUSYQUUC5CQCF65CG7RZBIZRDUL3A" alt='image' width='800'/></a> </div>
+<div align="center"> <a href=""><img src="https://raw.githubusercontent.com/0xR101/Rofouf/main/src/assets/snapshots/profile.png?token=GHSAT0AAAAAACPUSYQV7I5H75SOATKIOZM6ZRDUMPA" alt='image' width='800'/></a> </div>
+<div align="center"> <a href=""><img src="https://raw.githubusercontent.com/0xR101/Rofouf/main/src/assets/snapshots/sign%20up.png?token=GHSAT0AAAAAACPUSYQVSDCPDA3B6HIB2C5OZRDUM6A" alt='image' width='800'/></a> </div>
+
 ### :dart: Features
 - register and log in to access the platform
 - list books for sale, rent, or exchange
