@@ -12,13 +12,15 @@ const books = [
     picture:
       "https://m.media-amazon.com/images/I/81YkqyaFVEL._AC_UF1000,1000_QL80_.jpg",
     link: "/to-kill-a-mockingbird",
+    active: true,
   },
   {
     name: "1984",
-    status: "Sold Out",
+    status: "For Rent",
     title: "1984",
     picture: "src/assets/bookCover.jpg",
     link: "/1984",
+    active: false,
   },
   {
     name: "The Great Gatsby",
@@ -26,6 +28,7 @@ const books = [
     title: "The Great Gatsby",
     picture: "src/assets/bookCover.jpg",
     link: "/great-gatsby",
+    active: true,
   },
   {
     name: "Pride and Prejudice",
@@ -33,6 +36,7 @@ const books = [
     title: "Pride and Prejudice",
     picture: "src/assets/bookCover.jpg",
     link: "/pride-and-prejudice",
+    active: true,
   },
   {
     name: "The Catcher in the Rye",
@@ -40,6 +44,7 @@ const books = [
     title: "The Catcher in the Rye",
     picture: "src/assets/bookCover.jpg",
     link: "/the-catcher-in-the-rye",
+    active: true,
   },
   {
     name: "The Hobbit",
@@ -47,6 +52,7 @@ const books = [
     title: "The Hobbit",
     picture: "src/assets/bookCover.jpg",
     link: "/the-hobbit",
+    active: false,
   },
 ];
 
@@ -59,27 +65,27 @@ function HorizontalBookSlider() {
     slidesToScroll: 1,
     responsive: [
       {
-        breakpoint: 1030,
+        breakpoint: 1079,
         settings: {
           slidesToShow: 4,
         },
       },
       {
-        breakpoint: 850,
+        breakpoint: 880,
         settings: {
           slidesToShow: 3,
         },
       },
 
       {
-        breakpoint: 650,
+        breakpoint: 680,
         settings: {
           slidesToShow: 2,
         },
       },
 
       {
-        breakpoint: 460,
+        breakpoint: 490,
         settings: {
           slidesToShow: 1,
         },
@@ -87,9 +93,11 @@ function HorizontalBookSlider() {
     ],
   };
 
+  const sortedBooks = books.sort((a, b) => b.active - a.active);
+
   return (
     <Slider className="bg-lightBrown50 rounded-xl shadow-md   " {...settings}>
-      {books.map((book, index) => (
+      {sortedBooks.map((book, index) => (
         <BookItem key={index} {...book} />
       ))}
     </Slider>

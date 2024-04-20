@@ -26,25 +26,28 @@ const StarRating = ({ rating }) => {
 
 const Comment = ({ username, profilePic, date, text, rating }) => {
   return (
-    <div className="bg-backGround p-4 rounded-lg shadow mb-2 flex">
+    <div className="bg-backGround p-4 rounded-lg shadow mb-2 flex xs:flex-row">
       {/* Profile Picture */}
       <img
         src={profilePic}
         alt={`${username}'s profile pic`}
-        className="rounded-full h-10 w-10 mr-4"
+        className="rounded-full h-10 w-10 xs:h-12 xs:w-12 mr-3"
       />
       {/* Comment Content */}
-      <div>
+      <div className="flex flex-col xs:justify-center flex-grow">
         {/* Username and Star Rating */}
-        <div className="flex items-center mb-2">
-          <span className="font-bold mr-2 text-primary">{username}</span>
+        <div className="flex items-center justify-between mb-1 xl:text-lg 2xl:text-xl">
+          <span className="font-bold text-primary">{username}</span>
           {/* Star Rating Component */}
-          <StarRating rating={rating} />
         </div>
+        <StarRating rating={rating} />
+
         {/* Comment Text */}
-        <p className="text-gray-700">{text}</p>
+        <p className="text-gray-700 text-sm xs:text-base xl:text-lg 2xl:text-xl  ">
+          {text}
+        </p>
         {/* Date */}
-        <div className="text-sm text-gray-500">{date}</div>
+        <div className=" text-xs xs:text-sm text-gray-500 mt-1">{date}</div>
       </div>
     </div>
   );

@@ -17,6 +17,13 @@ export default {
         lightBrown50: "rgba(151, 134, 134, 0.5)",
         offWhite: "#fffaf2",
       },
+
+      screens: {
+        xxs: "320px", // Extra extra small
+        xs: "475px", // Extra small
+        s: "575px", // Smaller than small
+        // No need to rewrite 'sm', 'md', 'lg', 'xl', '2xl', they are preserved
+      },
     },
     fontFamily: {
       poppins: ["poppins"],
