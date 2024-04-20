@@ -46,7 +46,7 @@ Clone the project
 ```bash
 https://github.com/0xR101/Rofouf.git
 ```
-### :gear: Installation
+### :gear: Installation and run
 
 ```bash
 npm install or npm i
