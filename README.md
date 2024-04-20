@@ -18,6 +18,15 @@
 
 ## :star2: About the Project
 
+### :camera: Screenshots
+<div align="center"> <a href=""><img src="src/assets/snapshots/chat.png" alt='image' width='800'/></a> </div>
+<div align="center"> <a href=""><img src="src/assets/snapshots/home1.png" alt='image' width='800'/></a> </div>
+<div align="center"> <a href=""><img src="src/assets/snapshots/home2.png" alt='image' width='800'/></a> </div>
+<div align="center"> <a href=""><img src="src/assets/snapshots/image.png" alt='image' width='800'/></a> </div>
+<div align="center"> <a href=""><img src="src/assets/snapshots/login.png" alt='image' width='800'/></a> </div>
+<div align="center"> <a href=""><img src="src/assets/snapshots/profile.png" alt='image' width='800'/></a> </div>
+<div align="center"> <a href=""><img src="src/assets/snapshots/sign%20up.png" alt='image' width='800'/></a> </div>
+
 ### :dart: Features
 - register and log in to access the platform
 - list books for sale, rent, or exchange

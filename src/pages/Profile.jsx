@@ -13,7 +13,7 @@ export default function Profile() {
   return (
     <>
       <NavBar></NavBar>
-      <div class="flex h-full">
+      <div class="flex">
         <LeftSideProfile userName={user.name} userMail={user.mail} userNumber={user.number} userAddress={user.address} userId={user.id} />
         <RightSideProfile />
       </div>
