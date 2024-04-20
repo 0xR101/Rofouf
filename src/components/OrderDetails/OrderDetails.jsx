@@ -2,6 +2,8 @@ import { useState } from "react";
 import Select from "react-select";
 import { AiOutlineCalendar } from "react-icons/ai"; // Ensure you have react-icons installed
 
+import { useEffect } from "react";
+
 const popularBookGenres = [
   // Fiction
   { value: "actionAdventure", label: "Action & Adventure" },
@@ -80,15 +82,15 @@ const OrderDetails = () => {
     bookCondition: "",
     bookPrice: "",
     maxNumberOfDays: "",
-    // Add more fields as needed
+    bookISBN: "",
+    publicationYear: "",
   });
 
-  const handleImageChange = (e) => {
-    // Assuming you want to store the file in state
-    const file = e.target.files[0];
-    // Now you can use this file to preview or upload to a server
-  };
+  // State for the image file and its preview URL
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
 
+  // Event handler for text inputs change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
@@ -97,26 +99,87 @@ const OrderDetails = () => {
     }));
   };
 
+  // Event handler for file input change
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      setImagePreviewUrl(URL.createObjectURL(file)); // Create a URL for preview
+    }
+  };
+
+  // Event handler for the select elements (for genres, order type, and book condition)
+  const handleSelectChange = (name) => (selectedOption) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: selectedOption
+        ? Array.isArray(selectedOption)
+          ? selectedOption.map((option) => option.value)
+          : selectedOption.value
+        : "",
+    }));
+  };
+
+  const handleGenreChange = (selectedOptions) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      bookGenre: selectedOptions || [], // or [] to reset to empty if nothing is selected
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle the form submission, such as validating input data,
-    // possibly setting up an API call, etc.
+    // send to the server
+
+    // Reset form fields
+    setFormData({
+      bookName: "",
+      bookAuthor: "",
+      bookDescription: "",
+      bookGenre: [],
+      numberOfPages: "",
+      orderType: "",
+      bookCondition: "",
+      bookPrice: "",
+      maxNumberOfDays: "",
+      bookISBN: "",
+      publicationYear: "",
+    });
+
+    // Clear selected file and image preview
+    setSelectedFile(null);
+    setImagePreviewUrl(null);
   };
+
+  // Cleanup preview URL to avoid memory leaks
+  useEffect(() => {
+    // This will be called before the component unmounts or when imagePreviewUrl changes
+    return () => {
+      if (imagePreviewUrl) {
+        URL.revokeObjectURL(imagePreviewUrl);
+      }
+    };
+  }, [imagePreviewUrl]);
 
   const inputClassName =
     "pl-5 w-3/4 h-10 placeholder-white placeholder-opacity-50     rounded-lg bg-form shadow-md border-none resize-none focus:outline-none text-white";
 
   const labelClassName = "w-1/3 text-left text-primary font-bold";
 
+  const formContainerResponsive =
+    "max-w-lg mx-auto p-6 bg-white rounded-xl shadow-lg";
+
   return (
     <div className="container mx-auto p-6">
       <form
         onSubmit={handleSubmit}
-        className="flex p-5 flex-col space-y-10  max-w-lg mx-auto p-6 bg-white rounded-xl shadow-lg"
+        className={`flex flex-col space-y-6 ${formContainerResponsive}`}
       >
         <h1 className="text-2xl font-bold text-primary text-left mb-5">
           Add Order Details
         </h1>
+
         <div className="flex items-center space-x-4">
           <label
             className="block text-primary font-bold xs:w-1/4"
@@ -185,7 +248,7 @@ const OrderDetails = () => {
             styles={customSelectStyles}
             value={formData.bookGenre}
             placeholder="Select book genre"
-            onChange={(value) => setFormData({ ...formData, bookGenre: value })}
+            onChange={handleGenreChange}
             className="w-3/4"
           />
         </div>
@@ -212,9 +275,7 @@ const OrderDetails = () => {
             value={orderTypeOptions.find(
               (option) => option.value === formData.orderType
             )}
-            onChange={(selectedOption) =>
-              setFormData({ ...formData, orderType: selectedOption.value })
-            }
+            onChange={handleSelectChange("orderType")}
             className="w-3/4"
           />
         </div>
@@ -229,28 +290,26 @@ const OrderDetails = () => {
             value={bookConditionOptions.find(
               (option) => option.value === formData.bookCondition
             )}
-            onChange={(selectedOption) =>
-              setFormData({ ...formData, bookCondition: selectedOption.value })
-            }
+            onChange={handleSelectChange("bookCondition")}
             className="w-3/4"
           />
         </div>
 
-        <div className="flex space-x-15 flex-row items-center">
+        <div className="m-0 flex space-x-15 flex-row items-center">
           <label className={labelClassName}>Book Price:</label>
           <div className=" flex space-x-5 flex-row items-center">
             <input
-              className={inputClassName}
+              className="pl-5 w-1/2 h-10 placeholder-white placeholder-opacity-50     rounded-lg bg-form shadow-md border-none resize-none focus:outline-none text-white"
               type="number"
               name="bookPrice"
-              placeholder="Enter book price"
+              placeholder="Enter price"
               value={formData.bookPrice}
               onChange={handleInputChange}
             />
 
             {formData.orderType === "rent" && (
               <input
-                className={inputClassName}
+                className="pl-5 w-1/2 h-10 placeholder-white placeholder-opacity-50     rounded-lg bg-form shadow-md border-none resize-none focus:outline-none text-white"
                 type="number"
                 placeholder="Enter max days"
                 value={formData.maxNumberOfDays}
@@ -286,8 +345,9 @@ const OrderDetails = () => {
           </div>
         </div>
         <button
+          onSubmit={handleSubmit}
           type="submit"
-          className="w-full bg-primary text-white rounded-lg p-2 hover:bg-primary-dark"
+          className="w-full text-xl bg-primary text-white px-6 py-3 rounded-md border-none transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl focus:outline-none hover:bg-primary  hover:bg-opacity-75"
         >
           Submit Order
         </button>
@@ -295,4 +355,5 @@ const OrderDetails = () => {
     </div>
   );
 };
+
 export default OrderDetails;

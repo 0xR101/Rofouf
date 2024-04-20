@@ -2,9 +2,16 @@ import NavBar from "./../components/nav/NavBar.jsx";
 import Footer from "./../components/footer/Footer.jsx";
 
 import { FaWhatsapp } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import Massage from "../components/Massage/Massage.jsx";
 
 function BookDescription() {
+  const navigate = useNavigate();
+
+  const handleNavigation = () => {
+    navigate("/seller"); // Replace '/profile' with the actual profile route
+  };
+
   return (
     <>
       <NavBar></NavBar>
@@ -26,13 +33,16 @@ function BookDescription() {
                   className="rounded-md"
                   src="\src\assets\profile.png"
                   alt=""
+                  onClick={handleNavigation}
                 />
                 <div className="flex flex-col gap-1">
                   <img src="src\assets\stars.png" alt="" />
                   <div className="text-primary text-opacity-60">4.3/5</div>
                 </div>
               </div>
-              <div className="text-primary">Seller Name </div>
+              <div className="text-primary" onClick={handleNavigation}>
+                Seller Name{" "}
+              </div>
               <div>
                 <img src="\src\assets\loc.svg" alt="" />
                 <div className="text-black">location</div>
