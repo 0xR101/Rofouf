@@ -13,8 +13,8 @@
 # :notebook_with_decorative_cover: Table of Contents
 
 - [About the Project](#star2-about-the-project)
-- [Roadmap](#compass-roadmap)
 - [Getting Starte](#toolbox-Getting-Started)
+- [Roadmap](#compass-roadmap)
 
 
 ## :star2: About the Project
