@@ -19,7 +19,7 @@
 ## :star2: About the Project
 
 ### :camera: Screenshots
-<div align="center"> <a href=""><img src="https://raw.githubusercontent.com/0xR101/Rofouf/main/src/assets/snapshots/chat.png?token=GHSAT0AAAAAACPUSYQUFKIW56CRADOEDXM6ZRDUKFQ" alt='image' width='800'/></a> </div>
+<div align="center"> <a href=""><img src="src/assets/snapshots/chat.png" alt='image' width='800'/></a> </div>
 <div align="center"> <a href=""><img src="https://raw.githubusercontent.com/0xR101/Rofouf/main/src/assets/snapshots/home1.png?token=GHSAT0AAAAAACPUSYQU26USUWOY2KQ5U2UOZRDUKUA" alt='image' width='800'/></a> </div>
 <div align="center"> <a href=""><img src="https://raw.githubusercontent.com/0xR101/Rofouf/main/src/assets/snapshots/home2.png?token=GHSAT0AAAAAACPUSYQUNRWQ54ZM2PE7QJMKZRDUK5A" alt='image' width='800'/></a> </div>
 <div align="center"> <a href=""><img src="https://raw.githubusercontent.com/0xR101/Rofouf/main/src/assets/snapshots/image.png?token=GHSAT0AAAAAACPUSYQUYOCOMKRLN7T6KWSCZRDULRQ" alt='image' width='800'/></a> </div>
