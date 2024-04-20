@@ -8,7 +8,7 @@ function Chat() {
 
       <div className="flex flex-row w-full min-h-screen h-full bg-backGround p-5 gap-2">
         <div className="flex flex-col w-70 h-full  bg-primary  p-3 rounded-xl items-center  gap-10  flex-grow-2">
-          <div className="text-xl font-semibold">conversiton</div>
+          <div className="text-xl font-semibold">Conversation</div>
           <div className="flex flex-col gap-3">
             <PersonChatCard />
             <PersonChatCard />
