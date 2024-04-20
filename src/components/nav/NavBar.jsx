@@ -4,15 +4,17 @@ import { useNavigate } from "react-router-dom";
 
 function NavBar() {
   const [isProfileListVisible, setProfileListVisible] = useState(false);
-  const handleProfileListEnter = () => {
-    setProfileListVisible(true);
-  };
-
-  const handleProfileListLeave = () => {
-    setProfileListVisible(false);
-  };
-
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+
+  const handleProfileListEnter = () => setProfileListVisible(true);
+  const handleProfileListLeave = () => setProfileListVisible(false);
+
+  const handleSearch = (event) => {
+    if (event.key === "Enter") {
+      navigate(`/search?search=${searchTerm}`);
+    }
+  };
 
   const handlePostOfferClick = () => {
     navigate("/newOffer");
@@ -24,18 +26,18 @@ function NavBar() {
         style={{ width: "100%" }}
         className="flex justify-between mx-4 gap-2 shadow-2xl"
       >
-        {" "}
-        {/* Removed padding and reduced margin */}
         <div className="flex flex-grow items-center gap-4 max-sm:flex-col max-sm:items-start max-sm:justify-center max-sm:mt-2">
           <a href="/" className="shrink-0 px-0">
-            <img src="src\assets\logo.svg" alt="Logo" className="h-8" />{" "}
-            {/* Adjusted logo size */}
+            <img src="src/assets/logo.svg" alt="Logo" className="h-8" />
           </a>
-          <div className="flex-grow max-w-lg  max-sm:w-full max-sm:m-2 ">
+          <div className="flex-grow max-w-lg max-sm:w-full max-sm:m-2 ">
             <input
               type="search"
-              className="w-full h-10 placeholder-Placeholder placeholder-bold   pl-4 pr-3 rounded-full bg-plaster shadow-md border-none resize-none focus:outline-none text-gray-700" // Adjusted height and padding
+              className="w-full h-10 placeholder-Placeholder placeholder-bold pl-4 pr-3 rounded-full bg-plaster shadow-md border-none resize-none focus:outline-none text-gray-700"
               placeholder="Search Books..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyPress={handleSearch}
             />
           </div>
         </div>
