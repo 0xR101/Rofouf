@@ -17,6 +17,7 @@ import Profile from "./pages/Profile.jsx";
 import BooksList from "./pages/BooksList.jsx";
 import NewOffer from "./pages/NewOffer.jsx";
 import Search from "./pages/Search.jsx";
+import Genre from "./pages/Genre.jsx";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,11 @@ const router = createBrowserRouter([
   {
     path: "search",
     element: <Search />,
+  },
+
+  {
+    path: "genre",
+    element: <Genre />,
   },
 ]);
 

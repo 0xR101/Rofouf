@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { GiSwordInStone } from "react-icons/gi";
 // import React from "react";
 import Slider from "react-slick";
-import GenreCard from './../genre/GenreCard.jsx';
+import GenreCard from "./../genre/GenreCard.jsx";
 import { IoIosColorWand } from "react-icons/io";
 import { FaChildReaching } from "react-icons/fa6";
 import { ImProfile } from "react-icons/im";
@@ -15,7 +15,6 @@ import { MdCastForEducation } from "react-icons/md";
 import { RiMentalHealthFill } from "react-icons/ri";
 import { MdSportsVolleyball } from "react-icons/md";
 import { GiGardeningShears } from "react-icons/gi";
-
 
 function GroupSlider() {
   var settings = {
