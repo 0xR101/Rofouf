@@ -127,7 +127,7 @@ export default function BooksList() {
   return (
     <>
       <NavBar></NavBar>
-      <div class="p-12 bg-backGround">
+      <div class="p-12 mb-10">
         <h1 class="inline">All Books list </h1>
 
         <select

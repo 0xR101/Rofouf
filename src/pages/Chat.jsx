@@ -26,7 +26,7 @@ function Chat() {
     <>
       <NavBar></NavBar>
       <div className="max-sm:px-3 flex justify-center">
-        <div className="flex flex-row w-full  h-full bg-backGround p-5 gap-2 max-sm:flex-col">
+        <div className="flex flex-row w-full  h-full bg-backGround  p-5 gap-2 max-sm:flex-col">
           <div className="flex flex-col max-sm:w-full  h-full overflow-y-scroll  bg-primary  p-3 rounded-xl   gap-10  flex-grow-2  max-sm:overflow-x max-sm:overflow-y-hidden">
             <div className="text-2xl font-bold text-center text-white max-sm:hidden">
               conversation

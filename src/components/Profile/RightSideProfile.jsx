@@ -7,7 +7,7 @@ export default function RightSideProfile() {
     <>
       <div
         id="right"
-        class="bg-backGround w-2/5 p-10"
+        class="bg-offWhite w-2/5 p-10"
         // style={{ width: "40%", padding: "20px" }}
       >
         <div className="flex justify-center h-32">

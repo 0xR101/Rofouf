@@ -8,13 +8,19 @@ export default function Profile() {
     mail: "johndoe@example.com",
     number: "1234567890",
     address: "123 Main Street",
-    id: "jone.doe"
+    id: "jone.doe",
   };
   return (
     <>
       <NavBar></NavBar>
-      <div class="flex">
-        <LeftSideProfile userName={user.name} userMail={user.mail} userNumber={user.number} userAddress={user.address} userId={user.id} />
+      <div className="flex min-h-screen ">
+        <LeftSideProfile
+          userName={user.name}
+          userMail={user.mail}
+          userNumber={user.number}
+          userAddress={user.address}
+          userId={user.id}
+        />
         <RightSideProfile />
       </div>
 

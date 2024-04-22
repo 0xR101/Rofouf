@@ -169,22 +169,24 @@ const OrderDetails = () => {
   const labelClassName = "w-1/3 text-left text-primary font-bold";
 
   const formContainerResponsive =
-    "max-w-lg mx-auto p-6 bg-white rounded-xl shadow-lg";
+    "max-w-lg m-0  p-6 bg-white rounded-xl shadow-lg";
 
   return (
-    <div className="container mx-auto p-6">
-      <form onSubmit={handleSubmit} className="flex items-center space-x-20">
-        <div className="flex flex-col items-center p-6">
-          <div className="w-96 h-128 bg-gray-200 rounded-lg shadow-md flex items-center justify-center overflow-hidden">
+    <div className="container m-5 p-0 ">
+      <form
+        onSubmit={handleSubmit}
+        className="flex justify-start items-start space-x-20"
+      >
+        <div className="flex flex-col justify-start  items-center p-0">
+          <div className=" bg-gray-200 rounded-lg shadow-md flex items-start justify-center overflow-hidden">
             {imagePreviewUrl ? (
               <img
                 src={imagePreviewUrl}
                 alt="Preview"
-                className="object-scale-down h-full w-full rounded-lg"
+                className="object-cover h-200 w-96 rounded-lg"
               />
             ) : (
-              // Show a placeholder or icon if no image is selected
-              <AiOutlineCamera className="text-gray-400" size="40" />
+              <AiOutlineCamera className="text-gray-400 " size="400" />
             )}
           </div>
 

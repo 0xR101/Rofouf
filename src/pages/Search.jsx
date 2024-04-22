@@ -151,16 +151,16 @@ export default function BooksList() {
   return (
     <>
       <NavBar />
-      <div className="p-12 bg-backGround">
+      <div className="p-12 min-h-screen mb-10 ">
         <h1 className="inline">
-          Search Results for "{searchQuery}" ({booksShown.length})
+          Search Results for &quot;{searchQuery}&quot; ({booksShown.length})
         </h1>
         <br />
         <div>
           <label>Sort by:</label>
           <select
             onChange={handleSortChange}
-            className="p-2 bg-primary rounded-md text-white ml-4"
+            className="p-2 rounded-md text-white ml-4"
           >
             <option value="">Select</option>
             <option value="priceAsc">Price (Low to High)</option>

@@ -16,10 +16,10 @@ const sellerInfo = {
 
 function Seller() {
   return (
-    <div className=" flex bg-offWhite flex-col min-h-screen w-full">
+    <div className=" flex  flex-col min-h-screen w-full">
       <NavBar></NavBar>
 
-      <main className=" flex-grow m-10 space-y-5 ">
+      <main className=" flex-grow m-10 space-y-5 mb-40 ">
         <SellerHeader seller={sellerInfo} />
         <h1 className="text-3xl font-bold mb-4 text-primary">All Offers</h1>
         <HorizontalBookSlider></HorizontalBookSlider>

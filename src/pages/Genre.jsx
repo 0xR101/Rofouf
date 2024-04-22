@@ -170,15 +170,15 @@ export default function BooksByGenre() {
   return (
     <>
       <NavBar />
-      <div className="p-12 bg-backGround">
+      <div className="p-12 min-h-screen mb-10">
         {!isValidGenre ? (
           <h1>Genre not found. Please select from available genres.</h1>
         ) : (
           <>
             <h1 className="inline">
-              Books in "
-              {genreQuery.charAt(0).toUpperCase() + genreQuery.slice(1)}" Genre
-              ({booksShown.length})
+              Books in &quot;
+              {genreQuery.charAt(0).toUpperCase() + genreQuery.slice(1)}&quot;
+              Genre ({booksShown.length})
             </h1>
             <div>
               <label>Sort by:</label>
@@ -228,9 +228,9 @@ export default function BooksByGenre() {
                   booksShown
                 ) : (
                   <p>
-                    No books found in the "
-                    {genreQuery.charAt(0).toUpperCase() + genreQuery.slice(1)}"
-                    genre.
+                    No books found in the &quot;
+                    {genreQuery.charAt(0).toUpperCase() + genreQuery.slice(1)}
+                    &quot; genre.
                   </p>
                 )}
               </div>

@@ -1,9 +1,9 @@
 import NavBar from "./../components/nav/NavBar.jsx";
 import Footer from "./../components/footer/Footer.jsx";
+import CommentSection from "./../components/CommentSection/CommentSection.jsx";
 
 import { FaWhatsapp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import Massage from "../components/Massage/Massage.jsx";
 
 function BookDescription() {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ function BookDescription() {
     <>
       <NavBar></NavBar>
 
-      <div className="flex flex-col p-7 gap-4">
+      <div className="flex flex-col p-7 gap-4 min-h-screen mb-10">
         <div className="flex flex-row gap-10 max-md:flex-col  max-sm:flex-col max-sm:items-center max-lg:flex-col">
           <div className="flex flex-col gap-2">
             {/* here we should add the cover of the book */}
@@ -123,46 +123,11 @@ function BookDescription() {
             </div>
           </div>
         </div>
-
         <h1>Comments</h1>
-        <div className="bg-primary bg-opacity-30 rounded-md p-8 flex flex-col gap-5 ">
-          <Massage></Massage>
-          <Massage></Massage>
-          <Massage></Massage>
-        </div>
-        <div className="w-full ">
-          <form className="w-full">
-            <div className="relative">
-              <img
-                className="absolute top-0 left-0 w-9  h-8 p-4 rounded-full"
-                src="src\assets\profile.png"
-                alt=""
-              />
-            </div>
-            <div className="relative">
-              <div
-                onClick={{}}
-                className="text-white text-center pt-2 w-20 h-7 rounded-xl bg-primary font-bold absolute top-4 right-0 "
-              >
-                Send
-              </div>
-            </div>
-
-            <div className="mr-20">
-              <textarea
-                className=" shadow-md border-none resize-none focus:outline-none   flex pt-4 h-10 text-white pl-20 bg-primary bg-opacity-40 rounded-lg w-full text-base"
-                name=""
-                id=""
-                placeholder="Write a comment ..."
-              ></textarea>
-            </div>
-          </form>
-        </div>
+        <CommentSection> </CommentSection>
       </div>
 
-      <>
-        <Footer></Footer>
-      </>
+      <Footer></Footer>
     </>
   );
 }
