@@ -27,6 +27,8 @@
 <div align="center"> <a href=""><img src="src/assets/snapshots/login.png" alt='image' width='800'/></a> </div>
 <div align="center"> <a href=""><img src="src/assets/snapshots/profile.png" alt='image' width='800'/></a> </div>
 <div align="center"> <a href=""><img src="src/assets/snapshots/sign%20up.png" alt='image' width='800'/></a> </div>
+<div align="center"> <a href=""><img src="src/assets/snapshots/seller.png" alt='image' width='800'/></a> </div>
+
 
 ### :dart: Features
 - register and log in to access the platform
