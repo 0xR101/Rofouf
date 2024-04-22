@@ -169,16 +169,16 @@ const OrderDetails = () => {
   const labelClassName = "w-1/3 text-left text-primary font-bold";
 
   const formContainerResponsive =
-    "w-full  mx-auto p-6 bg-white rounded-xl shadow-lg";
+    "w-full  mx-auto p-6 bg-white rounded-xl shadow-xl";
 
   return (
-    <div className="container m-10 p-0 ">
+    <div className="container  m-10 p-0 ">
       <form
         onSubmit={handleSubmit}
         className="flex justify-start items-start space-x-20"
       >
         <div className="flex flex-col justify-start  items-center p-0 ">
-          <div className=" bg-gray-200 rounded-lg shadow-md flex items-start justify-center overflow-hidden">
+          <div className=" bg-white rounded-lg shadow-md flex items-start justify-center overflow-hidden">
             {imagePreviewUrl ? (
               <img
                 src={imagePreviewUrl}
