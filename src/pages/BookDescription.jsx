@@ -4,6 +4,7 @@ import CommentSection from "./../components/CommentSection/CommentSection.jsx";
 
 import { FaWhatsapp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import StarRating from "../components/StarRating/StarRating.jsx";
 
 function BookDescription() {
   const navigate = useNavigate();
@@ -16,18 +17,18 @@ function BookDescription() {
     <>
       <NavBar></NavBar>
 
-      <div className="flex flex-col p-7 gap-4 min-h-screen mb-10">
+      <div className="flex flex-col  p-7 gap-4 min-h-screen mb-10">
         <div className="flex flex-row gap-10 max-md:flex-col  max-sm:flex-col max-sm:items-center max-lg:flex-col">
           <div className="flex flex-col gap-2">
             {/* here we should add the cover of the book */}
             <div>
               <img
-                className="object-cover w-80 h-70 "
+                className="object-cover rounded-lg w-80 h-70 "
                 src="\src\assets\bookCover.jpg"
                 alt="hi"
               />
             </div>
-            <div className="bg-white p-4 flex flex-col gap-1">
+            <div className="bg-white rounded-lg p-5 flex flex-col gap-1">
               <div className="flex gap-3">
                 <img
                   className="rounded-md"
@@ -36,8 +37,7 @@ function BookDescription() {
                   onClick={handleNavigation}
                 />
                 <div className="flex flex-col gap-1">
-                  <img src="src\assets\stars.png" alt="" />
-                  <div className="text-primary text-opacity-60">4.3/5</div>
+                  <StarRating rating={4.4} />
                 </div>
               </div>
               <div className="text-primary" onClick={handleNavigation}>
@@ -50,7 +50,7 @@ function BookDescription() {
               <a target="_blank" href="https://wa.me/0553731017">
                 <div
                   onClick={{}}
-                  className="bg-primary font-extrabold text-center hover:bg-orange-400 h-10 pt-4 rounded-lg flex gap-2 justify-center"
+                  className="bg-primary text-white font-extrabold text-center hover:bg-orange-400 h-10 pt-4 rounded-lg flex gap-2 justify-center"
                 >
                   <div>Contact</div>
                   <FaWhatsapp className="w-5 h-5 text-green-300" />
@@ -59,7 +59,7 @@ function BookDescription() {
             </div>
           </div>
 
-          <div className="bg-white flex flex-col p-7 text-primary">
+          <div className="bg-white rounded-lg flex flex-col p-7 text-primary">
             <h1>The book title</h1>
             <h3>discritpion</h3>
             <p className="text-primary">
@@ -109,7 +109,7 @@ function BookDescription() {
               <div className="flex flex-col">
                 <h2>Additional details</h2>
 
-                <div className="flex flex-col bg-primary bg-opacity-70 text-white p-5 gap-4 w-80 h-full">
+                <div className="flex  rounded-lg flex-col bg-primary bg-opacity-70 text-white p-5 gap-4 w-80 h-full">
                   <div>
                     <div className="font-bold">ISBN(s)</div>
                     <div>123432531-124334643</div>
