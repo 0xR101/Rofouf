@@ -58,7 +58,7 @@ const customSelectStyles = {
     ...provided,
     minHeight: "2.5rem", // Adjust height to match your other inputs
     borderRadius: "9999px", // Tailwind rounded-full
-    backgroundColor: "#f4f4f4", // Tailwind bg-plaster or any color you want
+    backgroundColor: "rgba(151, 134, 134, 0.5)", // Tailwind bg-plaster or any color you want
     boxShadow:
       "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)", // Tailwind shadow-md
     border: "none",
@@ -67,7 +67,7 @@ const customSelectStyles = {
   placeholder: (provided) => ({
     ...provided,
     fontWeight: "bold", // Tailwind font-bold
-    color: "#a1a1a1", // Tailwind text-gray-500 or any color you want
+    color: "#a2a1a1", // Tailwind text-gray-500 or any color you want
   }),
   // Add more custom styles if needed
 };
@@ -164,20 +164,20 @@ const OrderDetails = () => {
   }, [imagePreviewUrl]);
 
   const inputClassName =
-    "pl-5 w-3/4 h-10 placeholder-white placeholder-opacity-50     rounded-lg bg-form shadow-md border-none resize-none focus:outline-none text-white";
+    "pl-5  w-full h-10 placeholder-white placeholder-opacity-50     rounded-full bg-lightBrown50 shadow-md border-none resize-none focus:outline-none text-white";
 
   const labelClassName = "w-1/3 text-left text-primary font-bold";
 
   const formContainerResponsive =
-    "max-w-lg m-0  p-6 bg-white rounded-xl shadow-lg";
+    "w-full  mx-auto p-6 bg-white rounded-xl shadow-lg";
 
   return (
-    <div className="container m-5 p-0 ">
+    <div className="container m-10 p-0 ">
       <form
         onSubmit={handleSubmit}
         className="flex justify-start items-start space-x-20"
       >
-        <div className="flex flex-col justify-start  items-center p-0">
+        <div className="flex flex-col justify-start  items-center p-0 ">
           <div className=" bg-gray-200 rounded-lg shadow-md flex items-start justify-center overflow-hidden">
             {imagePreviewUrl ? (
               <img
@@ -249,7 +249,7 @@ const OrderDetails = () => {
               Book&apos; Description
             </label>
             <textarea
-              className={`${inputClassName} py-2 h-20 `}
+              className={`${inputClassName} pt-5 h-20 `}
               name="bookDescription"
               placeholder="Enter book description"
               value={formData.bookDescription}
@@ -267,7 +267,7 @@ const OrderDetails = () => {
               value={formData.bookGenre}
               placeholder="Select book genre"
               onChange={handleGenreChange}
-              className="w-3/4"
+              className="w-full"
             />
           </div>
 
@@ -296,7 +296,7 @@ const OrderDetails = () => {
                 ) || ""
               }
               onChange={handleSelectChange("orderType")}
-              className="w-3/4"
+              className="w-full"
             />
           </div>
 
@@ -313,15 +313,15 @@ const OrderDetails = () => {
                 ) || ""
               }
               onChange={handleSelectChange("bookCondition")}
-              className="w-3/4"
+              className="w-full"
             />
           </div>
 
-          <div className="m-0 flex space-x-15 flex-row items-center">
-            <label className={labelClassName}>Book Price:</label>
-            <div className=" flex space-x-5 flex-row items-center">
+          <div className="m-0 flex  flex-row items-center justify-start">
+            <label className={`${labelClassName} w-1/4`}>Book Price</label>
+            <div className=" flex space-x-5 flex-row  flex-grow items-start justify-start w-2/3">
               <input
-                className="pl-5 w-1/2 h-10 placeholder-white placeholder-opacity-50     rounded-lg bg-form shadow-md border-none resize-none focus:outline-none text-white"
+                className={`${inputClassName}  `}
                 type="number"
                 name="bookPrice"
                 placeholder="Enter price"
@@ -331,8 +331,8 @@ const OrderDetails = () => {
 
               {formData.orderType === "rent" && (
                 <input
-                  className="pl-5 w-1/2 h-10 placeholder-white placeholder-opacity-50     rounded-lg bg-form shadow-md border-none resize-none focus:outline-none text-white"
                   type="number"
+                  className={`${inputClassName}  `}
                   placeholder="Enter max days"
                   value={formData.maxNumberOfDays}
                   onChange={handleInputChange}
@@ -342,21 +342,23 @@ const OrderDetails = () => {
           </div>
 
           <div className="flex space-x-15 flex-row items-center">
-            <label className={labelClassName}>Publication Info</label>
-            <div className=" flex space-x-5 flex-row items-center">
+            <label className={`${labelClassName} w-1/4`}>
+              Publication Info
+            </label>
+            <div className=" flex space-x-5 flex-row flex-grow items-center w-2/3">
               <input
-                className={inputClassName}
+                className={`${inputClassName}  `}
                 type="text"
                 name="publicationInfo"
                 placeholder="Enter ISBN(s)"
-                value={formData.publicationInfo}
+                value={formData.bookISBN}
                 onChange={handleInputChange}
               />
               <span className="">
                 <AiOutlineCalendar />
               </span>
               <input
-                className={inputClassName}
+                className={`${inputClassName}  `}
                 id="publicationYear"
                 name="publicationYear"
                 type="number"
@@ -366,13 +368,15 @@ const OrderDetails = () => {
               />
             </div>
           </div>
-          <button
-            onSubmit={handleSubmit}
-            type="submit"
-            className="w-full text-xl bg-primary text-white px-6 py-3 rounded-md border-none transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl focus:outline-none hover:bg-primary  hover:bg-opacity-75"
-          >
-            Submit Order
-          </button>
+          <div className="flex flex-row justify-end  items-center p-5">
+            <button
+              onSubmit={handleSubmit}
+              type="submit"
+              className=" w-2/3 text-xl bg-primary text-white px-6 py-3 rounded-md border-none transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl focus:outline-none hover:bg-primary  hover:bg-opacity-75"
+            >
+              Submit Order
+            </button>
+          </div>
         </div>
       </form>
     </div>
