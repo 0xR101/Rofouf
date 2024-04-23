@@ -153,6 +153,18 @@ const OrderDetails = () => {
     setImagePreviewUrl(null);
   };
 
+  const [iconSize, setIconSize] = useState(window.innerWidth < 640 ? 200 : 400);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIconSize(window.innerWidth < 640 ? 200 : 400);
+    };
+
+    window.addEventListener("resize", handleResize);
+    // Clean up the event listener when the component unmounts
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   // Cleanup preview URL to avoid memory leaks
   useEffect(() => {
     // This will be called before the component unmounts or when imagePreviewUrl changes
@@ -168,14 +180,13 @@ const OrderDetails = () => {
 
   const labelClassName = "w-1/3 text-left text-primary font-bold";
 
-  const formContainerResponsive =
-    "w-full  mx-auto p-6 bg-white rounded-xl shadow-xl";
-
+  const labelInput =
+    "flex items-start flex-col  justify-center gap-5  lg:items-center lg:flex-row";
   return (
     <div className="container  m-10 p-0 ">
       <form
         onSubmit={handleSubmit}
-        className="flex justify-start items-start space-x-20"
+        className="flex flex-col  justify-center items-center gap-10  lg:justify-start lg:items-start lg:flex-row      "
       >
         <div className="flex flex-col justify-start  items-center p-0 ">
           <div className=" bg-white rounded-lg shadow-md flex items-start justify-center overflow-hidden">
@@ -186,7 +197,7 @@ const OrderDetails = () => {
                 className="object-cover h-200 w-96 rounded-lg"
               />
             ) : (
-              <AiOutlineCamera className="text-gray-400 " size="400" />
+              <AiOutlineCamera className="text-gray-400 " size={iconSize} />
             )}
           </div>
 
@@ -214,13 +225,13 @@ const OrderDetails = () => {
           )}
         </div>
 
-        <div className={`flex flex-col space-y-6 ${formContainerResponsive}`}>
+        <div className=" flex  flex-col space-y-6 w-full   p-10 bg-white rounded-xl shadow-xl">
           <h1 className="text-2xl font-bold text-primary text-left mb-5">
             Add Order Details
           </h1>
 
-          <div className="flex space-x-15 flex-row items-center">
-            <label className={labelClassName}>Book&s Name</label>
+          <div className={labelInput}>
+            <label className={labelClassName}>Book&apos;s Name</label>
             <input
               className={inputClassName}
               name="bookName"
@@ -231,8 +242,8 @@ const OrderDetails = () => {
             />
           </div>
 
-          <div className="flex space-x-15 flex-row items-center">
-            <label className={labelClassName}>Book&s Author</label>
+          <div className={labelInput}>
+            <label className={labelClassName}>Book&apos;s Author</label>
             <input
               className={inputClassName}
               type="text"
@@ -244,12 +255,12 @@ const OrderDetails = () => {
             />
           </div>
 
-          <div className="flex  space-x-15 flex-row items-center ">
+          <div className={labelInput}>
             <label className={`${labelClassName} `}>
-              Book&apos; Description
+              Book&apos;s Description
             </label>
             <textarea
-              className={`${inputClassName} pt-5 h-20 `}
+              className={`${inputClassName} pt-5 h-10 lg:h-20 `}
               name="bookDescription"
               placeholder="Enter book description"
               value={formData.bookDescription}
@@ -257,7 +268,7 @@ const OrderDetails = () => {
             />
           </div>
 
-          <div className="flex space-x-15 flex-row items-center ">
+          <div className={labelInput}>
             <label className={labelClassName}>Genre</label>
             <Select
               isMulti
@@ -271,7 +282,7 @@ const OrderDetails = () => {
             />
           </div>
 
-          <div className="flex space-x-15 flex-row items-center">
+          <div className={labelInput}>
             <label className={labelClassName}>Number of Pages</label>
             <input
               className={inputClassName}
@@ -283,7 +294,7 @@ const OrderDetails = () => {
             />
           </div>
 
-          <div className="flex space-x-15 flex-row items-center">
+          <div className={labelInput}>
             <label className={labelClassName}>Order Type</label>
             <Select
               name="orderType"
@@ -300,7 +311,7 @@ const OrderDetails = () => {
             />
           </div>
 
-          <div className="flex space-x-15 flex-row items-center">
+          <div className={labelInput}>
             <label className={labelClassName}>Book Condition</label>
             <Select
               name="bookCondition"
@@ -317,9 +328,9 @@ const OrderDetails = () => {
             />
           </div>
 
-          <div className="m-0 flex  flex-row items-center justify-start">
+          <div className={labelInput}>
             <label className={`${labelClassName} w-1/4`}>Book Price</label>
-            <div className=" flex space-x-5 flex-row  flex-grow items-start justify-start w-2/3">
+            <div className=" flex space-x-12 flex-row  flex-grow items-start justify-start w-2/3">
               <input
                 className={`${inputClassName}  `}
                 type="number"
@@ -341,7 +352,7 @@ const OrderDetails = () => {
             </div>
           </div>
 
-          <div className="flex space-x-15 flex-row items-center">
+          <div className={labelInput}>
             <label className={`${labelClassName} w-1/4`}>
               Publication Info
             </label>
@@ -368,11 +379,11 @@ const OrderDetails = () => {
               />
             </div>
           </div>
-          <div className="flex flex-row justify-end  items-center p-5">
+          <div className="flex flex-row lg:justify-end  justify-center  items-center p-5">
             <button
               onSubmit={handleSubmit}
               type="submit"
-              className=" w-2/3 text-xl bg-primary text-white px-6 py-3 rounded-md border-none transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl focus:outline-none hover:bg-primary  hover:bg-opacity-75"
+              className=" w-2/3 text-xl  font-bold bg-primary text-white px-6 py-3 rounded-full border-none transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl focus:outline-none hover:bg-primary  hover:bg-opacity-75"
             >
               Submit Order
             </button>
