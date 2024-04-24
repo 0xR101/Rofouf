@@ -71,6 +71,7 @@ function SignUp() {
 															id="email"
 															placeholder=""
 															required
+															
 														/>
 														<label
 															htmlFor="email"
@@ -92,6 +93,7 @@ function SignUp() {
 															id="password"
 															placeholder=""
 															required
+															minLength={8}
 														/>
 														<label
 															htmlFor="password"
@@ -112,6 +114,7 @@ function SignUp() {
 															id="conf-password"
 															placeholder=""
 															required
+															minLength={8}
 														/>
 														<label
 															htmlFor="conf-password"

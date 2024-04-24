@@ -21,14 +21,14 @@ function SignIn() {
 														className="relative mb-4 mt-6 "
 													>
 														<input
-															type="email"
+															type="text"
 															className="pl-1.5 peer block min-h-[auto] w-full rounded-lg bg-[#53373750] border-0 text-base  py-[0.42rem] leading-[1.6] outline-none transition-all duration-200 ease-linear  peer-focus:text-primary  motion-reduce:transition-none dark:text-black dark:autofill:shadow-autofill dark:peer-focus:text-primary"
-															id="email"
+															id="username"
 															placeholder=""
 															required
 														/>
 														<label
-															htmlFor="email"
+															htmlFor="username"
 															className="absolute text-base dark:peer-focus:text-primary text-white  duration-200 transform -translate-y-4 scale-85 top-2 z-10 origin-[0]  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-90 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 "
 														>
 															<FaUser className="text-primary" />{" "}
