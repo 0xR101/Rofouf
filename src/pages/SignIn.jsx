@@ -19,7 +19,7 @@ function SignIn() {
                           {/* the input for the email */}
                           <div className="relative mb-4 mt-6 ">
                             <input
-                              type="email"
+                              type="text"
                               className="pl-1.5 peer block min-h-[auto] w-full rounded-lg bg-[#53373750] border-0 text-base  py-[0.42rem] leading-[1.6] outline-none transition-all duration-200 ease-linear  peer-focus:text-primary  motion-reduce:transition-none dark:text-black dark:autofill:shadow-autofill dark:peer-focus:text-primary"
                               id="email"
                               placeholder=""

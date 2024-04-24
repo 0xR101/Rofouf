@@ -1,3 +1,10 @@
+import { FaUser } from "react-icons/fa";
+import { HiMail } from "react-icons/hi";
+import { BsFillTelephoneFill } from "react-icons/bs";
+import { FaLocationDot } from "react-icons/fa6";
+import { IoMdFingerPrint } from "react-icons/io";
+
+
 export default function LeftSideProfile({
   userName = "",
   userMail = "",
@@ -14,6 +21,13 @@ export default function LeftSideProfile({
           <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div class="sm:col-span-3">
               <div class="mt-2">
+                <label
+															htmlFor="name"
+															className="  text-base dark:peer-focus:text-primary text-primary px-2   "
+														>
+															<FaUser className="text-primary" />{" "}
+															Name
+														</label>
                 <input
                   type="text"
                   name="name"
@@ -23,6 +37,13 @@ export default function LeftSideProfile({
                 />
               </div>
               <div class="mt-2">
+              <label
+															htmlFor=""
+															className="  text-base dark:peer-focus:text-primary text-primary px-2   "
+														>
+															<FaUser className="text-primary" />{" "}
+															IDK
+														</label>
                 <input
                   type="text"
                   name=""
@@ -34,6 +55,13 @@ export default function LeftSideProfile({
             </div>
             <div class="sm:col-span-3">
               <div class="mt-2">
+              <label
+															htmlFor="mail"
+															className="  text-base dark:peer-focus:text-primary text-primary px-2   "
+														>
+															<HiMail className="text-primary" />{" "}
+															Email
+														</label>
                 <input
                   type="mail"
                   name="mail"
@@ -43,8 +71,15 @@ export default function LeftSideProfile({
                 />
               </div>
               <div class="mt-2">
+              <label
+															htmlFor="number"
+															className="  text-base dark:peer-focus:text-primary text-primary px-2   "
+														>
+															<BsFillTelephoneFill className="text-primary" />{" "}
+															Number
+														</label>
                 <input
-                  type="number"
+                  type="tel"
                   name="number"
                   id="number"
                   value={userNumber}
@@ -58,6 +93,13 @@ export default function LeftSideProfile({
 
           <div class="mt-5 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-2">
             <div class="mt-2">
+            <label
+															htmlFor="mail"
+															className="  text-base dark:peer-focus:text-primary text-primary px-2   "
+														>
+															<FaLocationDot className="text-primary" />{" "}
+															Address
+														</label>
               <input
                 type="text"
                 name="mail"
@@ -66,6 +108,13 @@ export default function LeftSideProfile({
               />
             </div>
             <div class="mt-2">
+            <label
+															htmlFor="user-id"
+															className="  text-base dark:peer-focus:text-primary text-primary px-2   "
+														>
+															<IoMdFingerPrint className="text-primary" />{" "}
+															ID
+														</label>
               <input
                 type="text"
                 name="user-id"
