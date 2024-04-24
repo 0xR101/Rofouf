@@ -18,7 +18,7 @@ const PostComment = ({ onNewComment }) => {
 
   return (
     <form
-      className="bg-backGround p-4 rounded-lg shadow mt-4"
+      className="bg-backGround p-4 rounded-lg shadow mt-4 flex flex-col"
       onSubmit={handleSubmit}
     >
       <div className="flex items-center mb-4">
@@ -49,18 +49,21 @@ const PostComment = ({ onNewComment }) => {
           );
         })}
       </div>
-      <textarea
-        className="w-3/4 p-2  rounded-lg resize-none shadow-md border-none resize-none focus:outline-none text-gray-700 pl-4"
-        placeholder="Write a comment ..."
-        value={commentText}
-        onChange={(e) => setCommentText(e.target.value)}
-      />
-      <button
-        type="submit"
-        className="bg-lightBrown50 font-bold text-primary rounded-lg px-4 py-2 mt-2 float-right border-none transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl focus:outline-none"
-      >
-        Post Comment
-      </button>
+
+      <div>
+        <textarea
+          className="w-3/4 p-2 rounded-lg resize-none shadow-md border-none resize-none focus:outline-none text-gray-700 pl-4"
+          placeholder="Write a comment ..."
+          value={commentText}
+          onChange={(e) => setCommentText(e.target.value)}
+        />
+        <button
+          type="submit"
+          className="bg-lightBrown50 font-bold text-primary rounded-lg px-4 py-2 mt-2 float-right border-none transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl focus:outline-none"
+        >
+          Post Comment
+        </button>
+      </div>
     </form>
   );
 };

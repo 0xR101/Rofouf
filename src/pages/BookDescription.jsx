@@ -1,38 +1,48 @@
 import NavBar from "./../components/nav/NavBar.jsx";
 import Footer from "./../components/footer/Footer.jsx";
+import CommentSection from "./../components/CommentSection/CommentSection.jsx";
 
 import { FaWhatsapp } from "react-icons/fa";
-import Massage from "../components/Massage/Massage.jsx";
+import { useNavigate } from "react-router-dom";
+import StarRating from "../components/StarRating/StarRating.jsx";
 
 function BookDescription() {
+  const navigate = useNavigate();
+
+  const handleNavigation = () => {
+    navigate("/seller"); // Replace '/profile' with the actual profile route
+  };
+
   return (
     <>
       <NavBar></NavBar>
 
-      <div className="flex flex-col p-7 gap-4">
+      <div className="flex flex-col  p-7 gap-4 min-h-screen mb-10">
         <div className="flex flex-row gap-10 max-md:flex-col  max-sm:flex-col max-sm:items-center max-lg:flex-col">
           <div className="flex flex-col gap-2">
             {/* here we should add the cover of the book */}
             <div>
               <img
-                className="object-cover w-80 h-70 "
+                className="object-cover rounded-lg w-80 h-70 "
                 src="\src\assets\bookCover.jpg"
                 alt="hi"
               />
             </div>
-            <div className="bg-white p-4 flex flex-col gap-1">
+            <div className="bg-white rounded-lg p-5 flex flex-col gap-1">
               <div className="flex gap-3">
                 <img
                   className="rounded-md"
                   src="\src\assets\profile.png"
                   alt=""
+                  onClick={handleNavigation}
                 />
                 <div className="flex flex-col gap-1">
-                  <img src="src\assets\stars.png" alt="" />
-                  <div className="text-primary text-opacity-60">4.3/5</div>
+                  <StarRating rating={4.4} />
                 </div>
               </div>
-              <div className="text-primary">Seller Name </div>
+              <div className="text-primary" onClick={handleNavigation}>
+                Seller Name{" "}
+              </div>
               <div>
                 <img src="\src\assets\loc.svg" alt="" />
                 <div className="text-black">location</div>
@@ -40,7 +50,7 @@ function BookDescription() {
               <a target="_blank" href="https://wa.me/0553731017">
                 <div
                   onClick={{}}
-                  className="bg-primary font-extrabold text-center hover:bg-orange-400 h-10 pt-4 rounded-lg flex gap-2 justify-center"
+                  className="bg-primary text-white font-extrabold text-center hover:bg-orange-400 h-10 pt-4 rounded-lg flex gap-2 justify-center"
                 >
                   <div>Contact</div>
                   <FaWhatsapp className="w-5 h-5 text-green-300" />
@@ -49,7 +59,7 @@ function BookDescription() {
             </div>
           </div>
 
-          <div className="bg-white flex flex-col p-7 text-primary">
+          <div className="bg-white rounded-lg flex flex-col p-7 text-primary">
             <h1>The book title</h1>
             <h3>discritpion</h3>
             <p className="text-primary">
@@ -99,7 +109,7 @@ function BookDescription() {
               <div className="flex flex-col">
                 <h2>Additional details</h2>
 
-                <div className="flex flex-col bg-primary bg-opacity-70 text-white p-5 gap-4 w-80 h-full">
+                <div className="flex  rounded-lg flex-col bg-primary bg-opacity-70 text-white p-5 gap-4 w-80 h-full">
                   <div>
                     <div className="font-bold">ISBN(s)</div>
                     <div>123432531-124334643</div>
@@ -113,46 +123,11 @@ function BookDescription() {
             </div>
           </div>
         </div>
-
         <h1>Comments</h1>
-        <div className="bg-primary bg-opacity-30 rounded-md p-8 flex flex-col gap-5 ">
-          <Massage></Massage>
-          <Massage></Massage>
-          <Massage></Massage>
-        </div>
-        <div className="w-full ">
-          <form className="w-full">
-            <div className="relative">
-              <img
-                className="absolute top-0 left-0 w-9  h-8 p-4 rounded-full"
-                src="src\assets\profile.png"
-                alt=""
-              />
-            </div>
-            <div className="relative">
-              <div
-                onClick={{}}
-                className="text-white text-center pt-2 w-20 h-7 rounded-xl bg-primary font-bold absolute top-4 right-0 "
-              >
-                Send
-              </div>
-            </div>
-
-            <div className="mr-20">
-              <textarea
-                className=" shadow-md border-none resize-none focus:outline-none   flex pt-4 h-10 text-white pl-20 bg-primary bg-opacity-40 rounded-lg w-full text-base"
-                name=""
-                id=""
-                placeholder="Write a comment ..."
-              ></textarea>
-            </div>
-          </form>
-        </div>
+        <CommentSection> </CommentSection>
       </div>
 
-      <>
-        <Footer></Footer>
-      </>
+      <Footer></Footer>
     </>
   );
 }

@@ -1,14 +1,14 @@
 import NavBar from "./../components/nav/NavBar.jsx";
 import Footer from "./../components/footer/Footer.jsx";
-
+import OrderDetails from "./../components/OrderDetails/OrderDetails.jsx";
 export default function NewOffer() {
   return (
-    <>
+    <div className="    ">
       <NavBar></NavBar>
-      <div>
-        <h1>Create new offer </h1>
-      </div>
+      <main className=" p-5 mb-10  min-h-screen  ">
+        <OrderDetails></OrderDetails>
+      </main>
       <Footer></Footer>
-    </>
+    </div>
   );
 }

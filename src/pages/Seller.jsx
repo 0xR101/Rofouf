@@ -16,19 +16,23 @@ const sellerInfo = {
 
 function Seller() {
   return (
-    <div className=" flex bg-offWhite flex-col min-h-screen w-full">
-      <NavBar></NavBar>
+    <>
+      <NavBar />
 
-      <main className=" flex-grow m-10 space-y-5 ">
+      <main className="flex  flex-col min-h-screen  m-10 space-y-10 mb-40 ">
         <SellerHeader seller={sellerInfo} />
-        <h1 className="text-3xl font-bold mb-4 text-primary">All Offers</h1>
-        <HorizontalBookSlider></HorizontalBookSlider>
-        <h1 className="text-3xl font-bold mb-4 text-primary">All Comments</h1>
-        <CommentsSection></CommentsSection>
+        <div>
+          <h1 className="text-3xl font-bold mb-4 text-primary">All Offers</h1>
+          <HorizontalBookSlider></HorizontalBookSlider>
+        </div>
+        <div>
+          <h1 className="text-3xl font-bold mb-4 text-primary">All Comments</h1>
+          <CommentsSection></CommentsSection>
+        </div>
       </main>
 
       <Footer> </Footer>
-    </div>
+    </>
   );
 }
 
