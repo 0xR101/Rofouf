@@ -35,7 +35,7 @@ function NavBar() {
   // const dialogRef = useRef(null);
 
   return (
-    <div className="flex flex-col gap-2 mb-3">
+    <div className="flex flex-col gap-2 mb-2">
       <header className="bg-primary text-white">
         <nav
           style={{ width: "100%" }}
@@ -120,15 +120,17 @@ function NavBar() {
           </div>
         </dialog> */}
       </header>
-      <div className="flex-grow  shadow-2xl hidden max-sm:block w-full">
-        <input
-          type="search"
-          className="w-full h-10 placeholder-Placeholder placeholder-bold pl-4 pr-3  rounded-full bg-white shadow-2xl  border-none resize-none focus:outline-none text-gray-700"
-          placeholder="Search Books..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyPress={handleSearch}
-        />
+      <div className="pr-6">
+        <div className="flex-grow mx-1 shadow-2xl hidden max-sm:block w-full">
+          <input
+            type="search"
+            className="w-full h-10 placeholder-Placeholder placeholder-bold pl-4 pr-3  rounded-full bg-white shadow-2xl  border-none resize-none focus:outline-none text-gray-700"
+            placeholder="Search Books..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyPress={handleSearch}
+          />
+        </div>
       </div>
     </div>
   );
