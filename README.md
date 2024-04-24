@@ -32,12 +32,13 @@
 
 
 ### :dart: Features
+<b>IMPORTANT NOTE:</b> After receiving confirmation from the doctor that modifications to requirements are acceptable, we've opted to omit the community page from our current scope. It will be integrated into future features.
 - register and log in to access the platform
 - list books for sale, rent, or exchange
 - browse and initiate transactions
 - Rental period management and reminders
-- check the seller profile (History, users comments, and all current offerings)
-- •Direct communication between buyers and sellers to complete the payment transaction.
+- Check the seller profile (History, users comments, and all current offerings)
+- Direct communication between buyers and sellers to complete the payment transaction.
 
 
 ## :toolbox: Getting Started
