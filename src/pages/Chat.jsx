@@ -2,6 +2,9 @@ import NavBar from "./../components/nav/NavBar.jsx";
 import PersonChatCard from "./../components/personChatCard/PersonChatCard.jsx";
 import ChatMessage from "./../components/chatMessage/ChatMessage.jsx";
 
+import { useState } from "react";
+
+
 const message = [
   {
     messageSide: "me",
@@ -22,6 +25,19 @@ const message = [
 ];
 
 function Chat() {
+
+  const [messages, setMessages] = useState(message);
+
+  // Function to handle new comment submission
+  const sendNewMessage = (text) => {
+    const newMessage = {
+      messageSide: "me", 
+      message: text,
+    };
+    setMessages([...messages, newMessage]); // Add the new comment to the existing list
+  };
+
+
   return (
     <>
       <NavBar></NavBar>
@@ -63,7 +79,7 @@ function Chat() {
 
             {/* this div for the messages */}
 
-            <div className="flex-1 flex flex-col gap-4 my-2 p-8">
+            <div className="flex-1 flex flex-col gap-4 my-2 p-8 overflow-y-scroll">
               <div>
                 {message.map((msg, index) => (
                   <ChatMessage
@@ -85,12 +101,22 @@ function Chat() {
                   />
                 </div>
                 <input
+                
                   type="text"
                   className="border-none p-2 pl-10 placeholder-gray-800 text-gray-900 relative w-full rounded-md focus:outline-none"
                   placeholder="Enter text"
                 />
 
-                <span className="right-0 pr-3">
+                <span onClick={
+                  {
+
+
+                    // here
+
+
+                  }
+                } className="right-0 pr-3">
+
                   <img
                     className="w-6 h-6 p-1"
                     src="\src\assets\send.svg"

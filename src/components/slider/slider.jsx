@@ -26,16 +26,25 @@ function GroupSlider() {
 
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1230,
         settings: {
-          slidesToShow: 8,
-          slidesToScroll: 8,
+          slidesToShow: 5,
+          slidesToScroll: 5,
           // infinite: true,
           dots: false,
         },
       },
       {
-        breakpoint: 800,
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 5,
+          // infinite: true,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 990,
         settings: {
           slidesToShow: 4,
           slidesToScroll: 4,
@@ -47,6 +56,7 @@ function GroupSlider() {
       {
         breakpoint: 600,
         settings: {
+          
           slidesToShow: 2,
           slidesToScroll: 2,
           dots: false,
@@ -60,6 +70,7 @@ function GroupSlider() {
           slidesToShow: 1,
           slidesToScroll: 1,
           dots: false,
+
           // infinite: true,
           centerPadding: "2px",
         },
@@ -74,6 +85,8 @@ function GroupSlider() {
           centerPadding: "2px",
         },
       },
+
+      // 912
     ],
   };
 
