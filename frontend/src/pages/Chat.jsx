@@ -1,50 +1,11 @@
 import NavBar from "./../components/nav/NavBar.jsx";
-// import PersonChatCard from "./../components/personChatCard/PersonChatCard.jsx";
-// import ChatMessage from "./../components/chatMessage/ChatMessage.jsx";
 
-// import { useState } from "react";
-
-
-
-import { 
-  ChatEngine,
-  
-} from 'react-chat-engine'
+import { ChatEngine } from "react-chat-engine";
 
 // import { ChatEngine } from "react-chat-engine";
-import './../chatStyle.css';
-
-// const message = [
-//   {
-//     messageSide: "me",
-//     message: "Hello, how are you?",
-//   },
-//   {
-//     messageSide: "other",
-//     message: "I'm good, thanks! How about you?",
-//   },
-//   {
-//     messageSide: "me",
-//     message: "I'm doing great, thanks for asking!",
-//   },
-//   {
-//     messageSide: "other",
-//     message: "That's good to hear!",
-//   },
-// ];
+import "./../chatStyle.css";
 
 function Chat() {
-  // const [messages, setMessages] = useState(message);
-
-  // Function to handle new comment submission
-  // const sendNewMessage = (text) => {
-  //   const newMessage = {
-  //     messageSide: "me",
-  //     message: text,
-  //   };
-  //   setMessages([...messages, newMessage]); // Add the new comment to the existing list
-  // };
-
   return (
     <div>
       <NavBar />
@@ -54,13 +15,6 @@ function Chat() {
         projectID="e84afb28-5082-49d2-b25b-fe2df86f6e28"
         userName="ahamd"
         userSecret="ksa123"
-        onGetChats={(chat, index) => {
-          console.log(chat, index);
-        }}
-        // renderChatCard=
-        // renderChatSettings={(chatAppState) => {}}
-        // renderChatSettings={(chatAppState) => {}}
-
       />
     </div>
   );
@@ -156,3 +110,33 @@ export default Chat;
 //     </div>
 //   </div>
 // </>
+
+// const message = [
+//   {
+//     messageSide: "me",
+//     message: "Hello, how are you?",
+//   },
+//   {
+//     messageSide: "other",
+//     message: "I'm good, thanks! How about you?",
+//   },
+//   {
+//     messageSide: "me",
+//     message: "I'm doing great, thanks for asking!",
+//   },
+//   {
+//     messageSide: "other",
+//     message: "That's good to hear!",
+//   },
+// ];
+
+// const [messages, setMessages] = useState(message);
+
+// Function to handle new comment submission
+// const sendNewMessage = (text) => {
+//   const newMessage = {
+//     messageSide: "me",
+//     message: text,
+//   };
+//   setMessages([...messages, newMessage]); // Add the new comment to the existing list
+// };
