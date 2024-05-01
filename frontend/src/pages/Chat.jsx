@@ -1,135 +1,158 @@
 import NavBar from "./../components/nav/NavBar.jsx";
-import PersonChatCard from "./../components/personChatCard/PersonChatCard.jsx";
-import ChatMessage from "./../components/chatMessage/ChatMessage.jsx";
+// import PersonChatCard from "./../components/personChatCard/PersonChatCard.jsx";
+// import ChatMessage from "./../components/chatMessage/ChatMessage.jsx";
 
-import { useState } from "react";
+// import { useState } from "react";
 
 
-const message = [
-  {
-    messageSide: "me",
-    message: "Hello, how are you?",
-  },
-  {
-    messageSide: "other",
-    message: "I'm good, thanks! How about you?",
-  },
-  {
-    messageSide: "me",
-    message: "I'm doing great, thanks for asking!",
-  },
-  {
-    messageSide: "other",
-    message: "That's good to hear!",
-  },
-];
+
+import { 
+  ChatEngine,
+  
+} from 'react-chat-engine'
+
+// import { ChatEngine } from "react-chat-engine";
+import './../chatStyle.css';
+
+// const message = [
+//   {
+//     messageSide: "me",
+//     message: "Hello, how are you?",
+//   },
+//   {
+//     messageSide: "other",
+//     message: "I'm good, thanks! How about you?",
+//   },
+//   {
+//     messageSide: "me",
+//     message: "I'm doing great, thanks for asking!",
+//   },
+//   {
+//     messageSide: "other",
+//     message: "That's good to hear!",
+//   },
+// ];
 
 function Chat() {
-
-  const [messages, setMessages] = useState(message);
+  // const [messages, setMessages] = useState(message);
 
   // Function to handle new comment submission
-  const sendNewMessage = (text) => {
-    const newMessage = {
-      messageSide: "me", 
-      message: text,
-    };
-    setMessages([...messages, newMessage]); // Add the new comment to the existing list
-  };
-
+  // const sendNewMessage = (text) => {
+  //   const newMessage = {
+  //     messageSide: "me",
+  //     message: text,
+  //   };
+  //   setMessages([...messages, newMessage]); // Add the new comment to the existing list
+  // };
 
   return (
-    <>
-      <NavBar></NavBar>
-      <div className="max-sm:px-3 flex justify-center">
-        <div className="flex flex-row w-full  h-full bg-backGround  p-5 gap-2 max-sm:flex-col">
-          <div className="flex flex-col max-sm:w-full  h-full overflow-y-scroll  bg-primary  p-3 rounded-xl   gap-10  flex-grow-2  max-sm:overflow-x max-sm:overflow-y-hidden">
-            <div className="text-2xl font-bold text-center text-white max-sm:hidden">
-              conversation
-            </div>
-            <div className="flex flex-col gap-3 max-sm:flex-row  overflow-auto box-border max-sm:items-center">
-              <PersonChatCard />
+    <div>
+      <NavBar />
 
-              <PersonChatCard />
-            </div>
-          </div>
+      <ChatEngine
+        height="calc(100vh - 80px)"
+        projectID="e84afb28-5082-49d2-b25b-fe2df86f6e28"
+        userName="ahamd"
+        userSecret="ksa123"
+        onGetChats={(chat, index) => {
+          console.log(chat, index);
+        }}
+        // renderChatCard=
+        // renderChatSettings={(chatAppState) => {}}
+        // renderChatSettings={(chatAppState) => {}}
 
-          <div className=" flex flex-col min-h-screen w-90  flex-grow-2  w-full justify-between">
-            <div
-              style={{
-                borderBottom: "1px solid gray",
-              }}
-              className="h-20 py-2 px-6"
-            >
-              <div className="flex gap-2">
-                <img
-                  className="w-20 h-20 rounded-full"
-                  src="\src\assets\person.png"
-                  alt=""
-                />
-                <div className="flex flex-col gap-2">
-                  <div className="text-black text-xl font-bold">Name</div>
-                  <div className="text-black text-opacity-40 line-clamp-1">
-                    now
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* the above div only for person bar or card */}
-
-            {/* this div for the messages */}
-
-            <div className="flex-1 flex flex-col gap-4 my-2 p-8 overflow-y-scroll">
-              <div>
-                {message.map((msg, index) => (
-                  <ChatMessage
-                    key={index}
-                    messageSide={msg.messageSide}
-                    message={msg.message}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div className=" relative  mx-12 max-sm:mx-4">
-              <div className="bottom-20 p-1  flex items-center gap-2 border rounded-md bg-white shadow-2xl">
-                <div>
-                  <img
-                    className="w-6 h-6 p-1"
-                    src="\src\assets\attachment.svg"
-                    alt=""
-                  />
-                </div>
-                <input
-                
-                  type="text"
-                  className="border-none p-2 pl-10 placeholder-gray-800 text-gray-900 relative w-full rounded-md focus:outline-none"
-                  placeholder="Enter text"
-                />
-
-                <span onClick={
-                  {
-
-
-                    // here
-
-
-                  }
-                } className="right-0 pr-3">
-
-                  <img
-                    className="w-6 h-6 p-1"
-                    src="\src\assets\send.svg"
-                    alt=""
-                  />
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+      />
+    </div>
   );
 }
 
 export default Chat;
+
+// <>
+//   <NavBar></NavBar>
+//   <div className="max-sm:px-3 flex justify-center">
+//     <div className="flex flex-row w-full  h-full bg-backGround  p-5 gap-2 max-sm:flex-col">
+//       <div className="flex flex-col max-sm:w-full  h-full overflow-y-scroll  bg-primary  p-3 rounded-xl   gap-10  flex-grow-2  max-sm:overflow-x max-sm:overflow-y-hidden">
+//         <div className="text-2xl font-bold text-center text-white max-sm:hidden">
+//           conversation
+//         </div>
+//         <div className="flex flex-col gap-3 max-sm:flex-row  overflow-auto box-border max-sm:items-center">
+//           <PersonChatCard />
+
+//           <PersonChatCard />
+//         </div>
+//       </div>
+
+//       <div className=" flex flex-col min-h-screen w-90  flex-grow-2  w-full justify-between">
+//         <div
+//           style={{
+//             borderBottom: "1px solid gray",
+//           }}
+//           className="h-20 py-2 px-6"
+//         >
+//           <div className="flex gap-2">
+//             <img
+//               className="w-20 h-20 rounded-full"
+//               src="\src\assets\person.png"
+//               alt=""
+//             />
+//             <div className="flex flex-col gap-2">
+//               <div className="text-black text-xl font-bold">Name</div>
+//               <div className="text-black text-opacity-40 line-clamp-1">
+//                 now
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//         {/* the above div only for person bar or card */}
+
+//         {/* this div for the messages */}
+
+//         <div className="flex-1 flex flex-col gap-4 my-2 p-8 overflow-y-scroll">
+//           <div>
+//             {message.map((msg, index) => (
+//               <ChatMessage
+//                 key={index}
+//                 messageSide={msg.messageSide}
+//                 message={msg.message}
+//               />
+//             ))}
+//           </div>
+//         </div>
+
+//         <div className=" relative  mx-12 max-sm:mx-4">
+//           <div className="bottom-20 p-1  flex items-center gap-2 border rounded-md bg-white shadow-2xl">
+//             <div>
+//               <img
+//                 className="w-6 h-6 p-1"
+//                 src="\src\assets\attachment.svg"
+//                 alt=""
+//               />
+//             </div>
+//             <input
+
+//               type="text"
+//               className="border-none p-2 pl-10 placeholder-gray-800 text-gray-900 relative w-full rounded-md focus:outline-none"
+//               placeholder="Enter text"
+//             />
+
+//             <span onClick={
+//               {
+
+//                 // here
+
+//               }
+//             } className="right-0 pr-3">
+
+//               <img
+//                 className="w-6 h-6 p-1"
+//                 src="\src\assets\send.svg"
+//                 alt=""
+//               />
+//             </span>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// </>
