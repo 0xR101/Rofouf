@@ -12,6 +12,7 @@ exports.checkId = (req, res, next, val) => {
   next();
 };
 
+// All book CRUD operations handlers
 exports.getAllBooks = (req, res) => {
   console.log(req.requestTime);
   //   res.status(200).json({
