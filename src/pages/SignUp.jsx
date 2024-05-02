@@ -2,8 +2,13 @@ import { FaUser } from "react-icons/fa";
 import { PiLockFill } from "react-icons/pi";
 import { HiMail } from "react-icons/hi";
 import NavBar from "./../components/nav/NavBar.jsx";
-
+import { useState } from "react";
 function SignUp() {
+	function handleSubmit(event) {
+		event.preventDefault();
+
+	
+	}
 	return (
 		<>
 			<section className="gradient-form h-full  bg-white">
@@ -16,7 +21,10 @@ function SignUp() {
 									<div className="px-4 md:px-0 lg:w-full">
 										<div className="">
 											<div className="grid grid-cols-2  max-md:flex max-sm:flex ">
-												<form className=" p-12  max-md:w-full max-sm:w-full gap-y-2 grid">
+												<form
+													className=" p-12  max-md:w-full max-sm:w-full gap-y-2 grid"
+													onSubmit={handleSubmit}
+												>
 													{/* the input for the name */}
 
 													<div
@@ -27,8 +35,10 @@ function SignUp() {
 															type="text"
 															className="pl-1.5 peer  block min-h-[auto] w-full rounded-lg bg-[#53373750] border-0 text-base  py-[0.42rem] leading-[1.6] outline-none transition-all duration-200 ease-linear  peer-focus:text-primary  motion-reduce:transition-none dark:text-black dark:autofill:shadow-autofill dark:peer-focus:text-primary "
 															id="name"
-															placeholder=""
+															name="name"
+															title="Letters only and (3-12) in length"
 															required
+															pattern="[A-Za-z]{3,12}"
 														/>
 														<label
 															htmlFor="name"
@@ -37,6 +47,9 @@ function SignUp() {
 															<FaUser className="text-primary" />{" "}
 															Name
 														</label>
+														<span className="text-primary hidden">
+															this is a test
+														</span>
 													</div>
 													{/* the input for the username */}
 													<div
@@ -47,6 +60,7 @@ function SignUp() {
 															type="text"
 															className="pl-1.5 peer block min-h-[auto] w-full rounded-lg bg-[#53373750] border-0 text-base  py-[0.42rem] leading-[1.6] outline-none transition-all duration-200 ease-linear  peer-focus:text-primary  motion-reduce:transition-none dark:text-black dark:autofill:shadow-autofill dark:peer-focus:text-primary"
 															id="username"
+															name="username"
 															placeholder=""
 															required
 														/>
@@ -68,6 +82,7 @@ function SignUp() {
 															type="email"
 															className="pl-1.5 peer block min-h-[auto] w-full rounded-lg bg-[#53373750] border-0 text-base  py-[0.42rem] leading-[1.6] outline-none transition-all duration-200 ease-linear  peer-focus:text-primary  motion-reduce:transition-none dark:text-black dark:autofill:shadow-autofill dark:peer-focus:text-primary"
 															id="email"
+															name="email"
 															placeholder=""
 															required
 														/>
@@ -89,6 +104,7 @@ function SignUp() {
 															type="password"
 															className=" pl-1.5 peer block min-h-[auto] w-full rounded-lg bg-[#53373750] border-0 text-base  py-[0.42rem] leading-[1.6] outline-none transition-all duration-200 ease-linear  peer-focus:text-primary  motion-reduce:transition-none dark:text-black dark:autofill:shadow-autofill dark:peer-focus:text-primary"
 															id="password"
+															name="password"
 															placeholder=""
 															required
 														/>
@@ -109,6 +125,7 @@ function SignUp() {
 															type="password"
 															className="pl-1.5 peer block min-h-[auto] w-full rounded-lg bg-[#53373750] border-0 text-base  py-[0.42rem] leading-[1.6] outline-none transition-all duration-200 ease-linear  peer-focus:text-primary  motion-reduce:transition-none dark:text-black dark:autofill:shadow-autofill dark:peer-focus:text-primary"
 															id="conf-password"
+															name="confPassword"
 															placeholder=""
 															required
 														/>
