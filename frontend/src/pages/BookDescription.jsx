@@ -28,7 +28,7 @@ function BookDescription() {
                 alt="hi"
               />
             </div>
-            <div className="bg-white rounded-lg p-5 flex flex-col gap-1">
+            <div className="bg-white rounded-lg p-5 flex flex-col gap-1 shadow-2xl">
               <div className="flex gap-3">
                 <img
                   className="rounded-md"
@@ -59,7 +59,7 @@ function BookDescription() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg flex flex-col p-7 text-primary">
+          <div className="bg-white rounded-lg flex flex-col p-7 text-primary shadow-2xl">
             <h1>The book title</h1>
             <h3>discritpion</h3>
             <p className="text-primary">
