@@ -1,9 +1,16 @@
 const express = require("express");
 const morgan = require("morgan");
-const bookRouter = require("./routes/bookRoutes"); // importing routes
-const db = require("./database/db");
+const {connectToDb,getDb} = require("./database/db");
 
-console.lg(db)
+const bookRouter = require("./routes/bookRoutes"); // importing routes
+
+// here we might check if we connect to the database
+connectToDb()
+
+// this object is the one we will use to deal with the database
+const database = getDb()
+
+// console.lg(db)
 
 const app = express();
 
