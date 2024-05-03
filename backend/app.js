@@ -1,6 +1,9 @@
 const express = require("express");
 const morgan = require("morgan");
 const bookRouter = require("./routes/bookRoutes"); // importing routes
+const db = require("./database/db");
+
+console.lg(db)
 
 const app = express();
 
