@@ -10,19 +10,7 @@ connectToDb(async (err) => {
   if (!err) {
     database = getDb();
 
-    database.collection("users").insertOne({
-      name: "John Doe",
-      email: "john@example.com",
-      username: "johndoe",
-      password: "hashedpassword",
-      profileImage: "https://example.com/profile.jpg",
-      phoneNumber: "1234567890",
-      address: "123 Main St",
-      comments: [],
-      offers: [],
-      listedBooks: []
-    });
-
+    console.log((database.collection("users")));
   }
 });
 

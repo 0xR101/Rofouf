@@ -18,7 +18,6 @@ module.exports = {
 
       await client.db("admin").command({ ping: 1 });
 
-      console.log(client.db("Rofouf"));
 
       return cb();
     } catch (err) {
