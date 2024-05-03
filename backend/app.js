@@ -1,14 +1,32 @@
 const express = require("express");
 const morgan = require("morgan");
-const {connectToDb,getDb} = require("./database/db");
+const { connectToDb, getDb } = require("./database/db");
 
 const bookRouter = require("./routes/bookRoutes"); // importing routes
-
 // here we might check if we connect to the database
-connectToDb()
+let database;
+
+connectToDb(async (err) => {
+  if (!err) {
+    database = getDb();
+
+    database.collection("users").insertOne({
+      name: "John Doe",
+      email: "john@example.com",
+      username: "johndoe",
+      password: "hashedpassword",
+      profileImage: "https://example.com/profile.jpg",
+      phoneNumber: "1234567890",
+      address: "123 Main St",
+      comments: [],
+      offers: [],
+      listedBooks: []
+    });
+
+  }
+});
 
 // this object is the one we will use to deal with the database
-const database = getDb()
 
 // console.lg(db)
 
@@ -60,7 +78,7 @@ app.use("/api/v1/books", bookRouter);
  */
 
 app.get("/", (req, res) => {
-  res.status(200).send("Hello World");
+  res.status(200).send("<>Hello World");
 });
 
 app.post("/", (req, res) => {

@@ -11,22 +11,20 @@ const client = new MongoClient(uri, {
   },
 });
 
-let dbConnection;
-
-
 module.exports = {
-  connectToDb: () => {
-    client
-      .connect()
-      .then((connectedClinet) => {
-        dbConnection = connectedClinet.db("admin").command({ ping: 1 });
-        console.log(
-          "Pinged your deployment. You successfully connected to MongoDB!",
-        );
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  connectToDb: async (cb) => {
+    try {
+      await client.connect();
+
+      await client.db("admin").command({ ping: 1 });
+
+      console.log(client.db("Rofouf"));
+
+      return cb();
+    } catch (err) {
+      console.log(err);
+      return cb(err);
+    }
   },
-  getDb: () => dbConnection,
+  getDb: () => client.db("Rofouf"),
 };
