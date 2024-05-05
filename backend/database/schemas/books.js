@@ -14,7 +14,9 @@ const bookSchema = new mongoose.Schema({
   seller: String, // User name of the seller
   numberOfPages: Number,
   comments: [], // Array of comment IDs
-  offerStatus: String, // we can extract the list of offer bought-exchanged
+  offerStatus: String, // we can extract (selled bought exchanged or active)
+
+
 });
 
 module.exports = mongoose.model("books", bookSchema);
