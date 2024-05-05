@@ -1,16 +1,19 @@
 const express = require("express");
 const morgan = require("morgan");
 const { connectToDb, getDb } = require("./database/db");
-
+const users = require("./database/schemas/users");
 const bookRouter = require("./routes/bookRoutes"); // importing routes
+
 // here we might check if we connect to the database
 let database;
 
 connectToDb(async (err) => {
   if (!err) {
-    database = getDb();
+    // database = getDb();
 
-    console.log((database.collection("users")));
+    console.log(await users.find({}));
+
+    // const person = await Person.findOne({ 'name.last': 'Ghost' }, 'name occupation');
   }
 });
 
