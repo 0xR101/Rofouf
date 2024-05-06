@@ -11,19 +11,19 @@ const mongoose = require("mongoose");
 // });
 
 const userSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  username: { type: String, unique: true },
-  password: String,
-  profileImage: String, // it should be the url of the image
-  phoneNumber: String,
-  address: String,
-  comments: [],
+	name: String,
+	email: { type: String, unique: true },
+	username: { type: String, unique: true },
+	password: String,
+	profileImage: String, // it should be the url of the image
+	phoneNumber: String,
+	address: String,
+	comments: [],
 
-  /// this we will do a join
+	/// this we will do a join
 
-  // offers: [],
-  // listedBooks: [],
+	// offers: [],
+	// listedBooks: [],
 });
 
 module.exports = mongoose.model("users", userSchema);

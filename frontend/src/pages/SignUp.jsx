@@ -93,16 +93,30 @@ function SignUp() {
 		if (!validateForm()) {
 			return;
 		}
-
 		try {
 			// If the form data is valid, send it to the backend
-
 			// adjust the path to the correct server endpoint
-			await axios.post("/api/signup", formData);
-			console.log("User registered successfully");
-			
-			
-			window.location.href="signIn"
+			// await axios.post("http://localhost:5000/api/v1/users", formData);
+			fetch("http://localhost:5000/api/v1/users/signup", {
+				method: "POST",
+				crossDomain: true,
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+					"Access-Control-Allow-Origin": "*",
+				},
+				body: JSON.stringify({
+					name: formData.name,
+					username: formData.username,
+					email: formData.email,
+					password: formData.password,
+				}),
+			})
+				.then((res) => res.json())
+				.then((data) => console.log(data, "userRegister"));
+
+			console.log(formData);
+			window.location.href = "signIn";
 		} catch (error) {
 			console.error(error);
 		}
