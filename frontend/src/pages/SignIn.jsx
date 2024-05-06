@@ -1,8 +1,46 @@
 import { FaUser } from "react-icons/fa";
 import { PiLockFill } from "react-icons/pi";
 import NavBar from "./../components/nav/NavBar.jsx";
+import { useState } from "react";
 
 function SignIn() {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const submitForm = async (e) => {
+    e.preventDefault();
+
+    try {
+      //  adjust the path to the correct server endpoint
+      const response = await fetch("/api/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        // Redirect to home page or do something else
+        console.log("Login successful:", data);
+      } else {
+        console.log("Login failed");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+    }
+  };
+
   return (
     <>
       <section className="gradient-form h-full bg-white">
@@ -15,14 +53,20 @@ function SignIn() {
                   <div className="px-4 md:px-0 lg:w-">
                     <div className="">
                       <div className="grid grid-cols-2 max-md:flex max-sm:flex">
-                        <form className="p-12 max-md:p-4 my-auto max-md:w-full max-sm:w-full">
+                        <form
+                          onSubmit={submitForm}
+                          className="p-12 max-md:p-4 my-auto max-md:w-full max-sm:w-full"
+                        >
                           {/* the input for the email */}
                           <div className="relative mb-4 mt-6 ">
                             <input
                               type="text"
                               className="pl-1.5 peer block min-h-[auto] w-full rounded-lg bg-[#53373750] border-0 text-base  py-[0.42rem] leading-[1.6] outline-none transition-all duration-200 ease-linear  peer-focus:text-primary  motion-reduce:transition-none dark:text-black dark:autofill:shadow-autofill dark:peer-focus:text-primary"
                               id="email"
+                              name="email"
                               placeholder=""
+                              value={formData.email}
+                              onChange={handleChange}
                               required
                             />
                             <label
@@ -40,7 +84,10 @@ function SignIn() {
                               type="password"
                               className=" pl-1.5 peer block min-h-[auto] w-full rounded-lg bg-[#53373750] border-0 text-base  py-[0.42rem] leading-[1.6] outline-none transition-all duration-200 ease-linear  peer-focus:text-primary  motion-reduce:transition-none dark:text-black dark:autofill:shadow-autofill dark:peer-focus:text-primary"
                               id="password"
+                              name="password"
                               placeholder=""
+                              value={formData.password}
+                              onChange={handleChange}
                               required
                             />
                             <label
@@ -57,7 +104,7 @@ function SignIn() {
                             </a>
 
                             <input
-                              className="my-4 inline-block w-full rounded-lg px-6 pb-1 pt-1 text-base font-bold   leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out hover:shadow-dark-2 focus:shadow-dark-2 focus:outline-none focus:ring-0 active:shadow-dark-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong bg-primary"
+                              className="hover:scale-105 my-4 inline-block w-full rounded-lg px-6 pb-1 pt-1 text-base font-bold   leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out hover:shadow-dark-2 focus:shadow-dark-2 focus:outline-none focus:ring-0 active:shadow-dark-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong bg-primary"
                               type="submit"
                               data-twe-ripple-init
                               data-twe-ripple-color="light"
@@ -93,4 +140,5 @@ function SignIn() {
     </>
   );
 }
+
 export default SignIn;
