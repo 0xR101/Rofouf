@@ -113,10 +113,10 @@ function SignUp() {
 				}),
 			})
 				.then((res) => res.json())
-				.then((data) => console.log(data, "userRegister"));
+				.then((data) => alert(data.message, "userRegister"));
 
 			console.log(formData);
-			window.location.href = "signIn";
+			// window.location.href = "signIn";
 		} catch (error) {
 			console.error(error);
 		}
