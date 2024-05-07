@@ -8,6 +8,7 @@ const bookSchema = new mongoose.Schema({
   listingDate: Date,
   author: String,
   genre: [String],
+  offerType: String,
   bookCondition: String,
   price: Number,
   oldPrice: Number,
@@ -15,8 +16,6 @@ const bookSchema = new mongoose.Schema({
   numberOfPages: Number,
   comments: [], // Array of comment IDs
   offerStatus: String, // we can extract (selled bought exchanged or active)
-
-
 });
 
 module.exports = mongoose.model("books", bookSchema);

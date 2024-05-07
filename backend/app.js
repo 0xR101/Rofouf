@@ -1,50 +1,87 @@
 const express = require("express");
 const morgan = require("morgan");
-const { connectToDb, getDb } = require("./database/db");
-const User = require("./database/schemas/users"); // Modify this line
-const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-const cors = require("cors"); // Add this line
+const {connectToDb,getDb} = require("./database/db");
+const User = require("./database/schemas/users");
 
 const bookRouter = require("./routes/bookRoutes"); // importing routes
 const userRouter = require("./routes/authRoutes"); // importing routes
 
 // here we might check if we connect to the database
 
+// const newUser = new User({
+//   name: "John Doe",
+//   email: "john@example.com",
+//   username: "johnny",
+//   password: "hashedPassword", // You should hash the password before saving it
+//   profileImage: "https://example.com/profile.jpg",
+//   phoneNumber: "1234567890",
+//   address: "123 Main St, City, Country",
+//   comments: [
+//     {
+//       image: "https://example.com/comment_image.jpg",
+//       rating: 4,
+//       userName: "commenter123",
+//       content: "Great user!",
+//       date: new Date(),
+//     },
+//   ],
+//   offers: ["Offer 1", "Offer 2"], // Example offers
+//   listedBooks: ["Book 1", "Book 2"], // Example listed books
+// });
+
+// newUser
+//   .save()
+//   .then((savedUser) => {
+//     console.log("User saved successfully:", savedUser);
+//   })
+//   .catch((error) => {
+//     console.error("Error saving user:", error);
+//   });
+
 connectToDb(async (err) => {
-	if (!err) {
-		database = getDb();
+  if (!err) {
+    database = getDb();
 
-		const newUser = new User({
-			name: "John Doe",
-			email: "john@example.com",
-			username: "johnny",
-			password: "hashedPassword", // You should hash the password before saving it
-			profileImage: "https://example.com/profile.jpg",
-			phoneNumber: "1234567890",
-			address: "123 Main St, City, Country",
-			comments: [
-				{
-					image: "https://example.com/comment_image.jpg",
-					rating: 4,
-					userName: "commenter123",
-					content: "Great user!",
-					date: new Date(),
-				},
-			],
-			offers: ["Offer 1", "Offer 2"], // Example offers
-			listedBooks: ["Book 1", "Book 2"], // Example listed books
-		});
+    const newUser = new User({
+      name: "John Doe",
+      email: "john@example.com",
+      username: "johnny",
+      password: "hashedPassword", // You should hash the password before saving it
+      profileImage: "https://example.com/profile.jpg",
+      phoneNumber: "1234567890",
+      address: "123 Main St, City, Country",
+      comments: [
+        {
+          image: "https://example.com/comment_image.jpg",
+          rating: 4,
+          userName: "commenter123",
+          content: "Great user!",
+          date: new Date(),
+        },
+      ],
+      offers: ["Offer 1", "Offer 2"], // Example offers
+      listedBooks: ["Book 1", "Book 2"], // Example listed books
+    });
 
-		// Save the new user to the database
-		try {
-			const savedUser = await newUser.save();
-			console.log("User saved successfully:", savedUser);
-		} catch (error) {
-			console.error("Error saving user:", error);
-		}
-	}
+    // Save the new user to the database
+    newUser
+      .save()
+      .then((savedUser) => {
+        console.log("User saved successfully:", savedUser);
+      })
+      .catch((error) => {
+        console.error("Error saving user:", error);
+      });
+
+    // console.log(await users.find({}));
+
+    // const person = await Person.findOne({ 'name.last': 'Ghost' }, 'name occupation');
+  }
 });
+
+// this object is the one we will use to deal with the database
+
+// console.lg(db)
 
 const app = express();
 
@@ -136,5 +173,11 @@ app.get("/", (req, res) => {
 app.post("/", (req, res) => {
 	res.send("This is a post request");
 });
+
+
+app.post("/books", async(req,res) =>{
+
+
+})
 
 module.exports = app;
