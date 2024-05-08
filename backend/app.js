@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const {connectToDb,getDb} = require("./database/db");
 const User = require("./database/schemas/users");
+const cors = require("cors")
 
 const bookRouter = require("./routes/bookRoutes"); // importing routes
 const userRouter = require("./routes/authRoutes"); // importing routes

@@ -113,10 +113,13 @@ function SignUp() {
 				}),
 			})
 				.then((res) => res.json())
-				.then((data) => alert(data.message, "userRegister"));
+				.then((data) => {
+					if(data.status==200){
+						window.location.href = "signIn";
+					}
+					alert(data.message, "userRegister")
+				});
 
-			console.log(formData);
-			// window.location.href = "signIn";
 		} catch (error) {
 			console.error(error);
 		}
