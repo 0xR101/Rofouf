@@ -18,4 +18,10 @@ const bookSchema = new mongoose.Schema({
   offerStatus: String, // we can extract (selled bought exchanged or active)
 });
 
+
+
 module.exports = mongoose.model("books", bookSchema);
+
+
+
+
