@@ -16,7 +16,7 @@ function BookCard({
             src={image}
             alt="hi"
           />
-          <div className="relative text-white bottom-14 rounded-b-2xl  p-4 font-bold bg-gray-400 h-5 bg-opacity-50">
+          <div className="relative text-white bottom-14 rounded-b-2xl  p-4 font-bold bg-gray-400 h-12 bg-opacity-50">
             {offerType}
           </div>
         </div>

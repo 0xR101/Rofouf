@@ -1,19 +1,16 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-const { connectToDb} = require("./database/db");
+const { connectToDb } = require("./database/db");
 
 const bookRouter = require("./routes/bookRoutes"); // importing routes
 const userRouter = require("./routes/authRoutes"); // importing routes
-
-
 
 const app = express();
 
 app.use((req, res, next) => {
 	connectToDb(async (err) => {
 		if (!err) {
-			console.log("you are connected to the database");
 			next();
 		} else {
 			res.send(err);

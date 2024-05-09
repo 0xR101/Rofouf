@@ -22,6 +22,12 @@ const bookSchema = new mongoose.Schema({
 
 module.exports = mongoose.model("books", bookSchema);
 
+// exports.addCommentToBook = (id) =>{
+
+
+// }
+
+
 
 
 
