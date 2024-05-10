@@ -20,7 +20,7 @@ const BookListing = ({
   return (
     <>
       <div id={bookId} className="p-4">
-        <div className="bg-primary md:h-36 pl-8 pt-12 pb-12 flex items-center mx-auto border-b  mb-10 border-gray-200 rounded-lg sm:flex-row flex-col">
+        <div className="bg-primary pl-8 pt-12 pb-12 flex items-center mx-auto border-b  mb-10 border-gray-200 rounded-lg sm:flex-row flex-col">
           <div className="sm:w-32 sm:h-32 sm:mr-10 inline-flex items-center justify-center flex-shrink-0">
             <img src={bookImageUrl} className="w-32 rounded-md" />
           </div>

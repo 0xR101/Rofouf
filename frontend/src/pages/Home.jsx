@@ -114,7 +114,9 @@ function Home() {
 
         <div className="grid   gap-6 md:grid-cols-2 sm:grid-cols-1 max-sm:justify-center">
           {
-            loading? <ReactLoading type={"bars"} color={"#533737"} height={667} width={375} /> :
+
+            
+          error?<>{error} please restart the page</>: loading? <ReactLoading type={"bars"} color={"#533737"} height={667} width={375} /> :
           data.data.books.map((book) => (
             <BookCard
               key={book._id}
