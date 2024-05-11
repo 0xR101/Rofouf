@@ -17,37 +17,56 @@ const BookListing = ({
   // Format the date if it's not null
   const formattedDate = bookDate ? new Date(bookDate).toLocaleDateString() : "";
 
+  // Function to dynamically truncate the summary to fill the container
+  const truncateSummary = (summary, maxHeight = 80, lineHeight = 20) => {
+    const maxLines = maxHeight / lineHeight; // Calculate how many lines fit in the given height
+    const avgCharsPerLine = 50; // Rough estimate of average characters per line
+    const charLimit = avgCharsPerLine * maxLines;
+
+    if (summary.length > charLimit) {
+      return summary.substring(0, charLimit) + "...";
+    }
+    return summary;
+  };
+
   return (
     <>
       <div id={bookId} className="p-4">
-        <div className="bg-primary md:h-36 pl-8 pt-12 pb-12 flex items-center mx-auto border-b  mb-10 border-gray-200 rounded-lg sm:flex-row flex-col">
-          <div className="sm:w-32 sm:h-32 sm:mr-10 inline-flex items-center justify-center flex-shrink-0">
-            <img src={bookImageUrl} className="w-32 rounded-md" />
+        <div
+          className={`bg-primary p-8 flex flex-col sm:flex-row items-center mx-auto border-b mb-10 border-gray-200 rounded-lg md:h-76`}
+        >
+          <div className="flex-shrink-0 w-full sm:w-48 sm:h-48 m-4 p-2">
+            <img
+              src={bookImageUrl}
+              className="w-full h-full object-cover rounded-md"
+              alt="Book cover"
+              style={{ aspectRatio: "1 / 1" }}
+            />
           </div>
-          <div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-            <div className="flex ">
-              <div className="text-white w-full">
-                <span className=" text-1xl title-font font-bold mb-2">
+          <div className="flex-grow text-center sm:text-left">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <div className="text-white text-xl title-font font-bold mb-2 truncate">
                   {bookTitle}
-                </span>
-                <br />
-                <span>{bookAuthor}</span>
-                <br />
-                <br />
-                <span>Posted on: {formattedDate}</span>
-                <br />
-                <span>Sold by: {bookSeller}</span>
+                </div>
+                <div className="text-white truncate">{bookAuthor}</div>
+                <div className="text-white mt-2 truncate">
+                  Posted on: {formattedDate}
+                </div>
+                <div className="text-white truncate">Sold by: {bookSeller}</div>
               </div>
-              <div className="leading-relaxed text-white text-lg ml-5 mr-5">
-                {bookSummary}
+              <div
+                className="text-white text-lg overflow-hidden"
+                style={{ maxHeight: "80px" }}
+              >
+                {truncateSummary(bookSummary, 80)}
               </div>
             </div>
-            {/* This is for status */}
-            <div className="w-full  md:w-1/2 flex space-x-3">
-              <div className="bg-bookStatus flex justify-center items-center h-8 mt-5 rounded-xl text-primary inline-block px-2">
+            <div className="mt-5 flex flex-col sm:flex-row gap-2">
+              <div className="bg-bookStatus flex justify-center items-center rounded-xl text-primary px-2 py-1 w-full sm:w-auto">
                 {bookStatus}: {bookPrice}
               </div>
-              <div className="bg-bookStatus flex justify-center items-center h-8 mt-5 rounded-xl text-primary inline-block px-2">
+              <div className="bg-bookStatus flex justify-center items-center rounded-xl text-primary px-2 py-1 w-full sm:w-auto">
                 Location: {bookLocation}
               </div>
             </div>
