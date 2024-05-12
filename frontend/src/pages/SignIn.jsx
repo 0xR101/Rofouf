@@ -80,7 +80,8 @@ function SignIn() {
 			if (response.ok) {
 				const data = await response.json();
 				if (data.status === 200) {
-					window.location.href = "/"; // Redirect to home page
+					window.location.href = "/"; 
+          // Redirect to home page
 				} else {
 					alert(data.message);
 				}
