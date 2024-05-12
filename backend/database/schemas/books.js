@@ -10,17 +10,17 @@ const bookSchema = new mongoose.Schema({
   genre: [String],
   offerType: String,
   bookCondition: String,
-  price: Number,
+  price: Number,  
   oldPrice: Number,
   seller: String, // User name of the seller
   numberOfPages: Number,
-  comments: [], // Array of comment IDs
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }], // Array of comment IDs
   offerStatus: String, // we can extract (selled bought exchanged or active)
 });
 
 
 
-module.exports = mongoose.model("books", bookSchema);
+module.exports = mongoose.model("Book", bookSchema);
 
 // exports.addCommentToBook = (id) =>{
 

@@ -33,17 +33,8 @@ exports.createUser = async (req, res) => {
 			profileImage: null,
 			phoneNumber: null,
 			address: null,
-			comments: [
-				{
-					image: null,
-					rating: null,
-					userName: null,
-					content: null,
-					date: null,
-				},
-			],
-			offers: [], // Example offers
-			listedBooks: [], // Example listed books
+			comments: [],
+			books: [],
 		});
 
 		res.status(201).json({

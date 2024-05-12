@@ -11,15 +11,12 @@ const userSchema = new mongoose.Schema({
 	profileImage: String, // it should be the url of the image
 	phoneNumber: String,
 	address: String,
-	comments: [],
+	comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+	books: [{ type: mongoose.Schema.Types.ObjectId, ref: "Book" }],
 
-	/// this we will do a join
-
-	// offers: [],
-	// listedBooks: [],
 });
 
-module.exports = mongoose.model("users", userSchema);
+module.exports = mongoose.model("User", userSchema);
 
 // aggregate.lookup({ from: 'users', localField: 'userId', foreignField: '_id', as: 'users' });
 
