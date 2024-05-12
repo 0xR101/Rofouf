@@ -1,8 +1,10 @@
 import { useRef, useState } from "react";
 import DropdownMenu from "../dropdown/DropDownMenu";
 import { useNavigate } from "react-router-dom";
-import { MdOutlineSearch } from "react-icons/md";
-import { VscClose } from "react-icons/vsc";
+import { BsPersonCircle } from "react-icons/bs";
+
+
+
 
 function NavBar() {
   const [isProfileListVisible, setProfileListVisible] = useState(false);
@@ -78,6 +80,16 @@ function NavBar() {
               />
             </a>
             <div>
+
+              {/* there should be logic here to handle this 
+              the flow:
+
+              the user click the avatar log
+              if the user is logged 
+              then go to the presonal profile: /this cand be done using sessioin class/
+
+              if not then navigate to the singn in screen */}
+
               <div
                 className="avatar rounded-full"
                 onClick={() => {
@@ -88,11 +100,12 @@ function NavBar() {
                   }
                 }}
               >
-                <img
+                {/* <img
                   src="src\assets\profile.png"
                   alt="Profile"
                   className="h-10 w-10 rounded-full" // Adjusted profile size and shape
-                />
+                /> */}
+                <BsPersonCircle className="h-10 w-10 text-secondaryColor "/>
               </div>
               {isProfileListVisible ? (
                 <DropdownMenu names={["login", "profile"]} />
