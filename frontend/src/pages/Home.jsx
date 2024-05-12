@@ -3,10 +3,8 @@ import Ad from "./../components/ad/Ad.jsx";
 import GroupSlider from "./../components/slider/slider.jsx";
 import BookCard from "./../components/bookCard/BookCard.jsx";
 import Footer from "./../components/footer/Footer.jsx";
-import { useState, useEffect } from 'react';
-import ReactLoading from 'react-loading';
-
-
+import { useState, useEffect } from "react";
+import ReactLoading from "react-loading";
 
 // const books = [
 //   {
@@ -40,23 +38,17 @@ import ReactLoading from 'react-loading';
 //   },
 // ];
 
-
 // http://localhost:5000/api/v1/books/
 
-
 function Home() {
-
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
 
   useEffect(() => {
     const fetchDataForPosts = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:5000/api/v1/books/`
-        );
+        const response = await fetch(`http://localhost:5000/api/v1/books/`);
         if (!response.ok) {
           throw new Error(`HTTP error: Status ${response.status}`);
         }
@@ -74,15 +66,12 @@ function Home() {
     fetchDataForPosts();
   }, []);
 
-  console.log(data)
+  console.log(data);
 
   const books = data;
-  
-  console.log(books)
 
+  console.log(books);
 
-
-  
   return (
     // this code will be replaced by routes for all pages, but for now we keep it like this
     <div className="">
@@ -113,22 +102,30 @@ function Home() {
         </div>
 
         <div className="grid   gap-6 md:grid-cols-2 sm:grid-cols-1 max-sm:justify-center">
-          {
-
-            
-          error?<>{error} please restart the page</>: loading? <ReactLoading type={"bars"} color={"#533737"} height={667} width={375} /> :
-          data.data.books.map((book) => (
-            <BookCard
-              key={book._id}
-              title={book.title}
-              subtitle={book.description}
-              offerType={book.offerType}
-              condition={book.bookCondition}
-              newPrice={book.price}
-              oldPrice={book.oldPrice}
-              image={book.image}
+          {error ? (
+            <>{error} please restart the page</>
+          ) : loading ? (
+            <ReactLoading
+              type={"bars"}
+              color={"#533737"}
+              height={667}
+              width={375}
             />
-          ))}
+          ) : (
+            data.data.books.map((book) => (
+              <BookCard
+                key={book._id}
+                id={book._id}
+                title={book.title}
+                subtitle={book.description}
+                offerType={book.offerType}
+                condition={book.bookCondition}
+                newPrice={book.price}
+                oldPrice={book.oldPrice}
+                image={book.image}
+              />
+            ))
+          )}
         </div>
       </div>
 

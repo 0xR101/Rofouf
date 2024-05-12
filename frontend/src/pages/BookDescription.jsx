@@ -2,19 +2,52 @@ import NavBar from "./../components/nav/NavBar.jsx";
 import Footer from "./../components/footer/Footer.jsx";
 import CommentSection from "./../components/CommentSection/CommentSection.jsx";
 
-import { FaWhatsapp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import StarRating from "../components/StarRating/StarRating.jsx";
+import { useSearchParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function BookDescription() {
   const navigate = useNavigate();
 
   const handleNavigation = () => {
-    navigate("/seller"); // Replace '/profile' with the actual profile route
+    navigate("/seller?");
+    // Replace '/profile' with the actual profile route
   };
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const id = searchParams.get("id");
+
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchDataForPosts = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/v1/books/${id}`
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error: Status ${response.status}`);
+        }
+        let postsData = await response.json();
+        setData(postsData.data);
+        setError(null);
+      } catch (err) {
+        setError(err.message);
+        setData(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDataForPosts();
+  }, []);
+
   return (
-    <>
+    <div>
       <NavBar></NavBar>
 
       <div className="flex flex-col  p-7 gap-4 min-h-screen mb-10">
@@ -24,11 +57,11 @@ function BookDescription() {
             <div>
               <img
                 className="object-cover rounded-lg w-80 h-70 "
-                src="\src\assets\bookCover.jpg"
+                src={loading ? "loading" : data.book.image}
                 alt="hi"
               />
             </div>
-            <div className="bg-white rounded-lg p-5 flex flex-col gap-1 shadow-2xl">
+            <div className="bg-white rounded-lg p-5 flex flex-col gap-1 shadow-2xl w">
               <div className="flex gap-3">
                 <img
                   className="rounded-md"
@@ -41,35 +74,24 @@ function BookDescription() {
                 </div>
               </div>
               <div className="text-primary" onClick={handleNavigation}>
-                Seller Name{" "}
+                Seller Name : {loading ? "loading" : data.book.seller}
               </div>
               <div>
                 <img src="\src\assets\loc.svg" alt="" />
                 <div className="text-black">location</div>
               </div>
-              <a target="_blank" href="https://wa.me/0553731017">
-                <div
-                  onClick={{}}
-                  className="bg-primary text-white font-extrabold text-center hover:bg-orange-400 h-10 pt-4 rounded-lg flex gap-2 justify-center"
-                >
-                  <div>Contact</div>
-                  <FaWhatsapp className="w-5 h-5 text-green-300" />
-                </div>
-              </a>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg flex flex-col p-7 text-primary shadow-2xl">
-            <h1>The book title</h1>
+          <div className="bg-white rounded-lg flex flex-col p-7 text-primary shadow-2xl w-full">
+            <h1>{loading ? "loading" : data.book.title}</h1>
             <h3>discritpion</h3>
             <p className="text-primary">
-              Outlive: The Science and Art of Longevity&quot; is a book that
-              explores the intersection of science and lifestyle in achieving a
-              longer, healthier life. It offers insights into the latest
-              research on aging and provides practical advice on diet, exercise,
-              and mental well-being to enhance longevity and vitality.
+              {loading ? "loading" : data.book.description}
             </p>
-            <h3 className="span">Autours</h3>
+            <h3 className="span">
+              Autours {loading ? "loading" : data.book.author}
+            </h3>
             <div
               style={{
                 border: "solid 1px #533737",
@@ -78,31 +100,30 @@ function BookDescription() {
 
             <div className=" flex flex-row gap-20 max-md:flex-col max-sm:flex-col">
               <div className="flex flex-col w-full gap-5 text-primary">
-                <ul>
-                  Gener
-                  <li>health</li>
-                  <li>Fitness</li>
-                  <li>Self help </li>
-                </ul>
+                {loading
+                  ? "loading"
+                  : data.book.genre.map((gne) => {
+                      return <li>{gne}</li>;
+                    })}
 
                 <div className=" w-full flex flex-row  justify-between items-center">
                   <div>Book condtion:</div>
-                  <div>Good</div>
+                  <div>{loading?"loading":data.book.bookCondition}</div>
                 </div>
 
                 <div className=" w-full flex flex-row  justify-between items-center ">
                   <div>Listing style:</div>
-                  <div>sell</div>
+                  <div>{loading?"loading":data.book.offerStatus}</div>
                 </div>
 
                 <div className=" w-full flex flex-row  justify-between items-center ">
                   <div>Price:</div>
-                  <div>$ 34</div>
+                  <div>{loading?"loading":data.book.price} SAR</div>
                 </div>
 
                 <div className=" w-full flex flex-row  justify-between items-center ">
                   <div>Number of pages:</div>
-                  <div>212</div>
+                  <div>{loading?"loading":data.book.numberOfPages}</div>
                 </div>
               </div>
 
@@ -112,11 +133,11 @@ function BookDescription() {
                 <div className="flex  rounded-lg flex-col bg-primary bg-opacity-70 text-white p-5 gap-4 w-80 h-full">
                   <div>
                     <div className="font-bold">ISBN(s)</div>
-                    <div>123432531-124334643</div>
+                    <div>{loading?"loading":data.book.ISBN}</div>
                   </div>
                   <div>
                     <div className="font-bold">Listing Date</div>
-                    <div>2023-07-13 </div>
+                    <div>{loading?"loading":data.book.listingDate}</div>
                   </div>
                 </div>
               </div>
@@ -128,7 +149,7 @@ function BookDescription() {
       </div>
 
       <Footer></Footer>
-    </>
+    </div>
   );
 }
 
