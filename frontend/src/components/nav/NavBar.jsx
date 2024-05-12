@@ -3,10 +3,15 @@ import DropdownMenu from "../dropdown/DropDownMenu";
 import { useNavigate } from "react-router-dom";
 import { BsPersonCircle } from "react-icons/bs";
 
+import { Link } from "react-router-dom"
+
 
 
 
 function NavBar() {
+
+  let user = "ayed";
+  let password = "ksa123"
   const [isProfileListVisible, setProfileListVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
@@ -24,17 +29,6 @@ function NavBar() {
     navigate("/newOffer");
   };
 
-  // function toggleDialog() {
-  //   if (!dialogRef.current) {
-  //     return;
-  //   }
-
-  //   dialogRef.current.hasAttribute("open")
-  //     ? dialogRef.current.close()
-  //     : dialogRef.current.showModal();
-  // }
-
-  // const dialogRef = useRef(null);
 
   return (
     <div className="flex flex-col gap-2 mb-2">
@@ -72,13 +66,13 @@ function NavBar() {
                 Post Offer
               </span>
             </button>
-            <a href="/Chat" className="p-2">
-              <img
+            <Link to={`/Chat?user=${user}&password=${password}`} className="p-2">
+            <img
                 src="src\assets\notficaiton.svg"
                 alt="Notifications"
                 className="h-8" // Icon height
               />
-            </a>
+            </Link>
             <div>
 
               {/* there should be logic here to handle this 

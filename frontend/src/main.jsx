@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     element: <BookDescription />,
   },
   {
-    path: "chat",
+    path: `/Chat/`,
     element: <Chat />,
   },
   {

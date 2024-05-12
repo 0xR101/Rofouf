@@ -1,21 +1,33 @@
 import NavBar from "./../components/nav/NavBar.jsx";
 
 import { ChatEngine } from "react-chat-engine";
-
+import { useSearchParams } from 'react-router-dom';
 // import { ChatEngine } from "react-chat-engine";
 import "./../chatStyle.css";
 
-function Chat() {
+function Chat(props) {
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const user = searchParams.get('user');
+  const password = searchParams.get('password');
+
+  // const searchParams = new URLSearchParams(props);
+
+  // const user = searchParams.get('user');
+  // const password = searchParams.get('password');
   return (
     <div>
       <NavBar />
 
       <ChatEngine
         height="calc(100vh - 80px)"
-        projectID="e84afb28-5082-49d2-b25b-fe2df86f6e28"
-        userName="ahamd"
-        userSecret="ksa123"
+        projectID="e5281aef-af2a-4606-b69f-ee90c5ad7ce3"
+        userName={user}
+        userSecret={password}
+
       />
+      <div></div>
     </div>
   );
 }
