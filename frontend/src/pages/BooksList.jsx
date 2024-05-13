@@ -1,92 +1,119 @@
 import NavBar from "./../components/nav/NavBar.jsx";
 import Footer from "./../components/footer/Footer.jsx";
 import BookDetails from "../components/bookDetails/BookDetails.jsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const books = [
-  {
-    id: 101,
-    title: "Harry Potter and the Sorcerer's Stone",
-    summary:
-      "It’s a passion for knowledge, a desire to travel, and a fascination with culture that provides the driving force behind Assouline.",
-    status: "Rented by Me",
-    imageUrl:
-      "https://i.pinimg.com/originals/16/b7/88/16b788f1c01374f26f6388d00f2ddd83.jpg",
-    date: "12/01/2023",
-    seller: "Rayyan Raza",
-  },
-  {
-    id: 102,
-    title: "The Great Gatsby",
-    summary:
-      "It’s a passion for knowledge, a desire to travel, and a fascination with culture that provides the driving force behind Assouline.",
-    status: "Bought by Me",
-    imageUrl:
-      "https://i.pinimg.com/originals/16/b7/88/16b788f1c01374f26f6388d00f2ddd83.jpg",
-    date: "12/01/2023",
-    seller: "Rayyan Raza",
-  },
-  {
-    id: 103,
-    title: "To Kill a Mockingbird",
-    summary:
-      "It’s a passion for knowledge, a desire to travel, and a fascination with culture that provides the driving force behind Assouline.",
-    status: "Exchanged",
-    imageUrl:
-      "https://i.pinimg.com/originals/16/b7/88/16b788f1c01374f26f6388d00f2ddd83.jpg",
-    date: "12/01/2023",
-    seller: "Rayyan Raza",
-  },
-  {
-    id: 104,
-    title: "Pride and Prejudice",
-    summary:
-      "It’s a passion for knowledge, a desire to travel, and a fascination with culture that provides the driving force behind Assouline.",
-    status: "Selled",
-    imageUrl:
-      "https://i.pinimg.com/originals/16/b7/88/16b788f1c01374f26f6388d00f2ddd83.jpg",
-    date: "12/01/2023",
-    seller: "Rayyan Raza",
-  },
-  {
-    id: 105,
-    title: "The Catcher in the Rye",
-    summary:
-      "A controversial novel by J.D. Salinger, following the story of Holden Caulfield, a disenchanted teenager navigating through life and society.",
-    status: "Rented by Me",
-    imageUrl:
-      "https://i.pinimg.com/originals/16/b7/88/16b788f1c01374f26f6388d00f2ddd83.jpg",
-    date: "01/15/2023",
-    seller: "Jane Smith",
-  },
-  {
-    id: 106,
-    title: "1984",
-    summary:
-      "A dystopian novel by George Orwell, depicting a totalitarian society where Big Brother watches everyone's every move.",
-    status: "Bought by Me",
-    imageUrl:
-      "https://i.pinimg.com/originals/16/b7/88/16b788f1c01374f26f6388d00f2ddd83.jpg",
-    date: "02/28/2023",
-    seller: "John Doe",
-  },
-];
+
+// const books = [
+//   {
+//     id: 101,
+//     title: "Harry Potter and the Sorcerer's Stone",
+//     summary:
+//       "It’s a passion for knowledge, a desire to travel, and a fascination with culture that provides the driving force behind Assouline.",
+//     status: "Rented by Me",
+//     imageUrl:
+//       "https://i.pinimg.com/originals/16/b7/88/16b788f1c01374f26f6388d00f2ddd83.jpg",
+//     date: "12/01/2023",
+//     seller: "Rayyan Raza",
+//   },
+//   {
+//     id: 102,
+//     title: "The Great Gatsby",
+//     summary:
+//       "It’s a passion for knowledge, a desire to travel, and a fascination with culture that provides the driving force behind Assouline.",
+//     status: "Bought by Me",
+//     imageUrl:
+//       "https://i.pinimg.com/originals/16/b7/88/16b788f1c01374f26f6388d00f2ddd83.jpg",
+//     date: "12/01/2023",
+//     seller: "Rayyan Raza",
+//   },
+//   {
+//     id: 103,
+//     title: "To Kill a Mockingbird",
+//     summary:
+//       "It’s a passion for knowledge, a desire to travel, and a fascination with culture that provides the driving force behind Assouline.",
+//     status: "Exchanged",
+//     imageUrl:
+//       "https://i.pinimg.com/originals/16/b7/88/16b788f1c01374f26f6388d00f2ddd83.jpg",
+//     date: "12/01/2023",
+//     seller: "Rayyan Raza",
+//   },
+//   {
+//     id: 104,
+//     title: "Pride and Prejudice",
+//     summary:
+//       "It’s a passion for knowledge, a desire to travel, and a fascination with culture that provides the driving force behind Assouline.",
+//     status: "Selled",
+//     imageUrl:
+//       "https://i.pinimg.com/originals/16/b7/88/16b788f1c01374f26f6388d00f2ddd83.jpg",
+//     date: "12/01/2023",
+//     seller: "Rayyan Raza",
+//   },
+//   {
+//     id: 105,
+//     title: "The Catcher in the Rye",
+//     summary:
+//       "A controversial novel by J.D. Salinger, following the story of Holden Caulfield, a disenchanted teenager navigating through life and society.",
+//     status: "Rented by Me",
+//     imageUrl:
+//       "https://i.pinimg.com/originals/16/b7/88/16b788f1c01374f26f6388d00f2ddd83.jpg",
+//     date: "01/15/2023",
+//     seller: "Jane Smith",
+//   },
+//   {
+//     id: 106,
+//     title: "1984",
+//     summary:
+//       "A dystopian novel by George Orwell, depicting a totalitarian society where Big Brother watches everyone's every move.",
+//     status: "Bought by Me",
+//     imageUrl:
+//       "https://i.pinimg.com/originals/16/b7/88/16b788f1c01374f26f6388d00f2ddd83.jpg",
+//     date: "02/28/2023",
+//     seller: "John Doe",
+//   },
+// ];
+
+
+
+
 
 export default function BooksList() {
-  const [booksShown, setBooksShown] = useState(
-    books.map((book) => {
-      return (
-        <BookDetails
-          bookId={book.id}
-          bookTitle={book.title}
-          bookImageUrl={book.imageUrl}
-          bookDetails={book.summary}
-          bookDate={book.date}
-          bookSeller={book.seller}
-        />
-      );
-    })
-  );
+
+  const [books, setBooks] = useState([]);
+  // created function to handle API request
+  useEffect(() => {
+    fetch('http://localhost:5000/api/v1/books/')
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setBooks(data.data.books.map((book) => {
+          return {
+              bookId: book._id,
+              bookTitle: book.title,
+              bookImageUrl: book.image,
+              bookDetails: book.description,
+              bookDate: book.listingDate,
+              bookSeller: book.seller,
+          }}));
+      });
+  }, []);
+
+
+  const [booksShown, setBooksShown] = useState(books.map((book) => {
+    return (
+      <BookDetails
+        bookId={book.bookId}
+        bookTitle={book.bookTitle}
+        bookImageUrl={book.bookImageUrl}
+        bookDetails={book.bookDetails}
+        bookDate={book.bookDate}
+        bookSeller={book.bookSeller}
+      />
+    );
+  }));
+
+    
 
   const getFilteredBooks = (status = "all") => {
     if (status === "all") {
@@ -94,12 +121,12 @@ export default function BooksList() {
         books.map((book) => {
           return (
             <BookDetails
-              bookId={book.id}
-              bookTitle={book.title}
-              bookImageUrl={book.imageUrl}
-              bookDetails={book.summary}
-              bookDate={book.date}
-              bookSeller={book.seller}
+            bookId={book.bookId}
+            bookTitle={book.bookTitle}
+            bookImageUrl={book.bookImageUrl}
+            bookDetails={book.bookDetails}
+            bookDate={book.bookDate}
+            bookSeller={book.bookSeller}
             />
           );
         })
@@ -110,12 +137,12 @@ export default function BooksList() {
           if (book.status === status) {
             return (
               <BookDetails
-                bookId={book.id}
-                bookTitle={book.title}
-                bookImageUrl={book.imageUrl}
-                bookDetails={book.summary}
-                bookDate={book.date}
-                bookSeller={book.seller}
+              bookId={book.bookId}
+              bookTitle={book.bookTitle}
+              bookImageUrl={book.bookImageUrl}
+              bookDetails={book.bookDetails}
+              bookDate={book.bookDate}
+              bookSeller={book.bookSeller}
               />
             );
           }
