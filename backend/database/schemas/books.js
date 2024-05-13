@@ -4,7 +4,7 @@ const bookSchema = new mongoose.Schema({
   image: String, // URL to image
   title: String,
   description: String,
-  ISBN: { type: String, unique: true }, // it should be unique
+  ISBN: { type: String, unique: false }, // it should be unique
   listingDate: Date,
   author: String,
   genre: [String],

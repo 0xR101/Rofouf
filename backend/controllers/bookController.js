@@ -1,5 +1,14 @@
 // - GET /api/v1/books
 const BookModel = require("../database/schemas/books");
+const User = require("../database/schemas/users");
+
+// get that user that is asscoiated with this ID
+async function getUser(userId) {
+	const user = await User.findOne({
+		_id: userId,
+	});
+	return user;
+}
 
 // check id middleware
 exports.checkId = (req, res, next, val) => {
@@ -75,30 +84,48 @@ exports.updateBook = (req, res) => {
 };
 
 // - POST /api/v1/books
-exports.createNewBook = (req, res) => {
+exports.createNewBook = async (req, res) => {
 	// const newId = books[books.length - 1].id + 1;
 
-	const reqExmaple = {
-		image: "https://i.guim.co.uk/img/media/f51df963039740fa2cb5f1b6649e571a0d31579e/0_0_1355_2079/master/1355.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=0166526b8d4f5d40300085c26a427cea",
-		title: "The Great Gatsby",
-		description: "A novel by F. Scott Fitzgerald",
-		ISBN: "97807432753565",
-		listingDate: new Date("2024-05-09"),
-		author: "F. Scott Fitzgerald",
-		genre: ["Classic", "Fiction"],
-		offerType: "Selling",
-		bookCondition: "Good",
-		price: 15.99,
-		oldPrice: 20.99,
-		seller: "booklover123",
-		numberOfPages: 180,
-		comments: [],
-		offerStatus: "Active",
-	};
 
-	const newBook = new BookModel(reqExmaple);
-	newBook
+	// const reqExmaple = {
+	// 	image: "https://i.guim.co.uk/img/media/f51df963039740fa2cb5f1b6649e571a0d31579e/0_0_1355_2079/master/1355.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=0166526b8d4f5d40300085c26a427cea",
+	// 	title: "The Great Gatsby",
+	// 	description: "A novel by F. Scott Fitzgerald",
+	// 	ISBN: "97807432753565",
+	// 	listingDate: new Date("2024-05-09"),
+	// 	author: "F. Scott Fitzgerald",
+	// 	genre: ["Classic", "Fiction"],
+	// 	offerType: "Selling",
+	// 	bookCondition: "Good",
+	// 	price: 15.99,
+	// 	oldPrice: 20.99,
+	// 	seller: "booklover123",
+	// 	numberOfPages: 180,
+	// 	comments: [],
+	// 	offerStatus: "Active",
+	// };
+	// get user Id associated with this book
+	const userId = "6641d17df5ae6fae41954f55";
+	const user = await getUser(userId);
+	const newBook = new BookModel(req.body);
+	await newBook
 		.save()
+		.then((savedUser) => {
+			console.log("book saved successfully:", savedUser);
+
+			res.status(201).json({
+				status: "success",
+				data: {
+					book: newBook,
+				},
+			});
+		})
+		.catch((error) => {
+			console.error("Error saving user:", error);
+		});
+	user.books.push(newBook);
+	await user.save()
 		.then((savedUser) => {
 			console.log("book saved successfully:", savedUser);
 
