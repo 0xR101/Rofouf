@@ -108,22 +108,22 @@ function BookDescription() {
 
                 <div className=" w-full flex flex-row  justify-between items-center">
                   <div>Book condtion:</div>
-                  <div>{loading?"loading":data.book.bookCondition}</div>
+                  <div>{loading ? "loading" : data.book.bookCondition}</div>
                 </div>
 
                 <div className=" w-full flex flex-row  justify-between items-center ">
                   <div>Listing style:</div>
-                  <div>{loading?"loading":data.book.offerStatus}</div>
+                  <div>{loading ? "loading" : data.book.offerStatus}</div>
                 </div>
 
                 <div className=" w-full flex flex-row  justify-between items-center ">
                   <div>Price:</div>
-                  <div>{loading?"loading":data.book.price} SAR</div>
+                  <div>{loading ? "loading" : data.book.price} SAR</div>
                 </div>
 
                 <div className=" w-full flex flex-row  justify-between items-center ">
                   <div>Number of pages:</div>
-                  <div>{loading?"loading":data.book.numberOfPages}</div>
+                  <div>{loading ? "loading" : data.book.numberOfPages}</div>
                 </div>
               </div>
 
@@ -133,11 +133,11 @@ function BookDescription() {
                 <div className="flex  rounded-lg flex-col bg-primary bg-opacity-70 text-white p-5 gap-4 w-80 h-full">
                   <div>
                     <div className="font-bold">ISBN(s)</div>
-                    <div>{loading?"loading":data.book.ISBN}</div>
+                    <div>{loading ? "loading" : data.book.ISBN}</div>
                   </div>
                   <div>
                     <div className="font-bold">Listing Date</div>
-                    <div>{loading?"loading":data.book.listingDate}</div>
+                    <div>{loading ? "loading" : data.book.listingDate}</div>
                   </div>
                 </div>
               </div>
