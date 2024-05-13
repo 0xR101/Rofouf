@@ -2,30 +2,14 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const { connectToDb } = require("./database/db");
-const multer = require("multer");
 const bookRouter = require("./routes/bookRoutes"); // importing routes
 const userRouter = require("./routes/authRoutes"); // importing routes
 const { static } = require("express");
+const fileSystem = require("./file/fileSystem");
 
 const app = express();
 
-const storage = multer.diskStorage({
-	destination: "assets/cover",
-	filename: function (req, file, cb) {
-		const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-		const fileExtension = file.originalname.split(".").pop();
-
-		const fileNameWithExtension =
-			file.fieldname + "-" + uniqueSuffix + "." + fileExtension;
-		cb(null, fileNameWithExtension);
-	},
-});
-
-
-const upload = multer({ storage: storage });
-
-app.post("/api/upload", upload.single("avatar"), function (req, res, next) {
-
+app.post("/api/upload", fileSystem.uploadAvatar(), function (req, res, next) {
 	res.json(req.file.path);
 });
 
@@ -33,6 +17,7 @@ app.post("/api/upload", upload.single("avatar"), function (req, res, next) {
 
 // the form is :
 
+// the server/images/the name of the image
 
 app.use("/images/", static("assets/cover"));
 app.use("/images/", static("assets/avatar"));
