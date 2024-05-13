@@ -160,7 +160,7 @@ export default function BooksList() {
           <label>Sort by:</label>
           <select
             onChange={handleSortChange}
-            className="p-2 rounded-md text-white ml-4"
+            className="p-2 rounded-md text-white bg-primary ml-4"
           >
             <option value="">Select</option>
             <option value="priceAsc">Price (Low to High)</option>
