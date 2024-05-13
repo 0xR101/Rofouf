@@ -52,14 +52,23 @@ exports.createUser = async (req, res) => {
 
 exports.checkUser = async (req, res) => {
 	try {
-		const { email, password } = req.body;
+		const { email, password,currentUsername } = req.body;
+
+		console.log(req.body)
 
 		// Check if the user exists
-		const user = await User.findOne({ email });
+		const user = await User.findOne({ username:req.body.username });
 
 		if (!user) {
+
+			console.log(currentUsername)
+
+
+
+			
 			return res.status(404).json({ message: "User not found" });
 		}
+
 
 		// Compare passwords
 		const isPasswordValid = await bcrypt.compare(password, user.password);

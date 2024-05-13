@@ -122,7 +122,27 @@ exports.createNewBook = async (req, res) => {
 	// get user Id associated with this book
 	const userId = "6641d17df5ae6fae41954f55";
 	const user = await getUser(userId);
-	const newBook = new BookModel(req.body);
+	// req.body.bookGenre
+	const bookObject = {
+		image: "https://www.google.com/imgres?q=mathematics%20book&imgurl=http%3A%2F%2Fwww.sahityabharatipublications.com%2Fuploads%2Fproductimg%2FWonderful%2520Mathematics%2520Book%2520-3.jpg&imgrefurl=http%3A%2F%2Fwww.sahityabharatipublications.com%2Fbook%2Fthebook%2F591&docid=I_GaUHIckGFa3M&tbnid=QG6F1JTA7Eq8MM&vet=12ahUKEwi1prCLyIuGAxXk7QIHHTQmDp8QM3oFCIEBEAA..i&w=240&h=320&hcb=2&ved=2ahUKEwi1prCLyIuGAxXk7QIHHTQmDp8QM3oFCIEBEAA",
+		title: req.body.bookName,
+		description: req.body.bookDescription,
+		ISBN: req.body.bookISBN,
+		listingDate: new Date(),
+		author: req.body.bookAuthor,
+		// genre: [],
+		offerType: req.body.orderType,
+		bookCondition: req.body.bookCondition,
+		price: req.body.bookPrice,
+		oldPrice: null,
+		seller: req.body.seller,
+		numberOfPages: req.body.numberOfPages,
+		comments: [],
+		offerStatus: "Active",
+	};
+
+	const newBook = new BookModel(bookObject);
+	user.books.push(newBook);
 	await newBook
 		.save()
 		.then((savedUser) => {

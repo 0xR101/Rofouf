@@ -24,7 +24,6 @@ function Chat(props) {
         userName={user}
         userSecret={password}
       />
-      <div></div>
     </div>
   );
 }
