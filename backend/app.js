@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
+const Book = require("./database/schemas/books");
 const { connectToDb } = require("./database/db");
 const bookRouter = require("./routes/bookRoutes"); // importing routes
 const userRouter = require("./routes/authRoutes"); // importing routes
@@ -115,6 +116,11 @@ app.use("/api/v1/users", userRouter);
 
 app.get("/", (req, res) => {
 	res.status(200).send("<>Hello World");
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+	console.log(`Server running on port ${PORT}`);
 });
 
 app.post("/", (req, res) => {

@@ -24,11 +24,26 @@ exports.checkId = (req, res, next, val) => {
 
 // All book CRUD operations handlers
 exports.getAllBooks = async (req, res) => {
-	console.log(req.params.id);
-
-	// console.log("ggg");
 	try {
-		const books = await BookModel.find({});
+		const { genre, sort, offerType } = req.query;
+		let filter = {};
+
+		if (genre) {
+			filter.genre = { $in: [genre] };
+		}
+		if (offerType) {
+			// Split the offerType string into an array by commas
+			const offerTypes = offerType.split(",");
+			filter.offerType = { $in: offerTypes };
+		}
+
+		let sortOptions = {};
+		if (sort === "priceAsc") sortOptions.price = 1;
+		if (sort === "priceDesc") sortOptions.price = -1;
+		if (sort === "dateAsc") sortOptions.listingDate = 1;
+		if (sort === "dateDesc") sortOptions.listingDate = -1;
+
+		const books = await BookModel.find(filter).sort(sortOptions);
 
 		res.status(200).json({
 			status: "success",
@@ -38,7 +53,7 @@ exports.getAllBooks = async (req, res) => {
 			},
 		});
 	} catch (err) {
-		console.error(err);
+		console.error("Error fetching books based on filters:", err);
 		res.status(500).json({
 			status: "error",
 			message: "Internal Server Error",
@@ -87,7 +102,6 @@ exports.updateBook = (req, res) => {
 exports.createNewBook = async (req, res) => {
 	// const newId = books[books.length - 1].id + 1;
 
-
 	// const reqExmaple = {
 	// 	image: "https://i.guim.co.uk/img/media/f51df963039740fa2cb5f1b6649e571a0d31579e/0_0_1355_2079/master/1355.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=0166526b8d4f5d40300085c26a427cea",
 	// 	title: "The Great Gatsby",
@@ -108,7 +122,27 @@ exports.createNewBook = async (req, res) => {
 	// get user Id associated with this book
 	const userId = "6641d17df5ae6fae41954f55";
 	const user = await getUser(userId);
-	const newBook = new BookModel(req.body);
+	// req.body.bookGenre
+	const bookObject = {
+		image: "https://www.google.com/imgres?q=mathematics%20book&imgurl=http%3A%2F%2Fwww.sahityabharatipublications.com%2Fuploads%2Fproductimg%2FWonderful%2520Mathematics%2520Book%2520-3.jpg&imgrefurl=http%3A%2F%2Fwww.sahityabharatipublications.com%2Fbook%2Fthebook%2F591&docid=I_GaUHIckGFa3M&tbnid=QG6F1JTA7Eq8MM&vet=12ahUKEwi1prCLyIuGAxXk7QIHHTQmDp8QM3oFCIEBEAA..i&w=240&h=320&hcb=2&ved=2ahUKEwi1prCLyIuGAxXk7QIHHTQmDp8QM3oFCIEBEAA",
+		title: req.body.bookName,
+		description: req.body.bookDescription,
+		ISBN: req.body.bookISBN,
+		listingDate: new Date(),
+		author: req.body.bookAuthor,
+		// genre: [],
+		offerType: req.body.orderType,
+		bookCondition: req.body.bookCondition,
+		price: req.body.bookPrice,
+		oldPrice: null,
+		seller: req.body.seller,
+		numberOfPages: req.body.numberOfPages,
+		comments: [],
+		offerStatus: "Active",
+	};
+
+	const newBook = new BookModel(bookObject);
+	user.books.push(newBook);
 	await newBook
 		.save()
 		.then((savedUser) => {
@@ -125,7 +159,8 @@ exports.createNewBook = async (req, res) => {
 			console.error("Error saving user:", error);
 		});
 	user.books.push(newBook);
-	await user.save()
+	await user
+		.save()
 		.then((savedUser) => {
 			console.log("book saved successfully:", savedUser);
 

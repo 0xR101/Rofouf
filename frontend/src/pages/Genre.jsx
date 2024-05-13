@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import NavBar from "./../components/nav/NavBar.jsx";
-import Footer from "./../components/footer/Footer.jsx";
+import NavBar from "../components/nav/NavBar.jsx";
+import Footer from "../components/footer/Footer.jsx";
 import BookListing from "../components/bookListing/BookListing.jsx";
 
 function useQuery() {
@@ -11,174 +11,75 @@ function useQuery() {
 export default function BooksByGenre() {
   const [booksShown, setBooksShown] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [filterStatus, setFilterStatus] = useState([]);
+  const [selectedOfferTypes, setSelectedOfferTypes] = useState([]);
   const [sortMethod, setSortMethod] = useState("");
   const query = useQuery();
-  const genreQuery = query.get("genre")?.toLowerCase() || "";
-
-  // Available genres for validation
-  const validGenres = [
-    "education",
-    "health",
-    "sport",
-    "home",
-    "history",
-    "arts",
-    "children",
-    "biographies",
-    "business",
-    "computer",
-    "food & cook",
-  ];
-  const isValidGenre = validGenres.includes(genreQuery);
-
-  // Mock data - the array of books
-  const books = [
-    {
-      key: 101,
-      title: "Harry Potter and the Sorcerer's Stone",
-      author: "J.K. Rowling",
-      summary:
-        "It’s a passion for knowledge, a desire to travel, and a fascination with culture that provides the driving force behind Assouline.",
-      status: "For Rent",
-      imageUrl:
-        "https://i.pinimg.com/originals/16/b7/88/16b788f1c01374f26f6388d00f2ddd83.jpg",
-      seller: "Osama Abkar",
-      genre: "children",
-      price: "2.00 SAR per day",
-      location: "Daharan",
-      offerDate: new Date(2024, 4, 20, 10, 33, 30),
-      available: true,
-    },
-    {
-      key: 102,
-      title: "The Great Gatsby",
-      author: "F. Scott Fitzgerald",
-      summary:
-        "It’s a passion for knowledge, a desire to travel, and a fascination with culture that provides the driving force behind Assouline.",
-      status: "For Sale",
-      imageUrl:
-        "https://i.pinimg.com/originals/16/b7/88/16b788f1c01374f26f6388d00f2ddd83.jpg",
-      seller: "Rayyan Raza",
-      genre: "history",
-      price: "55.00 SAR",
-      location: "Riyadh",
-      offerDate: new Date(2024, 4, 20, 15, 33, 30),
-      available: true,
-    },
-    {
-      key: 103,
-      title: "A History of the American People",
-      author: "Paul Johnson",
-      summary:
-        "Littered with letters, diaries, and recorded conversations, it details the origins of their struggles for independence and nationhood, their heroic efforts and sacrifices to deal with the 'organic sin' of slavery and the preservation of the Union to its explosive economic growth and emergence as a world power.",
-      status: "For Exchange",
-      imageUrl:
-        "https://i.pinimg.com/originals/16/b7/88/16b788f1c01374f26f6388d00f2ddd83.jpg",
-      seller: "Alawi Sahel",
-      genre: "history",
-      price: "Harry Potter Book",
-      location: "Riyadh",
-      offerDate: new Date(2024, 4, 21, 15, 33, 30),
-      available: true,
-    },
-    {
-      key: 104,
-      title: "Rich Dad Poor Dad",
-      author: "Robert T. Kiyosaki",
-      summary:
-        "Rich Dad, Poor Dad by Robert T. Kiyosaki is a personal finance book that emphasizes the importance of financial education, teaches how to make money work for you, and challenges traditional beliefs about money.",
-      status: "For Sale",
-      imageUrl:
-        "https://i.pinimg.com/originals/16/b7/88/16b788f1c01374f26f6388d00f2ddd83.jpg",
-      seller: "Rayyan Raza",
-      genre: "Biography",
-      price: "60.00 SAR",
-      location: "Jizan",
-      offerDate: new Date(2024, 4, 21, 15, 33, 30),
-      available: true,
-    },
-  ];
+  const genreQuery = query.get("genre") || ""; // Assume 'genre' is passed as the genre's value
 
   useEffect(() => {
-    if (isValidGenre) {
+    if (genreQuery) {
       setLoading(true);
-      setTimeout(() => {
-        let filteredBooks = books.filter(
-          (book) =>
-            book.available &&
-            book.genre.toLowerCase() === genreQuery &&
-            (filterStatus.length === 0 || filterStatus.includes(book.status))
-        );
+      const queryParams = new URLSearchParams({
+        genre: genreQuery,
+        sort: sortMethod,
+        offerType: selectedOfferTypes.join(","),
+      }).toString();
 
-        switch (sortMethod) {
-          case "priceAsc":
-            filteredBooks.sort(
-              (a, b) => parseFloat(a.price) - parseFloat(b.price)
-            );
-            break;
-          case "priceDesc":
-            filteredBooks.sort(
-              (a, b) => parseFloat(b.price) - parseFloat(a.price)
-            );
-            break;
-          case "dateAsc":
-            filteredBooks.sort((a, b) => a.offerDate - b.offerDate);
-            break;
-          case "dateDesc":
-            filteredBooks.sort((a, b) => b.offerDate - a.offerDate);
-            break;
-        }
-
-        setBooksShown(
-          filteredBooks.map((book) => (
+      fetch(`http://localhost:5000/api/v1/books?${queryParams}`)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("API Response:", data);
+          const bookComponents = data.data.books.map((book) => (
             <BookListing
-              key={book.key}
-              bookId={book.key}
+              key={book._id}
+              bookId={book._id}
               bookTitle={book.title}
-              bookImageUrl={book.imageUrl}
-              bookSummary={book.summary}
-              bookStatus={book.status}
+              bookImageUrl={book.image}
+              bookSummary={book.description}
+              bookStatus={book.offerStatus} // Assuming offerStatus represents book status
               bookSeller={book.seller}
-              bookGenre={book.genre}
+              bookGenre={book.genre.join(", ")} // If genre is an array
               bookPrice={book.price}
-              bookLocation={book.location}
-              bookDate={book.offerDate}
-              bookAvailable={book.available}
+              bookLocation={""} // Placeholder if location is not available
+              bookDate={book.listingDate}
+              bookAvailable={book.offerStatus.toLowerCase() === "active"} // Adjust as needed
               bookAuthor={book.author}
             />
-          ))
-        );
-        setLoading(false);
-      }, 1000);
+          ));
+          setBooksShown(bookComponents);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Failed to fetch books:", error);
+          setLoading(false);
+        });
     }
-  }, [genreQuery, filterStatus, sortMethod]);
+  }, [genreQuery, selectedOfferTypes, sortMethod]);
 
   const handleSortChange = (event) => {
     setSortMethod(event.target.value);
   };
 
-  const handleFilterChange = (event) => {
-    const status = event.target.value;
-    if (event.target.checked) {
-      setFilterStatus([...filterStatus, status]);
-    } else {
-      setFilterStatus(filterStatus.filter((s) => s !== status));
-    }
+  const handleCheckboxChange = (event) => {
+    const { value, checked } = event.target;
+    setSelectedOfferTypes((prev) => {
+      if (checked) {
+        return [...prev, value];
+      } else {
+        return prev.filter((type) => type !== value);
+      }
+    });
   };
-
   return (
     <>
       <NavBar />
       <div className="p-12 min-h-screen mb-10">
-        {!isValidGenre ? (
+        {!genreQuery ? (
           <h1>Genre not found. Please select from available genres.</h1>
         ) : (
           <>
             <h1 className="inline">
-              Books in &quot;
-              {genreQuery.charAt(0).toUpperCase() + genreQuery.slice(1)}&quot;
-              Genre ({booksShown.length})
+              Books in "{genreQuery}" Genre ({booksShown.length})
             </h1>
             <div>
               <label>Sort by:</label>
@@ -198,24 +99,27 @@ export default function BooksByGenre() {
               <label>
                 <input
                   type="checkbox"
-                  value="For Rent"
-                  onChange={handleFilterChange}
+                  value="forRent"
+                  label="For Rent"
+                  onChange={handleCheckboxChange}
                 />{" "}
                 For Rent
               </label>
               <label>
                 <input
                   type="checkbox"
-                  value="For Sale"
-                  onChange={handleFilterChange}
+                  value="forSale"
+                  label="For Sale"
+                  onChange={handleCheckboxChange}
                 />{" "}
                 For Sale
               </label>
               <label>
                 <input
                   type="checkbox"
-                  value="For Exchange"
-                  onChange={handleFilterChange}
+                  value="forExchange"
+                  label="For Exchange"
+                  onChange={handleCheckboxChange}
                 />{" "}
                 For Exchange
               </label>
@@ -227,11 +131,7 @@ export default function BooksByGenre() {
                 {booksShown.length > 0 ? (
                   booksShown
                 ) : (
-                  <p>
-                    No books found in the &quot;
-                    {genreQuery.charAt(0).toUpperCase() + genreQuery.slice(1)}
-                    &quot; genre.
-                  </p>
+                  <p>No books found in the "{genreQuery}" genre.</p>
                 )}
               </div>
             )}
