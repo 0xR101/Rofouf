@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 // driven attribute is rate
 
-
 const userSchema = new mongoose.Schema({
 	name: String,
 	email: { type: String, unique: true },
@@ -13,14 +12,11 @@ const userSchema = new mongoose.Schema({
 	address: String,
 	comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
 	books: [{ type: mongoose.Schema.Types.ObjectId, ref: "Book" }],
-
 });
 
 module.exports = mongoose.model("User", userSchema);
 
 // aggregate.lookup({ from: 'users', localField: 'userId', foreignField: '_id', as: 'users' });
-
-
 
 // const commentSchema = new mongoose.Schema({
 //   image: String, // URL to image
@@ -29,8 +25,6 @@ module.exports = mongoose.model("User", userSchema);
 //   content: String,
 //   date: { type: Date, default: Date.now }
 // });
-
-
 
 // here we might check if we connect to the database
 

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useDebugValue, useRef, useState, useEffect } from "react";
 import DropdownMenu from "../dropdown/DropDownMenu";
 // import { useNavigate } from "react-router-dom";
 import { BsPersonCircle } from "react-icons/bs";
@@ -8,12 +8,13 @@ import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 function NavBar() {
-  // assumed users
+  const [userData, setUserData] = useState(null);
 
-  let user = "ayed";
-  let password = "ksa123";
+  useEffect(() => {
+    const newData = JSON.parse(localStorage.getItem("currentUser"));
+    setUserData(newData);
+  }, [localStorage.getItem("currentUser")]);
 
-  const [isProfileListVisible, setProfileListVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
@@ -23,13 +24,17 @@ function NavBar() {
     }
   };
 
-  const handlePostOfferClick = () => {
-    navigate("/newOffer");
+  const handleProfileClick = () => {
+    if (userData != null) {
+      navigate("/Profile");
+    } else {
+      navigate("/Signin");
+    }
   };
 
-  const handleProfileClick = () => {
-    if (user != null && password != null) {
-      navigate("/Profile");
+  const handlePostOfferClick = () => {
+    if (userData != null) {
+      navigate("/newOffer");
     } else {
       navigate("/Signin");
     }
@@ -73,8 +78,8 @@ function NavBar() {
             </button>
             <Link
               to={
-                user != null && password != null
-                  ? `/Chat?user=${user}&password=${password}`
+                userData != null
+                  ? `/Chat?user=${userData.username}&password=${userData.password}`
                   : `/Signin`
               }
               className="p-2"
