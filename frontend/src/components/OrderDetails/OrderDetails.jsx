@@ -132,6 +132,34 @@ const OrderDetails = () => {
     e.preventDefault();
     // Handle the form submission, such as validating input data,
     // send to the server
+    // created function to handle API request
+    console.log("working fine..")
+
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    };
+    fetch("http://localhost:5000/api/v1/books/", options)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json(); // Assuming the response is JSON
+      })
+      .then((data) => {
+        console.log("Data successfully posted:", data);
+        // Do something with the response data if needed
+      })
+      .catch((error) => {
+        console.error("Error posting data:", error);
+        // Handle any errors that occurred during the fetch
+      });
+  
+  
+
 
     // Reset form fields
     setFormData({
