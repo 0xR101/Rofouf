@@ -14,11 +14,18 @@ function BookCard({
     <>
       <div className="flex flex-row w-full max-sm:flex-col max-sm:shadow-bottom-lg">
         <div className="w-60 h-80">
-          <img
-            className="object-cover w-full h-full rounded-2xl"
-            src={image}
-            alt="hi"
-          />
+          {image != null ? (
+            <img
+              className="object-cover w-full h-full rounded-2xl"
+              src={image}
+              alt="Faild to upload image"
+            />
+          ) : (
+            <div className="object-cover w-full h-full rounded-2xl text-center pt-10 bg-slate-200">
+              Faild to upload image
+            </div>
+          )}
+
           <div className="relative text-white bottom-14 rounded-b-2xl  p-4 font-bold bg-gray-400 h-12 bg-opacity-50">
             {offerType}
           </div>

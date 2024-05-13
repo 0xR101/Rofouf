@@ -37,6 +37,43 @@ exports.createUser = async (req, res) => {
 			books: [],
 		});
 
+		// add the user also to chat engine
+
+		const data = {
+			username: username,
+			first_name: name,
+			secret: password,
+			// custom_json: { high_score: 2000 },
+		};
+		// https://api.chatengine.io/users/
+		const url = "https://api.chatengine.io/users/";
+
+		const options = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"PRIVATE-KEY": "77313c5c-1e04-480e-9154-1d8fdd9bfbdb",
+			},
+			body: JSON.stringify(data),
+		};
+
+		try {
+			const response = await fetch(url, options);
+			if (!response.ok) {
+				const errorText = await response.text();
+				throw new Error(
+					`Network response was not ok: ${response.statusText} - ${errorText}`,
+				);
+			}
+			const responseData = await response.json();
+			console.log("Success:", responseData);
+			return responseData;
+		} catch (error) {
+			console.error("Error:", error);
+
+			new Error(`Network response was not ok: `);
+		}
+
 		res.status(201).json({
 			message: "User created successfully",
 			status: 200,
@@ -52,12 +89,16 @@ exports.createUser = async (req, res) => {
 
 exports.checkUser = async (req, res) => {
 	try {
-		const { email, password } = req.body;
+		const { email, password, currentUsername } = req.body;
+
+		console.log(req.body);
 
 		// Check if the user exists
-		const user = await User.findOne({ email });
+		const user = await User.findOne({ username: req.body.username });
 
 		if (!user) {
+			console.log(currentUsername);
+
 			return res.status(404).json({ message: "User not found" });
 		}
 
@@ -71,7 +112,7 @@ exports.checkUser = async (req, res) => {
 		}
 
 		// If the password is correct, create a JWT token
-        
+
 		// const token = jwt.sign(
 		// 	{
 		// 		userId: user._id,
