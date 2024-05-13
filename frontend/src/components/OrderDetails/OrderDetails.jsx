@@ -6,6 +6,15 @@ import { AiOutlineCamera } from "react-icons/ai";
 import { useEffect } from "react";
 
 import { popularBookGenres } from "../../constants/genres";
+import { TagsInput } from "react-tag-input-component";
+
+import DatePicker from "react-datepicker";
+import { setYear, startOfYear } from "date-fns";
+
+import "react-datepicker/dist/react-datepicker.css";
+import "./style.css";
+// import { set } from "../../../../backend/app";
+// import { set } from "../../../../backend/app";
 
 const orderTypeOptions = [
   { value: "sell", label: "Sell" },
@@ -41,6 +50,7 @@ const customSelectStyles = {
 };
 
 const OrderDetails = () => {
+  // states
   const [formData, setFormData] = useState({
     bookName: "",
     bookAuthor: "",
@@ -50,14 +60,30 @@ const OrderDetails = () => {
     orderType: "",
     bookCondition: "",
     bookPrice: "",
-    maxNumberOfDays: "",
-    bookISBN: "",
+    bookISBNs: [],
     publicationYear: "",
   });
 
   // State for the image file and its preview URL
   const [selectedFile, setSelectedFile] = useState(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
+  const [selectedYear, setSelectedYear] = useState(null);
+  const [selectedIsbns, setSelectedIsbns] = useState([]); // [isbn1, isbn2, ...]
+
+  // handlers
+
+  const handleYearChange = (date) => {
+    setSelectedYear(date);
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      publicationYear: selectedYear || [], // or [] to reset to empty if nothing is selected
+    }));
+  };
+
+  const handleISBNsChange = (newIsbn) => {
+    setSelectedIsbns(newIsbn);
+    setFormData({ ...formData, bookISBNs: newIsbn });
+  };
 
   // Event handler for text inputs change
   const handleInputChange = (e) => {
@@ -66,6 +92,61 @@ const OrderDetails = () => {
       ...prevFormData,
       [name]: value,
     }));
+  };
+
+  const resetForm = () => {
+    setFormData({
+      bookName: "",
+      bookAuthor: "",
+      bookDescription: "",
+      bookGenre: [],
+      numberOfPages: "",
+      orderType: "",
+      bookCondition: "",
+      bookPrice: "",
+      bookISBNs: [],
+      publicationYear: "",
+    });
+    setSelectedFile(null);
+    setImagePreviewUrl(null);
+    setSelectedYear(null);
+    setSelectedIsbns([]);
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    // Check for text length and required fields
+    if (!formData.bookName || formData.bookName.length >= 100)
+      errors.bookName =
+        "Book name must be less than 100 characters and is required.";
+    if (!formData.bookAuthor || formData.bookAuthor.length >= 100)
+      errors.bookAuthor =
+        "Author name must be less than 100 characters and is required.";
+    if (formData.bookDescription && formData.bookDescription.length >= 500)
+      errors.bookDescription = "Description must be less than 500 characters.";
+    if (
+      !formData.numberOfPages ||
+      formData.numberOfPages <= 0 ||
+      formData.numberOfPages > 10000
+    )
+      errors.numberOfPages =
+        "Number of pages must be between 0 and 10,000 and is required.";
+    if (
+      !formData.bookPrice ||
+      formData.bookPrice < 0 ||
+      formData.bookPrice > 10000
+    )
+      errors.bookPrice = "Price must be between 0 and 10,000 and is required.";
+    if (!formData.orderType) errors.orderType = "Order type is required.";
+    if (!formData.bookCondition)
+      errors.bookCondition = "Book condition is required.";
+    if (!selectedFile) errors.image = "An image must be uploaded.";
+
+    // Check for required array fields if they should not be empty
+    if (!formData.bookGenre || formData.bookGenre.length === 0)
+      errors.bookGenre = "At least one genre must be selected.";
+
+    return errors;
   };
 
   // Event handler for file input change
@@ -98,11 +179,14 @@ const OrderDetails = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle the form submission, such as validating input data,
-    // send to the server
-    // created function to handle API request
-    console.log("working fine..");
+    const errors = validateForm();
+    if (Object.keys(errors).length > 0) {
+      console.error("Validation errors:", errors);
+      // Optionally display these errors in the UI
+      return; // Stop the submission if there are errors
+    }
 
+    // Temporary section to test what the request will look like
     const options = {
       method: "POST",
       headers: {
@@ -110,40 +194,24 @@ const OrderDetails = () => {
       },
       body: JSON.stringify(formData),
     };
-    fetch("http://localhost:5000/api/v1/books/", options)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json(); // Assuming the response is JSON
-      })
-      .then((data) => {
-        console.log("Data successfully posted:", data);
-        // Do something with the response data if needed
-      })
-      .catch((error) => {
-        console.error("Error posting data:", error);
-        // Handle any errors that occurred during the fetch
-      });
+    console.log("Prepared request for submission:", options);
 
-    // Reset form fields
-    setFormData({
-      bookName: "",
-      bookAuthor: "",
-      bookDescription: "",
-      bookGenre: [],
-      numberOfPages: "",
-      orderType: "",
-      bookCondition: "",
-      bookPrice: "",
-      maxNumberOfDays: "",
-      bookISBN: "",
-      publicationYear: "",
-    });
+    // Assuming the fetch will be uncommented for actual use
+    // fetch("http://localhost:5000/api/v1/books/", options)
+    //   .then(response => {
+    //     if (!response.ok) {
+    //       throw new Error("Network response was not ok");
+    //     }
+    //     return response.json(); // Assuming the response is JSON
+    //   })
+    //   .then(data => {
+    //     console.log("Data successfully posted:", data);
+    //   })
+    //   .catch(error => {
+    //     console.error("Error posting data:", error);
+    //   });
 
-    // Clear selected file and image preview
-    setSelectedFile(null);
-    setImagePreviewUrl(null);
+    resetForm(); // Reset the form after successful validation and logging
   };
 
   const [iconSize, setIconSize] = useState(window.innerWidth < 640 ? 200 : 400);
@@ -168,10 +236,13 @@ const OrderDetails = () => {
     };
   }, [imagePreviewUrl]);
 
+  const minYear = startOfYear(setYear(new Date(), 0)); // January 1, 0
+  const maxYear = startOfYear(setYear(new Date(), 2050)); // January 1, 2050
+
   const inputClassName =
     "pl-5  w-full h-10 placeholder-white placeholder-opacity-50     rounded-full bg-lightBrown50 shadow-md border-none resize-none focus:outline-none text-white";
 
-  const labelClassName = "w-1/3 text-left text-primary font-bold";
+  const labelClassName = "w-1/4 text-left text-primary font-bold";
 
   const labelInput =
     "flex items-start flex-col  justify-center gap-5  lg:items-center lg:flex-row";
@@ -210,6 +281,7 @@ const OrderDetails = () => {
             accept="image/*"
             onChange={handleImageChange}
             className="hidden"
+            required
           />
 
           {/* Display the file name */}
@@ -225,14 +297,19 @@ const OrderDetails = () => {
 
           <div className={labelInput}>
             <label className={labelClassName}>Book&apos;s Name</label>
-            <input
-              className={inputClassName}
-              name="bookName"
-              placeholder="Enter book name"
-              value={formData.bookName}
-              onChange={handleInputChange}
-              // Add the rest of your styling classes here
-            />
+            <div className="flex flex-row items-center w-full">
+              <input
+                className={inputClassName}
+                name="bookName"
+                placeholder="Enter book name"
+                value={formData.bookName}
+                maxLength="100"
+                onChange={handleInputChange}
+                required
+
+                // Add the rest of your styling classes here
+              />
+            </div>
           </div>
 
           <div className={labelInput}>
@@ -244,7 +321,8 @@ const OrderDetails = () => {
               name="bookAuthor"
               value={formData.bookAuthor}
               onChange={handleInputChange}
-              // Add the rest of your styling classes here
+              maxLength="100"
+              required
             />
           </div>
 
@@ -258,6 +336,8 @@ const OrderDetails = () => {
               placeholder="Enter book description"
               value={formData.bookDescription}
               onChange={handleInputChange}
+              maxLength="500"
+              required
             />
           </div>
 
@@ -272,6 +352,7 @@ const OrderDetails = () => {
               placeholder="Select book genre"
               onChange={handleGenreChange}
               className="w-full"
+              required
             />
           </div>
 
@@ -282,8 +363,12 @@ const OrderDetails = () => {
               type="number"
               placeholder="Enter number of pages"
               name="numberOfPages"
+              min="1"
+              max="10000"
+              maxLength="5"
               value={formData.numberOfPages}
               onChange={handleInputChange}
+              required
             />
           </div>
 
@@ -301,6 +386,7 @@ const OrderDetails = () => {
               }
               onChange={handleSelectChange("orderType")}
               className="w-full"
+              required
             />
           </div>
 
@@ -318,58 +404,57 @@ const OrderDetails = () => {
               }
               onChange={handleSelectChange("bookCondition")}
               className="w-full"
+              required
             />
           </div>
 
           <div className={labelInput}>
             <label className={`${labelClassName} w-1/4`}>Book Price</label>
-            <div className=" flex space-x-12 flex-row  flex-grow items-start justify-start w-2/3">
+            <div className=" flex space-x-12 flex-row  flex-grow items-start justify-start w-full">
               <input
                 className={`${inputClassName}  `}
                 type="number"
                 name="bookPrice"
                 placeholder="Enter price"
+                min="0"
+                max="10000"
+                maxLength="5"
                 value={formData.bookPrice}
                 onChange={handleInputChange}
+                required
               />
-
-              {formData.orderType === "rent" && (
-                <input
-                  type="number"
-                  className={`${inputClassName}  `}
-                  placeholder="Enter max days"
-                  value={formData.maxNumberOfDays}
-                  onChange={handleInputChange}
-                />
-              )}
             </div>
           </div>
 
           <div className={labelInput}>
             <label className={`${labelClassName} w-1/4`}>
-              Publication Info
+              Book ISBN(s) & Publication Year
             </label>
-            <div className=" flex space-x-5 flex-row flex-grow items-center w-2/3">
-              <input
-                className={`${inputClassName}  `}
-                type="text"
-                name="publicationInfo"
-                placeholder="Enter ISBN(s)"
-                value={formData.bookISBN}
-                onChange={handleInputChange}
+            <div className=" flex space-x-5 flex-row flex-grow items-center w-full">
+              <TagsInput
+                value={selectedIsbns}
+                onChange={handleISBNsChange}
+                name="isbns"
+                placeHolder="Press Enter to add ISBN"
               />
+
               <span className="">
                 <AiOutlineCalendar />
               </span>
-              <input
-                className={`${inputClassName}  `}
-                id="publicationYear"
-                name="publicationYear"
-                type="number"
-                placeholder="YYYY"
-                value={formData.publicationYear}
-                onChange={handleInputChange}
-              />
+
+              <div>
+                <DatePicker
+                  className={`${inputClassName} flex-grow w-full   `}
+                  selected={selectedYear}
+                  onChange={handleYearChange}
+                  showYearPicker
+                  dateFormat="yyyy"
+                  placeholderText="Select a year"
+                  minDate={minYear}
+                  maxDate={maxYear}
+                  required
+                />
+              </div>
             </div>
           </div>
           <div className="flex flex-row lg:justify-end  justify-center  items-center p-5">
