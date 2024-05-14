@@ -50,7 +50,7 @@ function BookCard({
           <div className="flex flex-col gap-3">
             <div className="flex flex-row items-center gap-3">
               <div className=" text-lg text-fontColorDarkBlue">Condtion:</div>
-              {condition == "Good" ? (
+              {condition != "Poor" ? (
                 <div className="bg-green-500 text-white font-extrabold py-2 px-6 rounded shadow-2xl ">
                   {condition}
                 </div>
