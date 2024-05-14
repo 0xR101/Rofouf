@@ -5,13 +5,12 @@ const BookListing = ({
   bookId,
   bookAuthor = "",
   bookImageUrl = "",
-  bookStatus = "",
+  bookOfferType = "",
   bookSummary = "",
   bookDate = null,
   bookSeller = "",
-  bookGenre = "",
   bookPrice = "",
-  bookLocation = "",
+  bookCondition = "",
   bookAvailable = false,
 }) => {
   // Format the date if it's not null
@@ -67,10 +66,10 @@ const BookListing = ({
             </div>
             <div className="mt-5 flex flex-col sm:flex-row gap-2">
               <div className="bg-bookStatus flex justify-center items-center rounded-xl text-primary px-2 py-1 w-full sm:w-auto">
-                {bookStatus}: {bookPrice}
+                For {bookOfferType.slice(3)}: {bookPrice}
               </div>
               <div className="bg-bookStatus flex justify-center items-center rounded-xl text-primary px-2 py-1 w-full sm:w-auto">
-                Location: {bookLocation}
+                Condition: {bookCondition}
               </div>
             </div>
           </div>

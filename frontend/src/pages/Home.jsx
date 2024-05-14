@@ -86,17 +86,6 @@ function Home() {
           <GroupSlider />
         </div>
 
-        <div className="flex gap-4 max-sm:flex-col max-sm:items-center">
-          <div className="flex-1 rounded-md bg-secondaryColor w-80 p-2 h-20 flex flex-col items-center justify-center text-primary shadow-2xl hover:bg-primary hover:text-white">
-            <div className="font-bold">Most recent offers</div>
-          </div>
-          <div className="flex-1 rounded-md bg-secondaryColor w-80 p-2 h-20 flex flex-col items-center justify-center text-primary shadow-2xl hover:bg-primary hover:text-white">
-            <div className="font-bold">others</div>
-          </div>
-          <div className="flex-1 rounded-md bg-secondaryColor w-80 p-2 h-20 flex flex-col items-center justify-center text-primary shadow-2xl hover:bg-primary hover:text-white">
-            <div className="font-bold">others</div>
-          </div>
-        </div>
         <div className="font-extrabold text-primary text-3xl mt-5 max-sm:text-2xl mb-5">
           Recommendations
         </div>
