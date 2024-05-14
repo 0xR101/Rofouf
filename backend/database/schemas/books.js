@@ -7,10 +7,11 @@ const bookSchema = new mongoose.Schema({
 	ISBN: [{ type: String, unique: false }], // it should be unique
 	listingDate: Date,
 	author: String,
-	// genre: {type: [String], default: []},
+	genre: [{ type: String, default: [] }],
 	offerType: String,
 	bookCondition: String,
 	price: Number,
+	publicationYear: Number,
 	oldPrice: { type: Number, default: null },
 	seller: String, // User name of the seller
 	numberOfPages: Number,

@@ -36,6 +36,13 @@ app.use((req, res, next) => {
 // Enable CORS
 app.use(cors());
 
+// CORS configuration
+const corsOptions = {
+	origin: "http://localhost:5173", // Set this to your frontend's URL
+	credentials: true, // This allows the backend to accept cookies from the frontend
+};
+
+app.use(cors(corsOptions));
 // 1) MIDDLEWARES
 
 // this is a 3rd party middleware that will log the request to the console in a dev format
