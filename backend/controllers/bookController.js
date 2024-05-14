@@ -41,7 +41,7 @@ async function getUser(userId) {
 
 // check id middleware
 exports.checkId = (req, res, next, val) => {
-	if (req.params.id * 1 > BookModel.length || req.params.id * 1 < 0) {
+	if (req.params.id * 1 > Book.length || req.params.id * 1 < 0) {
 		return res.status(404).json({
 			status: "fail",
 			message: "Invalid ID",
