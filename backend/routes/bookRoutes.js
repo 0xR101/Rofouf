@@ -12,7 +12,7 @@ router.param("id", bookController.checkId);
 router
 	.route("/")
 	.get(bookController.getAllBooks)
-	.post(protect, fileSystem.uploadCover(), bookController.createNewBook);
+	.post(fileSystem.uploadCover(), bookController.createNewBook);
 router
 	.route("/:id")
 	.get(bookController.getBook)

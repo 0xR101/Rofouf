@@ -67,7 +67,7 @@ const OrderDetails = () => {
   // State for the image file and its preview URL
   const [selectedFile, setSelectedFile] = useState(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
-  const [selectedYear, setSelectedYear] = useState(null);
+  const [selectedYear, setSelectedYear] = useState(new Date());
   const [selectedIsbns, setSelectedIsbns] = useState([]); // [isbn1, isbn2, ...]
 
   // handlers
