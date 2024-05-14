@@ -9,9 +9,8 @@ export default function BooksList() {
   const [loading, setLoading] = useState(true);
   const [selectedOfferTypes, setSelectedOfferTypes] = useState([]);
   const [sortMethod, setSortMethod] = useState("");
-  const [searchParams, setSearchParams] = useSearchParams();
 
-  const user = searchParams.get("user");
+  const user = JSON.parse(localStorage.getItem("currentUser")).username;
 
   useEffect(() => {
     setLoading(true);
@@ -47,7 +46,7 @@ export default function BooksList() {
         console.error("Failed to fetch books:", error);
         setLoading(false);
       });
-  }, [searchParams, selectedOfferTypes, sortMethod]);
+  }, [user, selectedOfferTypes, sortMethod]);
 
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
@@ -70,7 +69,7 @@ export default function BooksList() {
       <div className="p-12 min-h-screen mb-10">
         {
           <>
-            <h1 className="inline">Search Results for ({booksShown.length})</h1>
+            <h1 className="inline">All listed books ({booksShown.length})</h1>
             <div>
               <label>Sort by:</label>
               <select
