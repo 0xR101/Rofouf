@@ -36,11 +36,10 @@ export default function BooksByGenre() {
               bookTitle={book.title}
               bookImageUrl={book.image}
               bookSummary={book.description}
-              bookStatus={book.offerStatus} // Assuming offerStatus represents book status
+              bookOfferType={book.offerType}
               bookSeller={book.seller}
-              bookGenre={book.genre.join(", ")} // If genre is an array
               bookPrice={book.price}
-              bookLocation={""} // Placeholder if location is not available
+              bookCondition={book.bookCondition}
               bookDate={book.listingDate}
               bookAvailable={book.offerStatus.toLowerCase() === "active"} // Adjust as needed
               bookAuthor={book.author}

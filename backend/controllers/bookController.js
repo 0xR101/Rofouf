@@ -2,6 +2,35 @@
 const BookModel = require("../database/schemas/books");
 const User = require("../database/schemas/users");
 
+const validGenres = [
+	"actionAdventure",
+	"classics",
+	"fantasy",
+	"historicalFiction",
+	"horror",
+	"literaryFiction",
+	"mysteryThriller",
+	"romance",
+	"scienceFiction",
+	"shortStories",
+	"westerns",
+	"youngAdult",
+	"artsPhotography",
+	"biographyMemoir",
+	"businessEconomics",
+	"computersTechnology",
+	"cookingFoodWine",
+	"history",
+	"politicsSocialSciences",
+	"reference",
+	"religionSpirituality",
+	"selfHelp",
+	"travel",
+	"comicsGraphicNovels",
+	"childrensBooks",
+	"magazinesNewspapers",
+];
+
 // get that user that is asscoiated with this ID
 async function getUser(userId) {
 	const user = await User.findOne({
@@ -25,10 +54,17 @@ exports.checkId = (req, res, next, val) => {
 // All book CRUD operations handlers
 exports.getAllBooks = async (req, res) => {
 	try {
-		const { genre, sort, offerType } = req.query;
+		const { search, genre, sort, offerType } = req.query;
 		let filter = {};
 
 		if (genre) {
+			if (!validGenres.includes(genre)) {
+				return res.status(400).json({
+					status: "fail",
+					message:
+						"Invalid genre provided. Please choose a valid genre.",
+				});
+			}
 			filter.genre = { $in: [genre] };
 		}
 		if (offerType) {
@@ -42,7 +78,14 @@ exports.getAllBooks = async (req, res) => {
 		if (sort === "priceDesc") sortOptions.price = -1;
 		if (sort === "dateAsc") sortOptions.listingDate = 1;
 		if (sort === "dateDesc") sortOptions.listingDate = -1;
-
+		if (search) {
+			// Add a search filter that checks multiple fields using regex
+			filter.$or = [
+				{ title: { $regex: search, $options: "i" } },
+				{ description: { $regex: search, $options: "i" } },
+				{ author: { $regex: search, $options: "i" } },
+			];
+		}
 		const books = await BookModel.find(filter).sort(sortOptions);
 
 		res.status(200).json({

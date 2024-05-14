@@ -356,7 +356,7 @@ const OrderDetails = () => {
                 type="text"
                 name="bookISBN"
                 placeholder="Enter ISBN(s)"
-                value={formData.bookISBN}  
+                value={formData.bookISBN}
                 onChange={handleInputChange}
               />
               <span className="">
