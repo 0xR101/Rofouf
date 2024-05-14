@@ -4,7 +4,7 @@ function BookCard({
   id,
   title,
   subtitle,
-  offerType,
+  offerType = "",
   condition,
   newPrice,
   oldPrice,
@@ -27,7 +27,7 @@ function BookCard({
           )}
 
           <div className="relative text-white bottom-14 rounded-b-2xl  p-4 font-bold bg-gray-400 h-12 bg-opacity-50">
-            {offerType}
+            For {offerType.slice(3)}
           </div>
         </div>
 
