@@ -12,7 +12,7 @@ require("dotenv").config();
 const app = express();
 
 app.post("/api/upload", fileSystem.uploadAvatar(), function (req, res, next) {
-	res.json(req.file.path);
+	res.json(req.file.path.split("\\").pop());
 });
 
 // here we can use this to make the url of the image
