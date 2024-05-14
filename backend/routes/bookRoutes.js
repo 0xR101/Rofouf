@@ -5,7 +5,7 @@ const { protect } = require("../middlewares/authMiddleware");
 
 const router = express.Router();
 
-router.get("/recommendations", bookController.getRecomendation);
+router.get("/recommendations", bookController.getRecommendations);
 
 router.param("id", bookController.checkId);
 

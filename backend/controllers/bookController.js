@@ -285,20 +285,18 @@ exports.deleteBook = (req, res) => {
 	});
 };
 
-exports.getRecomendation = async (req, res) => {
+exports.getRecommendations = async (req, res) => {
 	try {
 		const recentBooks = await Book.find()
 			.sort({ publishedDate: -1 })
 			.limit(5);
 
-		res.status(200).json({
+		await res.status(200).json({
 			status: "success",
 			data: {
-				recentBooks,
+				books: recentBooks,
 			},
 		});
-
-		console.log(book);
 	} catch (err) {
 		console.error(err);
 		res.status(500).json({
