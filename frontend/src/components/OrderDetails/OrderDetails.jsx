@@ -74,11 +74,14 @@ const OrderDetails = () => {
 
   const handleYearChange = (date) => {
     setSelectedYear(date);
-
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      publicationYear: selectedYear.getFullYear() || null, // or [] to reset to empty if nothing is selected
-    }));
+    // if it is a Date object, you can extract the year and not empty
+    if (date && date instanceof Date) {
+      const year = date.getFullYear();
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        publicationYear: year,
+      }));
+    }
   };
 
   const handleISBNsChange = (newIsbn) => {
