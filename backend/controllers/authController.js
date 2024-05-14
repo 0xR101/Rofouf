@@ -87,6 +87,28 @@ exports.createUser = async (req, res) => {
 	}
 };
 
+exports.getUser = async (req, res) => {
+	try {
+		const { username } = req.query;
+		const user = await User.findOne({ username: username });
+		const data = {
+			userName: user.name,
+			userMail: user.email,
+			userNumber: user.phoneNumber != null ? user.phoneNumber : "",
+			userAddress: user.address != null ? user.address : "",
+			userId: user.username,
+		};
+		console.log(data);
+		res.json(data);
+	} catch (error) {
+		console.error(error);
+		// res.status(500).json({
+		// 	message: "Internal server error",
+		// 	error: error.message,
+		// });
+	}
+};
+
 exports.checkUser = async (req, res) => {
 	try {
 		const { email, password, currentUsername } = req.body;
