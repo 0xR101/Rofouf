@@ -1,7 +1,6 @@
 const express = require("express");
 const bookController = require("../controllers/bookController");
 const fileSystem = require("../file/fileSystem");
-const { protect } = require("../middlewares/authMiddleware");
 
 const router = express.Router();
 

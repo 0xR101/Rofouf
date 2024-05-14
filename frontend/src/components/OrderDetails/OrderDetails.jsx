@@ -233,13 +233,23 @@ const OrderDetails = () => {
     console.log(formData.bookName);
     data.append("author", formData.bookAuthor);
     data.append("description", formData.bookDescription);
-    data.append("genre", JSON.stringify(formData.bookGenre)); // Genre is an array
+
+    // Extract only the 'value' properties from the genre array
+    const genreValues = formData.bookGenre.map((genre) => genre.value);
+    data.append("genre", JSON.stringify(genreValues)); // Genre is an array of values
+
     data.append("numberOfPages", formData.numberOfPages);
     data.append("offerType", formData.orderType);
     data.append("bookCondition", formData.bookCondition);
     data.append("price", formData.bookPrice);
     data.append("ISBN", JSON.stringify(formData.bookISBNs)); // ISBNs are an array
     data.append("publicationYear", formData.publicationYear); // Ensure this is a valid date
+
+    //Get the username from local storage
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const username = currentUser.username;
+    data.append("username", username);
+
     const token = localStorage.getItem("token");
 
     try {

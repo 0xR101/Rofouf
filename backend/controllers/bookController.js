@@ -146,87 +146,9 @@ exports.updateBook = (req, res) => {
 
 // - POST /api/v1/books
 
-// exports.createNewBook = async (req, res) => {
-// 	// const newId = books[books.length - 1].id + 1;
-
-// 	// const reqExmaple = {
-// 	// 	image: "https://i.guim.co.uk/img/media/f51df963039740fa2cb5f1b6649e571a0d31579e/0_0_1355_2079/master/1355.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=0166526b8d4f5d40300085c26a427cea",
-// 	// 	title: "The Great Gatsby",
-// 	// 	description: "A novel by F. Scott Fitzgerald",
-// 	// 	ISBN: "97807432753565",
-// 	// 	listingDate: new Date("2024-05-09"),
-// 	// 	author: "F. Scott Fitzgerald",
-// 	// 	genre: ["Classic", "Fiction"],
-// 	// 	offerType: "Selling",
-// 	// 	bookCondition: "Good",
-// 	// 	price: 15.99,
-// 	// 	oldPrice: 20.99,
-// 	// 	seller: "booklover123",
-// 	// 	numberOfPages: 180,
-// 	// 	comments: [],
-// 	// 	offerStatus: "Active",
-// 	// };
-// 	// get user Id associated with this book
-// 	const userId = "6641d17df5ae6fae41954f55";
-// 	const user = await getUser(userId);
-// 	// req.body.bookGenre
-// 	const bookObject = {
-// 		image: "https://www.google.com/imgres?q=mathematics%20book&imgurl=http%3A%2F%2Fwww.sahityabharatipublications.com%2Fuploads%2Fproductimg%2FWonderful%2520Mathematics%2520Book%2520-3.jpg&imgrefurl=http%3A%2F%2Fwww.sahityabharatipublications.com%2Fbook%2Fthebook%2F591&docid=I_GaUHIckGFa3M&tbnid=QG6F1JTA7Eq8MM&vet=12ahUKEwi1prCLyIuGAxXk7QIHHTQmDp8QM3oFCIEBEAA..i&w=240&h=320&hcb=2&ved=2ahUKEwi1prCLyIuGAxXk7QIHHTQmDp8QM3oFCIEBEAA",
-// 		title: req.body.bookName,
-// 		description: req.body.bookDescription,
-// 		ISBN: req.body.bookISBN,
-// 		listingDate: new Date(),
-// 		author: req.body.bookAuthor,
-// 		// genre: [],
-// 		offerType: req.body.orderType,
-// 		bookCondition: req.body.bookCondition,
-// 		price: req.body.bookPrice,
-// 		oldPrice: null,
-// 		seller: req.body.seller,
-// 		numberOfPages: req.body.numberOfPages,
-// 		comments: [],
-// 		offerStatus: "Active",
-// 	};
-
-// 	const newBook = new Book(bookObject);
-// 	user.books.push(newBook);
-// 	await newBook
-// 		.save()
-// 		.then((savedUser) => {
-// 			console.log("book saved successfully:", savedUser);
-
-// 			res.status(201).json({
-// 				status: "success",
-// 				data: {
-// 					book: newBook,
-// 				},
-// 			});
-// 		})
-// 		.catch((error) => {
-// 			console.error("Error saving user:", error);
-// 		});
-// 	user.books.push(newBook);
-// 	await user
-// 		.save()
-// 		.then((savedUser) => {
-// 			console.log("book saved successfully:", savedUser);
-
-// 			res.status(201).json({
-// 				status: "success",
-// 				data: {
-// 					book: newBook,
-// 				},
-// 			});
-// 		})
-// 		.catch((error) => {
-// 			console.error("Error saving user:", error);
-// 		});
-// };
-
 exports.createNewBook = async (req, res) => {
 	try {
 		// Assuming user ID comes from authenticated session or token
-		const username = req.body.usernmae;
 
 		const {
 			title,
@@ -239,7 +161,11 @@ exports.createNewBook = async (req, res) => {
 			price,
 			publicationYear,
 			numberOfPages,
+			username,
 		} = req.body;
+
+		// consol log all the data
+		console.log(req.body);
 
 		const newBook = new Book({
 			image: "/images/" + req.file.path.split("\\").pop(),
@@ -259,10 +185,11 @@ exports.createNewBook = async (req, res) => {
 
 		await newBook.save(); // Save the book to the database
 
-		// Optionally, add the book to the user's list of books
-		// await User.findByIdAndUpdate(username, {
-		// 	$push: { books: newBook._id },
-		// });
+		// Add the book to the user's list of books
+		await User.findOneAndUpdate(
+			{ username: username },
+			{ $push: { books: newBook._id } },
+		);
 
 		res.status(201).json({
 			status: "success",
