@@ -1,6 +1,5 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 import { GiSwordInStone } from "react-icons/gi";
 // import React from "react";
 import Slider from "react-slick";
@@ -15,6 +14,7 @@ import { MdCastForEducation } from "react-icons/md";
 import { RiMentalHealthFill } from "react-icons/ri";
 import { MdSportsVolleyball } from "react-icons/md";
 import { GiGardeningShears } from "react-icons/gi";
+import { popularBookGenres } from "./../../constants/genres";
 
 function GroupSlider() {
   var settings = {
@@ -56,7 +56,6 @@ function GroupSlider() {
       {
         breakpoint: 600,
         settings: {
-          
           slidesToShow: 2,
           slidesToScroll: 2,
           dots: false,
@@ -91,54 +90,17 @@ function GroupSlider() {
   };
 
   return (
-    <>
-      <div className="slider-container ">
-        <Slider {...settings}>
-          <GenreCard name="History">
-            <GiSwordInStone className="w-8 h-8" />
-          </GenreCard>
-
-          <GenreCard name="Arts">
-            <IoIosColorWand className="w-8 h-8" />
-          </GenreCard>
-
-          <GenreCard name="Children">
-            <FaChildReaching className="w-8 h-8" />
-          </GenreCard>
-
-          <GenreCard name="Biographies">
-            <ImProfile className="w-8 h-8" />
-          </GenreCard>
-
-          <GenreCard name="Business">
-            <TbBusinessplan className="w-8 h-8" />
-          </GenreCard>
-
-          <GenreCard name="Computer">
-            <MdOutlineComputer className="w-8 h-8" />
-          </GenreCard>
-          <GenreCard name="Food & cock">
-            <GiMeat className="w-8 h-8" />
-          </GenreCard>
-
-          <GenreCard name="Education">
-            <MdCastForEducation className="w-8 h-8" />
-          </GenreCard>
-
-          <GenreCard name="Health">
-            <RiMentalHealthFill className="w-8 h-8" />
-          </GenreCard>
-
-          <GenreCard name="Sport">
-            <MdSportsVolleyball className="w-8 h-8" />
-          </GenreCard>
-
-          <GenreCard name="Home">
-            <GiGardeningShears className="w-8 h-8" />
-          </GenreCard>
-        </Slider>
-      </div>
-    </>
+    <div className="slider-container">
+      <Slider {...settings}>
+        {popularBookGenres.map((genre) => (
+          <GenreCard
+            key={genre.value}
+            value={genre.value}
+            name={genre.label}
+          ></GenreCard>
+        ))}
+      </Slider>
+    </div>
   );
 }
 

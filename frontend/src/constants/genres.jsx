@@ -1,6 +1,9 @@
 export const popularBookGenres = [
   // Fiction
-  { value: "actionAdventure", label: "Action & Adventure" },
+  {
+    value: "actionAdventure",
+    label: "Action & Adventure",
+  },
   { value: "classics", label: "Classics" },
   { value: "fantasy", label: "Fantasy" },
   { value: "historicalFiction", label: "Historical Fiction" },

@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import NavBar from "../components/nav/NavBar.jsx";
 import Footer from "../components/footer/Footer.jsx";
 import BookListing from "../components/bookListing/BookListing.jsx";
+import { popularBookGenres } from "../constants/genres"; // Ensure the correct path
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -13,11 +14,24 @@ export default function BooksByGenre() {
   const [loading, setLoading] = useState(true);
   const [selectedOfferTypes, setSelectedOfferTypes] = useState([]);
   const [sortMethod, setSortMethod] = useState("");
+  const [genreLabel, setGenreLabel] = useState("");
+  const [genreFound, setGenreFound] = useState(true); // New state to track if genre is found
   const query = useQuery();
-  const genreQuery = query.get("genre") || ""; // Assume 'genre' is passed as the genre's value
+  const genreQuery = query.get("genre") || "";
 
   useEffect(() => {
-    if (genreQuery) {
+    const genreObject = popularBookGenres.find(
+      (genre) => genre.value === genreQuery
+    );
+    if (genreObject) {
+      setGenreLabel(genreObject.label);
+      setGenreFound(true); // Set to true if genre is found
+    } else {
+      setGenreLabel("");
+      setGenreFound(false); // Set to false if genre is not found
+    }
+
+    if (genreQuery && genreObject) {
       setLoading(true);
       const queryParams = new URLSearchParams({
         genre: genreQuery,
@@ -28,7 +42,6 @@ export default function BooksByGenre() {
       fetch(`http://localhost:5000/api/v1/books?${queryParams}`)
         .then((response) => response.json())
         .then((data) => {
-          console.log("API Response:", data);
           const bookComponents = data.data.books.map((book) => (
             <BookListing
               key={book._id}
@@ -41,7 +54,7 @@ export default function BooksByGenre() {
               bookPrice={book.price}
               bookCondition={book.bookCondition}
               bookDate={book.listingDate}
-              bookAvailable={book.offerStatus.toLowerCase() === "active"} // Adjust as needed
+              bookAvailable={book.offerStatus.toLowerCase() === "active"}
               bookAuthor={book.author}
             />
           ));
@@ -69,16 +82,17 @@ export default function BooksByGenre() {
       }
     });
   };
+
   return (
     <>
       <NavBar />
       <div className="p-12 min-h-screen mb-10">
-        {!genreQuery ? (
-          <h1>Genre not found. Please select from available genres.</h1>
+        {!genreFound ? (
+          <h1>Genre not found. Please select a valid genre.</h1>
         ) : (
           <>
             <h1 className="inline">
-              Books in "{genreQuery}" Genre ({booksShown.length})
+              Books in "{genreLabel}" Genre ({booksShown.length})
             </h1>
             <div>
               <label>Sort by:</label>
