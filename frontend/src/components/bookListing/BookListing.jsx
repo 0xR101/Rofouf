@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const BookListing = ({
   bookTitle = "",
@@ -41,9 +42,11 @@ const BookListing = ({
               alt="Book cover"
               style={{ aspectRatio: "1 / 1" }}
             />
-            <div className="font-extrabold bg-bookStatus flex justify-center items-center rounded-xl text-primary px-2 py-1 w-full sm:w-auto">
-              Show Details
-            </div>
+            <Link to={`/bookDescription?id=${bookId}`}>
+              <div className="font-extrabold bg-bookStatus flex justify-center items-center rounded-xl text-primary px-2 py-1 w-full sm:w-auto">
+                Show Details
+              </div>
+            </Link>
           </div>
           <div className="flex-grow text-center sm:text-left">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
