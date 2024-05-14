@@ -3,6 +3,9 @@ const bookController = require("../controllers/bookController");
 
 const router = express.Router();
 
+router.get("/recommendations",bookController.getRecomendation)
+
+
 router.param("id", bookController.checkId);
 
 router
@@ -14,5 +17,7 @@ router
 	.get(bookController.getBook)
 	.patch(bookController.updateBook)
 	.delete(bookController.deleteBook);
+
+
 
 module.exports = router;

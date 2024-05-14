@@ -228,3 +228,26 @@ exports.deleteBook = (req, res) => {
 		data: null,
 	});
 };
+
+exports.getRecomendation = async (req,res) => {
+	try {
+		const recentBooks = await BookModel.find()
+			.sort({ publishedDate: -1 })
+			.limit(5);
+
+		res.status(200).json({
+			status: "success",
+			data: {
+				recentBooks,
+			},
+		});
+
+		console.log(book);
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({
+			status: "error",
+			message: "Internal Server Error",
+		});
+	}
+};
