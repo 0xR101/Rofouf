@@ -51,7 +51,7 @@ const OrderDetails = () => {
     bookCondition: "",
     bookPrice: "",
     maxNumberOfDays: "",
-    bookISBN: "",
+    bookISBN: "1254621",
     publicationYear: "",
   });
 
@@ -338,6 +338,7 @@ const OrderDetails = () => {
                   type="number"
                   className={`${inputClassName}  `}
                   placeholder="Enter max days"
+                  name="maxNumberOfDays"
                   value={formData.maxNumberOfDays}
                   onChange={handleInputChange}
                 />
@@ -353,9 +354,9 @@ const OrderDetails = () => {
               <input
                 className={`${inputClassName}  `}
                 type="text"
-                name="publicationInfo"
+                name="bookISBN"
                 placeholder="Enter ISBN(s)"
-                value={formData.bookISBN}
+                value={formData.bookISBN}  
                 onChange={handleInputChange}
               />
               <span className="">
