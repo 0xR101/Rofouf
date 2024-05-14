@@ -17,9 +17,9 @@ import "./style.css";
 // import { set } from "../../../../backend/app";
 
 const orderTypeOptions = [
-  { value: "sell", label: "Sell" },
-  { value: "rent", label: "Rent" },
-  { value: "exchange", label: "Exchange" },
+  { value: "forSale", label: "Sell" },
+  { value: "forRent", label: "Rent" },
+  { value: "forExchange", label: "Exchange" },
 ];
 
 const bookConditionOptions = [
@@ -74,9 +74,10 @@ const OrderDetails = () => {
 
   const handleYearChange = (date) => {
     setSelectedYear(date);
+
     setFormData((prevFormData) => ({
       ...prevFormData,
-      publicationYear: selectedYear || [], // or [] to reset to empty if nothing is selected
+      publicationYear: selectedYear.getFullYear() || null, // or [] to reset to empty if nothing is selected
     }));
   };
 
@@ -226,22 +227,26 @@ const OrderDetails = () => {
     }
 
     // Prepare FormData to send files and text
-    const formData = new FormData();
-    formData.append("image", selectedFile); // Append file
-    formData.append("title", formData.bookName);
-    formData.append("author", formData.bookAuthor);
-    formData.append("description", formData.bookDescription);
-    formData.append("genre", JSON.stringify(formData.bookGenre)); // Genre is an array
-    formData.append("numberOfPages", formData.numberOfPages);
-    formData.append("offerType", formData.orderType);
-    formData.append("bookCondition", formData.bookCondition);
-    formData.append("price", formData.bookPrice);
-    formData.append("ISBN", JSON.stringify(formData.bookISBNs)); // ISBNs are an array
-    formData.append("publicationYear", formData.publicationYear); // Ensure this is a valid date
+    const data = new FormData();
+    data.append("image", selectedFile); // Append file
+    data.append("title", formData.bookName);
+    console.log(formData.bookName);
+    data.append("author", formData.bookAuthor);
+    data.append("description", formData.bookDescription);
+    data.append("genre", JSON.stringify(formData.bookGenre)); // Genre is an array
+    data.append("numberOfPages", formData.numberOfPages);
+    data.append("offerType", formData.orderType);
+    data.append("bookCondition", formData.bookCondition);
+    data.append("price", formData.bookPrice);
+    data.append("ISBN", JSON.stringify(formData.bookISBNs)); // ISBNs are an array
+    data.append("publicationYear", formData.publicationYear); // Ensure this is a valid date
+    const token = localStorage.getItem("token");
+
     try {
       const response = await fetch("http://localhost:5000/api/v1/books/", {
         method: "POST",
-        body: formData,
+        body: data,
+        Authorization: `Bearer ${token}`,
         credentials: "include", // Include credentials for user identification
       });
 
@@ -489,6 +494,7 @@ const OrderDetails = () => {
                 <DatePicker
                   className={`${inputClassName} flex-grow w-full   `}
                   selected={selectedYear}
+                  value={selectedYear}
                   onChange={handleYearChange}
                   showYearPicker
                   dateFormat="yyyy"
