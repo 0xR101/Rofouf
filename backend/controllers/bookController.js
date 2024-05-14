@@ -54,7 +54,7 @@ exports.checkId = (req, res, next, val) => {
 // All book CRUD operations handlers
 exports.getAllBooks = async (req, res) => {
 	try {
-		const { search, genre, sort, offerType } = req.query;
+		const { search, genre, sort, offerType, seller } = req.query;
 		let filter = {};
 
 		if (genre) {
@@ -71,6 +71,9 @@ exports.getAllBooks = async (req, res) => {
 			// Split the offerType string into an array by commas
 			const offerTypes = offerType.split(",");
 			filter.offerType = { $in: offerTypes };
+		}
+		if (seller) {
+			filter.seller = seller;
 		}
 
 		let sortOptions = {};

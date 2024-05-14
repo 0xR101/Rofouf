@@ -1,179 +1,131 @@
-import NavBar from "./../components/nav/NavBar.jsx";
-import Footer from "./../components/footer/Footer.jsx";
-import BookDetails from "../components/bookDetails/BookDetails.jsx";
 import { useState, useEffect } from "react";
-
-
-// const books = [
-//   {
-//     id: 101,
-//     title: "Harry Potter and the Sorcerer's Stone",
-//     summary:
-//       "It’s a passion for knowledge, a desire to travel, and a fascination with culture that provides the driving force behind Assouline.",
-//     status: "Rented by Me",
-//     imageUrl:
-//       "https://i.pinimg.com/originals/16/b7/88/16b788f1c01374f26f6388d00f2ddd83.jpg",
-//     date: "12/01/2023",
-//     seller: "Rayyan Raza",
-//   },
-//   {
-//     id: 102,
-//     title: "The Great Gatsby",
-//     summary:
-//       "It’s a passion for knowledge, a desire to travel, and a fascination with culture that provides the driving force behind Assouline.",
-//     status: "Bought by Me",
-//     imageUrl:
-//       "https://i.pinimg.com/originals/16/b7/88/16b788f1c01374f26f6388d00f2ddd83.jpg",
-//     date: "12/01/2023",
-//     seller: "Rayyan Raza",
-//   },
-//   {
-//     id: 103,
-//     title: "To Kill a Mockingbird",
-//     summary:
-//       "It’s a passion for knowledge, a desire to travel, and a fascination with culture that provides the driving force behind Assouline.",
-//     status: "Exchanged",
-//     imageUrl:
-//       "https://i.pinimg.com/originals/16/b7/88/16b788f1c01374f26f6388d00f2ddd83.jpg",
-//     date: "12/01/2023",
-//     seller: "Rayyan Raza",
-//   },
-//   {
-//     id: 104,
-//     title: "Pride and Prejudice",
-//     summary:
-//       "It’s a passion for knowledge, a desire to travel, and a fascination with culture that provides the driving force behind Assouline.",
-//     status: "Selled",
-//     imageUrl:
-//       "https://i.pinimg.com/originals/16/b7/88/16b788f1c01374f26f6388d00f2ddd83.jpg",
-//     date: "12/01/2023",
-//     seller: "Rayyan Raza",
-//   },
-//   {
-//     id: 105,
-//     title: "The Catcher in the Rye",
-//     summary:
-//       "A controversial novel by J.D. Salinger, following the story of Holden Caulfield, a disenchanted teenager navigating through life and society.",
-//     status: "Rented by Me",
-//     imageUrl:
-//       "https://i.pinimg.com/originals/16/b7/88/16b788f1c01374f26f6388d00f2ddd83.jpg",
-//     date: "01/15/2023",
-//     seller: "Jane Smith",
-//   },
-//   {
-//     id: 106,
-//     title: "1984",
-//     summary:
-//       "A dystopian novel by George Orwell, depicting a totalitarian society where Big Brother watches everyone's every move.",
-//     status: "Bought by Me",
-//     imageUrl:
-//       "https://i.pinimg.com/originals/16/b7/88/16b788f1c01374f26f6388d00f2ddd83.jpg",
-//     date: "02/28/2023",
-//     seller: "John Doe",
-//   },
-// ];
-
-
-
-
+import NavBar from "../components/nav/NavBar.jsx";
+import Footer from "../components/footer/Footer.jsx";
+import BookListing from "../components/bookListing/BookListing.jsx";
+import { useSearchParams } from "react-router-dom";
 
 export default function BooksList() {
+  const [booksShown, setBooksShown] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedOfferTypes, setSelectedOfferTypes] = useState([]);
+  const [sortMethod, setSortMethod] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [books, setBooks] = useState([]);
-  // created function to handle API request
+  const user = searchParams.get("user");
+
   useEffect(() => {
-    fetch('http://localhost:5000/api/v1/books/')
-      .then((res) => {
-        return res.json();
-      })
+    setLoading(true);
+    const queryParams = new URLSearchParams({
+      seller: user,
+      sort: sortMethod,
+      offerType: selectedOfferTypes.join(","),
+    }).toString();
+
+    fetch(`http://localhost:5000/api/v1/books?${queryParams}`)
+      .then((response) => response.json())
       .then((data) => {
-        setBooks(data.data.books.map((book) => {
-          return {
-              bookId: book._id,
-              bookTitle: book.title,
-              bookImageUrl: book.image,
-              bookDetails: book.description,
-              bookDate: book.listingDate,
-              bookSeller: book.seller,
-          }}));
+        const bookComponents = data.data.books.map((book) => (
+          <BookListing
+            key={book._id}
+            bookId={book._id}
+            bookTitle={book.title}
+            bookImageUrl={book.image}
+            bookSummary={book.description}
+            bookOfferType={book.offerType}
+            bookSeller={book.seller}
+            bookPrice={book.price}
+            bookCondition={book.bookCondition}
+            bookDate={book.listingDate}
+            bookAvailable={book.offerStatus.toLowerCase() === "active"} // Adjust as needed
+            bookAuthor={book.author}
+          />
+        ));
+        setBooksShown(bookComponents);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch books:", error);
+        setLoading(false);
       });
-  }, []);
+  }, [searchParams, selectedOfferTypes, sortMethod]);
 
+  const handleCheckboxChange = (event) => {
+    const { value, checked } = event.target;
+    setSelectedOfferTypes((prev) => {
+      if (checked) {
+        return [...prev, value];
+      } else {
+        return prev.filter((type) => type !== value);
+      }
+    });
+  };
 
-  const [booksShown, setBooksShown] = useState(books.map((book) => {
-    return (
-      <BookDetails
-        bookId={book.bookId}
-        bookTitle={book.bookTitle}
-        bookImageUrl={book.bookImageUrl}
-        bookDetails={book.bookDetails}
-        bookDate={book.bookDate}
-        bookSeller={book.bookSeller}
-      />
-    );
-  }));
-
-    
-
-  const getFilteredBooks = (status = "all") => {
-    if (status === "all") {
-      setBooksShown(
-        books.map((book) => {
-          return (
-            <BookDetails
-            bookId={book.bookId}
-            bookTitle={book.bookTitle}
-            bookImageUrl={book.bookImageUrl}
-            bookDetails={book.bookDetails}
-            bookDate={book.bookDate}
-            bookSeller={book.bookSeller}
-            />
-          );
-        })
-      );
-    } else {
-      setBooksShown(
-        books.map((book) => {
-          if (book.status === status) {
-            return (
-              <BookDetails
-              bookId={book.bookId}
-              bookTitle={book.bookTitle}
-              bookImageUrl={book.bookImageUrl}
-              bookDetails={book.bookDetails}
-              bookDate={book.bookDate}
-              bookSeller={book.bookSeller}
-              />
-            );
-          }
-        })
-      );
-    }
+  const handleSortChange = (event) => {
+    setSortMethod(event.target.value);
   };
 
   return (
     <>
-      <NavBar></NavBar>
-      <div class="p-12 mb-10">
-        <h1 class="inline">All Books list </h1>
-
-        <select
-          id="filterBooks"
-          onChange={(event) => {
-            console.log(event.target.value);
-            getFilteredBooks(event.target.value);
-          }}
-          class="p-3 w-22 bg-primary rounded-md text-white"
-        >
-          <option value="all">All</option>
-          <option value="Bought">Bought</option>
-          <option value="Exchanged">Exchanged</option>
-          <option value="Selled">Selled</option>
-        </select>
-
-        {booksShown}
+      <NavBar />
+      <div className="p-12 min-h-screen mb-10">
+        {
+          <>
+            <h1 className="inline">Search Results for ({booksShown.length})</h1>
+            <div>
+              <label>Sort by:</label>
+              <select
+                onChange={handleSortChange}
+                className="p-2 rounded-md text-white bg-primary ml-4"
+              >
+                <option value="">Select</option>
+                <option value="priceAsc">Price (Low to High)</option>
+                <option value="priceDesc">Price (High to Low)</option>
+                <option value="dateAsc">Date (Oldest to Newest)</option>
+                <option value="dateDesc">Date (Newest to Oldest)</option>
+              </select>
+            </div>
+            <div>
+              Filter by Status:
+              <label>
+                <input
+                  type="checkbox"
+                  value="forRent"
+                  onChange={handleCheckboxChange}
+                />{" "}
+                For Rent
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  value="forSale"
+                  onChange={handleCheckboxChange}
+                />{" "}
+                For Sale
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  value="forExchange"
+                  onChange={handleCheckboxChange}
+                />{" "}
+                For Exchange
+              </label>
+            </div>
+            {loading ? (
+              <p>Loading books...</p>
+            ) : (
+              <div>
+                {booksShown.length > 0 ? (
+                  booksShown
+                ) : (
+                  <p>No books found matching your criteria.</p>
+                )}
+              </div>
+            )}
+          </>
+        }
       </div>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 }
