@@ -1,6 +1,7 @@
 const User = require("../database/schemas/users");
 const Book = require("../database/schemas/books");
 const Comment = require("../database/schemas/comments");
+const { urlencoded } = require("express");
 
 exports.getComment = async (req, res) => {
 	try {
@@ -19,9 +20,21 @@ exports.getComment = async (req, res) => {
 	}
 };
 
-exports.addComment = async (req,res) => {
+exports.addComment = async (req, res) => {
+	// const username = req.body.bookId;
+
+	const username = req.body.username;
+
+	const book = User.find({ username: username });
+
+	const newComment = new Comment({
+		image: req.body.image,
+		rating: req.body.rating,
+		username: req.body.username,
+		content: req.body.content,
+	});
+
+	await newComment.save();
 
     
-
-
 };
