@@ -226,7 +226,7 @@ exports.updateBook = (req, res) => {
 exports.createNewBook = async (req, res) => {
 	try {
 		// Assuming user ID comes from authenticated session or token
-		const userId = req.user._id;
+		const username = req.body.usernmae;
 
 		const {
 			title,
@@ -242,10 +242,10 @@ exports.createNewBook = async (req, res) => {
 		} = req.body;
 
 		const newBook = new Book({
-			image: req.file.path, // Path where Multer saves the file
+			image: "/images/" + req.file.path.split("\\").pop(),
 			title,
 			description,
-			ISBN: JSON.parse(ISBN), // Assuming ISBN comes as a JSON stringified array
+			ISBN: JSON.parse(ISBN), //
 			listingDate: new Date(), // Automatically set the listing date
 			author,
 			genre: JSON.parse(genre), // Assuming genre comes as a JSON stringified array
@@ -254,13 +254,15 @@ exports.createNewBook = async (req, res) => {
 			price,
 			publicationYear,
 			numberOfPages,
-			seller: userId, // Link the book to the user who posted it
+			seller: username, // Link the book to the user who posted it
 		});
 
 		await newBook.save(); // Save the book to the database
 
 		// Optionally, add the book to the user's list of books
-		await User.findByIdAndUpdate(userId, { $push: { books: newBook._id } });
+		// await User.findByIdAndUpdate(username, {
+		// 	$push: { books: newBook._id },
+		// });
 
 		res.status(201).json({
 			status: "success",
