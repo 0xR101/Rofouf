@@ -1,62 +1,14 @@
 import BookItem from "./../BookItem/BookItem.jsx";
+import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./style.css";
 
-const books = [
-  {
-    name: "To Kill a Mockingbird",
-    status: "Available",
-    title: "To Kill a Mockingbird",
-    picture:
-      "https://m.media-amazon.com/images/I/81YkqyaFVEL._AC_UF1000,1000_QL80_.jpg",
-    link: "/to-kill-a-mockingbird",
-    active: true,
-  },
-  {
-    name: "1984",
-    status: "For Rent",
-    title: "1984",
-    picture: "src/assets/bookCover.jpg",
-    link: "/1984",
-    active: false,
-  },
-  {
-    name: "The Great Gatsby",
-    status: "For Sale",
-    title: "The Great Gatsby",
-    picture: "src/assets/bookCover.jpg",
-    link: "/great-gatsby",
-    active: true,
-  },
-  {
-    name: "Pride and Prejudice",
-    status: "For Exshange",
-    title: "Pride and Prejudice",
-    picture: "src/assets/bookCover.jpg",
-    link: "/pride-and-prejudice",
-    active: true,
-  },
-  {
-    name: "The Catcher in the Rye",
-    status: "For Rent",
-    title: "The Catcher in the Rye",
-    picture: "src/assets/bookCover.jpg",
-    link: "/the-catcher-in-the-rye",
-    active: true,
-  },
-  {
-    name: "The Hobbit",
-    status: "For Sale",
-    title: "The Hobbit",
-    picture: "src/assets/bookCover.jpg",
-    link: "/the-hobbit",
-    active: false,
-  },
-];
+const HorizontalBookSlider = ({ user = "" }) => {
+  const [booksShown, setBooksShown] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-function HorizontalBookSlider() {
   const settings = {
     dots: false,
     infinite: true,
@@ -93,15 +45,41 @@ function HorizontalBookSlider() {
     ],
   };
 
-  const sortedBooks = books.sort((a, b) => b.active - a.active);
+  useEffect(() => {
+    setLoading(true);
+    const queryParams = new URLSearchParams({
+      seller: user,
+      sort: "dateDesc",
+    }).toString();
+
+    fetch(`http://localhost:5000/api/v1/books?${queryParams}`)
+      .then((response) => response.json())
+      .then((data) => {
+        const bookComponents = data.data.books.map((book) => (
+          <BookItem
+            key={book._id}
+            bookId={book._id}
+            bookTitle={book.title}
+            bookImageUrl={book.image}
+            bookOfferType={book.offerType}
+            bookPrice={book.price}
+            bookAvailable={book.offerStatus}
+          />
+        ));
+        setBooksShown(bookComponents);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch books:", error);
+        setLoading(false);
+      });
+  }, [user]);
 
   return (
     <Slider className="bg-lightBrown50 rounded-xl shadow-md   " {...settings}>
-      {sortedBooks.map((book, index) => (
-        <BookItem key={index} {...book} />
-      ))}
+      {booksShown}
     </Slider>
   );
-}
+};
 
 export default HorizontalBookSlider;

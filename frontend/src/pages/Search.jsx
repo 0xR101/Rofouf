@@ -39,7 +39,7 @@ export default function BooksList() {
             bookPrice={book.price}
             bookCondition={book.bookCondition}
             bookDate={book.listingDate}
-            bookAvailable={book.offerStatus.toLowerCase() === "active"} // Adjust as needed
+            bookAvailable={book.offerStatus}
             bookAuthor={book.author}
           />
         ));

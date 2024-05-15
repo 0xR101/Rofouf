@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import NavBar from "../components/nav/NavBar.jsx";
 import Footer from "../components/footer/Footer.jsx";
 import BookListing from "../components/bookListing/BookListing.jsx";
-import { useSearchParams } from "react-router-dom";
 
 export default function BooksList() {
   const [booksShown, setBooksShown] = useState([]);
@@ -35,7 +34,7 @@ export default function BooksList() {
             bookPrice={book.price}
             bookCondition={book.bookCondition}
             bookDate={book.listingDate}
-            bookAvailable={book.offerStatus.toLowerCase() === "active"} // Adjust as needed
+            bookAvailable={book.offerStatus}
             bookAuthor={book.author}
           />
         ));
