@@ -55,7 +55,7 @@ function Seller() {
         </div>
         <div>
           <h1 className="text-3xl font-bold mb-4 text-primary">All Comments</h1>
-          <CommentsSection></CommentsSection>
+          <CommentsSection seller={sellerInfo}></CommentsSection>
         </div>
       </main>
 
