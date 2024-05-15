@@ -36,5 +36,8 @@ exports.addComment = async (req, res) => {
 
 	await newComment.save();
 
-    
+	await Book.findOneAndUpdate(
+		{ username: username },
+		{ $push: { comments: newComment._id } },
+	);
 };
