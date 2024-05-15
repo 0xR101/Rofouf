@@ -11,7 +11,6 @@ exports.createUser = async (req, res) => {
 		// Check if the email or username is already registered
 		const existingEmail = await User.findOne({ email });
 		const existingUsername = await User.findOne({ username });
-		console.log(req.body);
 
 		if (existingEmail) {
 			return res.status(400).json({ message: "Email already exists" });
@@ -87,6 +86,33 @@ exports.createUser = async (req, res) => {
 	}
 };
 
+exports.updateUser = async (req, res) => {
+	try {
+		// const { user } = req.body;
+		// console.log(user);
+		// const data = {
+		// 	name: user.name,
+		// 	email: user.email,
+		// 	phoneNumber: user.phoneNumber != null ? user.phoneNumber : "",
+		// 	address: user.address != null ? user.address : "",
+		// 	username: user.username,
+		// };
+		// await User.updateOne(
+		// 	{ username: user.username },
+		// 	{
+		// 		$set: {
+		// 			data,
+		// 		},
+		// 	},
+		// );
+
+		// console.log(data);
+		// res.json(data);
+	} catch (error) {
+		console.error(error);
+	}
+};
+
 exports.getUser = async (req, res) => {
 	try {
 		const { username } = req.query;
@@ -102,10 +128,6 @@ exports.getUser = async (req, res) => {
 		res.json(data);
 	} catch (error) {
 		console.error(error);
-		// res.status(500).json({
-		// 	message: "Internal server error",
-		// 	error: error.message,
-		// });
 	}
 };
 

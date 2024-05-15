@@ -5,16 +5,11 @@ import { FaLocationDot } from "react-icons/fa6";
 import { IoMdFingerPrint } from "react-icons/io";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+// const User = require("../../../../backend/database/schemas/users");
 
 export default function LeftSideProfile() {
   const navigate = useNavigate();
-  function logout() {
-    localStorage.clear();
-    navigate(`/Signin`);
-  }
-
   const [userData, setUserData] = useState({});
-
   let username = JSON.parse(localStorage.getItem("currentUser")).username;
   useEffect(() => {
     const fetchData = async () => {
@@ -35,6 +30,39 @@ export default function LeftSideProfile() {
 
     fetchData();
   }, []);
+
+  const handleChange = (event) => {
+    setUserData(event.target.value);
+  };
+  const logout = () => {
+    localStorage.clear();
+    navigate(`/Signin`);
+  };
+
+  const saveUserData = async () => {
+        try {
+          console.log("Clicked")
+
+          const response = await fetch(
+            `http://localhost:5000/api/v1/users/updateUser`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(userData),
+            }
+          );
+          if (response.ok) {
+            console.log("User data updated sucessfully");
+            alert("User Updated");
+          } else {
+            throw new Error("Request failed");
+          }
+        } catch (error) {
+          console.error(error);
+        }
+  };
 
   return (
     <>
@@ -57,6 +85,7 @@ export default function LeftSideProfile() {
                   id="name"
                   value={userData.userName}
                   class="bg-backGround block w-full rounded-md border border-primary px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  onChange={handleChange}
                 />
               </div>
               <div class="mt-2">
@@ -69,9 +98,10 @@ export default function LeftSideProfile() {
                 <input
                   type="text"
                   name=""
-                  value="@iam.a.real.user"
+                  value={userData.userId}
                   id="last-name"
                   class="bg-backGround block w-full rounded-md border border-primary px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  // onChange={handleChange}
                 />
               </div>
             </div>
@@ -89,6 +119,7 @@ export default function LeftSideProfile() {
                   id="mail"
                   value={userData.userMail}
                   class="bg-backGround block w-full rounded-md border border-primary px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  onChange={handleChange}
                 />
               </div>
               <div class="mt-2">
@@ -104,6 +135,7 @@ export default function LeftSideProfile() {
                   id="number"
                   value={userData.userNumber}
                   class="bg-backGround block w-full rounded-md border border-primary px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -124,6 +156,7 @@ export default function LeftSideProfile() {
                 name="mail"
                 value={userData.userAddress}
                 class="bg-backGround block w-full rounded-md border border-primary px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                onChange={handleChange}
               />
             </div>
             <div class="mt-2">
@@ -139,6 +172,7 @@ export default function LeftSideProfile() {
                 id="user-id"
                 value={userData.userId}
                 class="bg-backGround block w-full rounded-md border border-primary px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                onChange={handleChange}
               />
             </div>
 
@@ -149,6 +183,7 @@ export default function LeftSideProfile() {
                   value="Save Information"
                   id="save"
                   class="bg-primary block w-full rounded-md border-0 py-1.5 text-white shadow-sm  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  onClick={saveUserData}
                 />
               </div>
             </div>
