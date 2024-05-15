@@ -41,34 +41,38 @@ const HorizontalBookSlider = ({ user = "" }) => {
 
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
+    centerMode: false,
     speed: 500,
     slidesToShow: Math.min(5, booksShown.length),
-    slidesToScroll: 1,
-    variableWidth: booksShown.length < 5,
+    slidesToScroll: Math.min(5, booksShown.length),
     responsive: [
       {
         breakpoint: 1079,
         settings: {
           slidesToShow: Math.min(4, booksShown.length),
+          slidesToScroll: Math.min(4, booksShown.length),
         },
       },
       {
         breakpoint: 880,
         settings: {
           slidesToShow: Math.min(3, booksShown.length),
+          slidesToScroll: Math.min(3, booksShown.length),
         },
       },
       {
         breakpoint: 680,
         settings: {
           slidesToShow: Math.min(2, booksShown.length),
+          slidesToScroll: Math.min(2, booksShown.length),
         },
       },
       {
         breakpoint: 490,
         settings: {
           slidesToShow: 1,
+          slidesToScroll: 1,
         },
       },
     ],
