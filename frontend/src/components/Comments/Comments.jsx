@@ -1,4 +1,3 @@
-// components/Comment.jsx
 import PropTypes from "prop-types";
 
 const StarRating = ({ rating }) => {
@@ -24,7 +23,7 @@ const StarRating = ({ rating }) => {
   );
 };
 
-const Comment = ({ username, profilePic, date, text, rating }) => {
+const Comment = ({ username, profilePic, date, content, rating }) => {
   return (
     <div className="bg-backGround p-4 rounded-lg shadow mb-2 flex xs:flex-row">
       {/* Profile Picture */}
@@ -44,24 +43,26 @@ const Comment = ({ username, profilePic, date, text, rating }) => {
 
         {/* Comment Text */}
         <p className="text-gray-700 text-sm xs:text-base xl:text-lg 2xl:text-xl  ">
-          {text}
+          {content}
         </p>
         {/* Date */}
-        <div className=" text-xs xs:text-sm text-gray-500 mt-1">{date}</div>
+        <div className=" text-xs xs:text-sm text-gray-500 mt-1">
+          {new Date(date).toLocaleString()}
+        </div>
       </div>
     </div>
   );
 };
 
 StarRating.propTypes = {
-  rating: PropTypes.func.isRequired,
+  rating: PropTypes.number.isRequired,
 };
 
 Comment.propTypes = {
   username: PropTypes.string.isRequired,
   profilePic: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
 };
 

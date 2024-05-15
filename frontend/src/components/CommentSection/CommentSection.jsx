@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import PostComment from "./../PostComment/PostComment.jsx";
-import Comments from "./../Comments/Comments.jsx";
+import Comment from "./../Comments/Comments.jsx";
 
 const CommentsSection = ({ seller }) => {
   const [comments, setComments] = useState([]);
@@ -54,7 +54,7 @@ const CommentsSection = ({ seller }) => {
     <div className="p-4 space-y-8 bg-lightBrown50 rounded-xl shadow-md">
       <div className="space-y-4">
         {comments.map((comment, index) => (
-          <Comments key={index} {...comment} />
+          <Comment key={index} {...comment} />
         ))}
       </div>
       <PostComment onNewComment={handleNewComment} />
