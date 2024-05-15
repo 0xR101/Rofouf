@@ -48,7 +48,9 @@ function Home() {
   useEffect(() => {
     const fetchDataForPosts = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/v1/books/`);
+        const response = await fetch(
+          `http://localhost:5000/api/v1/books/recommendations`
+        );
         if (!response.ok) {
           throw new Error(`HTTP error: Status ${response.status}`);
         }

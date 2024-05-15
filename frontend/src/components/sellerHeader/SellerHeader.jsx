@@ -1,14 +1,75 @@
+import { useDebugValue, useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import StarRating from "./../StarRating/StarRating.jsx";
 import { useNavigate } from "react-router-dom";
+import { projectIP } from "./../../constants/chat.jsx";
 
 function SellerHeader({
   seller: { id, name, joinDate, rating, profilePic, location },
 }) {
   const navigate = useNavigate();
 
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const newData = JSON.parse(localStorage.getItem("currentUser"));
+    setUserData(newData);
+  }, [localStorage.getItem("currentUser")]);
+
   const handleChatClick = () => {
-    navigate("/chat");
+    const url = "https://api.chatengine.io/chats/";
+
+    const data = {
+      title: "Chat with the seller",
+      is_direct_chat: false,
+    };
+
+    const headers = {
+      "Project-ID": projectIP,
+      "User-Name": userData.username,
+      "User-Secret": userData.password,
+      "Content-Type": "application/json",
+    };
+
+    fetch(url, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((responseData) => {
+        console.log("Success:", responseData);
+
+        const url = `https://api.chatengine.io/chats/${responseData.id}/people/`;
+
+        const headers = {
+          "Project-ID": projectIP,
+          "User-Name": userData.username,
+          "User-Secret": userData.password,
+          "Content-Type": "application/json",
+        };
+
+        const data = {
+          username: "ayed",
+        };
+
+        fetch(url, {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify(data),
+        })
+          .then((response) => response.json())
+          .then((responseData) => {
+            console.log("add user");
+            navigate(
+              `/Chat?user=${userData.username}&password=${userData.password}&username=${name}`
+            );
+          });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
     console.log(id);
   };
 
@@ -49,6 +110,10 @@ function SellerHeader({
           <span className="font-bold text-md sm:text-lg">Start Chat</span>
         </button>
       </div>
+
+      {/* <div className="absolute w-full h-full bg-black z-20">
+
+      </div> */}
     </header>
   );
 }

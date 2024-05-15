@@ -58,7 +58,7 @@ function BookDescription() {
               <img
                 className="object-cover rounded-lg w-80 h-70 "
                 src={loading ? "loading" : data.book.image}
-                alt="hi"
+                alt="the image is not loaded"
               />
             </div>
             <div className="bg-white rounded-lg p-5 flex flex-col gap-1 shadow-2xl w">
