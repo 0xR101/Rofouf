@@ -3,14 +3,39 @@ import { HiMail } from "react-icons/hi";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoMdFingerPrint } from "react-icons/io";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function LeftSideProfile({
-  userName = "",
-  userMail = "",
-  userNumber = "",
-  userAddress = "",
-  userId,
-}) {
+export default function LeftSideProfile() {
+  const navigate = useNavigate();
+  function logout() {
+    localStorage.clear();
+    navigate(`/Signin`);
+  }
+
+  const [userData, setUserData] = useState({});
+
+  let username = JSON.parse(localStorage.getItem("currentUser")).username;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/v1/users/getUser?username=${username}`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setUserData(data);
+        } else {
+          throw new Error("Request failed");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <div id="left" class="bg-secondaryBackground w-3/5 p-10">
@@ -30,7 +55,7 @@ export default function LeftSideProfile({
                   type="text"
                   name="name"
                   id="name"
-                  value={userName}
+                  value={userData.userName}
                   class="bg-backGround block w-full rounded-md border border-primary px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -62,7 +87,7 @@ export default function LeftSideProfile({
                   type="mail"
                   name="mail"
                   id="mail"
-                  value={userMail}
+                  value={userData.userMail}
                   class="bg-backGround block w-full rounded-md border border-primary px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -77,7 +102,7 @@ export default function LeftSideProfile({
                   type="tel"
                   name="number"
                   id="number"
-                  value={userNumber}
+                  value={userData.userNumber}
                   class="bg-backGround block w-full rounded-md border border-primary px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -97,7 +122,7 @@ export default function LeftSideProfile({
               <input
                 type="text"
                 name="mail"
-                value={userAddress}
+                value={userData.userAddress}
                 class="bg-backGround block w-full rounded-md border border-primary px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -112,7 +137,7 @@ export default function LeftSideProfile({
                 type="text"
                 name="user-id"
                 id="user-id"
-                value={userId}
+                value={userData.userId}
                 class="bg-backGround block w-full rounded-md border border-primary px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -132,8 +157,9 @@ export default function LeftSideProfile({
               <div class="mt-2">
                 <input
                   type="button"
-                  value="Delete Account"
+                  value="Log Out"
                   id="delete"
+                  onClick={logout}
                   class="bg-danger border border-black block max-w-4xl w-full rounded-md py-1.5 text-white shadow-sm  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
