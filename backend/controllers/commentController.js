@@ -21,23 +21,28 @@ exports.getComment = async (req, res) => {
 };
 
 exports.addComment = async (req, res) => {
-	// const username = req.body.bookId;
+	try {
+		const username = req.body.username;
 
-	const username = req.body.username;
+		// const book = await User.findOne({ username: username });
 
-	const book = User.find({ username: username });
+		const newComment = new Comment({
+			image: req.body.image,
+			rating: req.body.rating,
+			username: req.body.username,
+			content: req.body.content,
+		});
 
-	const newComment = new Comment({
-		image: req.body.image,
-		rating: req.body.rating,
-		username: req.body.username,
-		content: req.body.content,
-	});
+		await newComment.save();
 
-	await newComment.save();
+		await Book.findOneAndUpdate(
+			{ username: username },
+			{ $push: { comments: newComment._id } },
+		);
 
-	await Book.findOneAndUpdate(
-		{ username: username },
-		{ $push: { comments: newComment._id } },
-	);
+		res.status(200).json({ message: "Comment added successfully" });
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error: "Internal server error" });
+	}
 };
