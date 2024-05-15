@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import NavBar from "../components/nav/NavBar.jsx";
 import Footer from "../components/footer/Footer.jsx";
 import BookListing from "../components/bookListing/BookListing.jsx";
-import { useSearchParams } from "react-router-dom";
 
 export default function BooksList() {
   const [booksShown, setBooksShown] = useState([]);
