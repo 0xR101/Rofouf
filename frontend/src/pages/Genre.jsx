@@ -54,7 +54,7 @@ export default function BooksByGenre() {
               bookPrice={book.price}
               bookCondition={book.bookCondition}
               bookDate={book.listingDate}
-              bookAvailable={book.offerStatus.toLowerCase() === "active"}
+              bookAvailable={book.offerStatus}
               bookAuthor={book.author}
             />
           ));

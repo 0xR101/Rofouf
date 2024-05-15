@@ -219,8 +219,8 @@ exports.deleteBook = (req, res) => {
 exports.getRecommendations = async (req, res) => {
 	try {
 		const recentBooks = await Book.find()
-			.sort({ publishedDate: -1 })
-			.limit(5);
+			.sort({ listingDate: -1 })
+			.limit(6);
 
 		await res.status(200).json({
 			status: "success",

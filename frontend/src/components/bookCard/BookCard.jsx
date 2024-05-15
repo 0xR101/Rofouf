@@ -10,6 +10,13 @@ function BookCard({
   oldPrice,
   image,
 }) {
+  // Function to dynamically truncate the summary to fill the container
+  const truncateSummary = (summary, charLimit) => {
+    if (summary.length > charLimit) {
+      return summary.substring(0, charLimit) + "...";
+    }
+    return summary;
+  };
   return (
     <>
       <div className="flex flex-row w-full max-sm:flex-col max-sm:shadow-bottom-lg">
@@ -18,11 +25,11 @@ function BookCard({
             <img
               className="object-cover w-full h-full rounded-2xl"
               src={image}
-              alt="Faild to upload image"
+              alt="Failed to upload image"
             />
           ) : (
             <div className="object-cover w-full h-full rounded-2xl text-center pt-10 bg-slate-200">
-              Faild to upload image
+              Failed to upload image
             </div>
           )}
 
@@ -37,10 +44,12 @@ function BookCard({
               {title}
             </div>
             <div className="text-fontColorDarkBlue text-opacity-40 line-clamp-1">
-              {subtitle}
+              {truncateSummary(subtitle, 26)}
             </div>
             <div className="flex flex-row gap-10 text-lg">
-              <div className="text-fontColorDarkBlue">{newPrice}</div>
+              <div className="text-fontColorDarkBlue">
+                Price: {newPrice} SAR
+              </div>
               <div className="line-through text-fontColorDarkBlue text-opacity-40">
                 {oldPrice}
               </div>

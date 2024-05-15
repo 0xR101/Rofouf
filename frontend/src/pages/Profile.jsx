@@ -4,7 +4,7 @@ import { HiMail } from "react-icons/hi";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
-import { useNavigate, useRoutes } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 export default function Profile() {
@@ -285,15 +285,16 @@ export default function Profile() {
             <div className="h-4" />
 
             <div class="mt-4">
-              <input
-                type="button"
-                onClick={() => navigate("/seller")}
-                value="Personal Seller Page"
-                name="last-name"
-                id="last-name"
-                autocomplete="family-name"
-                class="bg-primary block w-full rounded-md border-0 py-1.5 text-white shadow-sm  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              />
+              <Link to={`/seller?username=${username}`}>
+                <input
+                  type="button"
+                  value="Personal Seller Page"
+                  name="last-name"
+                  id="last-name"
+                  autocomplete="family-name"
+                  class="bg-primary block w-full rounded-md border-0 py-1.5 text-white shadow-sm  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </Link>
             </div>
           </div>
         </div>
