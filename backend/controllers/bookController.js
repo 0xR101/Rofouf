@@ -168,7 +168,9 @@ exports.createNewBook = async (req, res) => {
 		console.log(req.body);
 
 		const newBook = new Book({
-			image: "/images/" + req.file.path.split("\\").pop(),
+			image:
+				"http://localhost:5000/images/" +
+				req.file.path.split("\\").pop(),
 			title,
 			description,
 			ISBN: JSON.parse(ISBN), //
