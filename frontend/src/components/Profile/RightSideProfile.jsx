@@ -43,7 +43,7 @@ export default function RightSideProfile() {
             />
           </div>
           <div className="h-4" />
-
+{/* 
           <div class="mt-2">
             <input
               type="button"
@@ -54,7 +54,7 @@ export default function RightSideProfile() {
               autocomplete="family-name"
               class="bg-primary block w-full rounded-md border-0 py-1.5 text-white shadow-sm  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
-          </div>
+          </div> */}
 
           <div class="mt-4">
             <input

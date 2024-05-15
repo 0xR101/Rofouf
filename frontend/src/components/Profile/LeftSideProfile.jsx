@@ -40,28 +40,28 @@ export default function LeftSideProfile() {
   };
 
   const saveUserData = async () => {
-        try {
-          console.log("Clicked")
+    try {
+      console.log("Clicked");
 
-          const response = await fetch(
-            `http://localhost:5000/api/v1/users/updateUser`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(userData),
-            }
-          );
-          if (response.ok) {
-            console.log("User data updated sucessfully");
-            alert("User Updated");
-          } else {
-            throw new Error("Request failed");
-          }
-        } catch (error) {
-          console.error(error);
+      const response = await fetch(
+        `http://localhost:5000/api/v1/users/updateUser`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
         }
+      );
+      if (response.ok) {
+        console.log("User data updated sucessfully");
+        alert("User Updated");
+      } else {
+        throw new Error("Request failed");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -93,9 +93,10 @@ export default function LeftSideProfile() {
                   htmlFor=""
                   className="  text-base dark:peer-focus:text-primary text-primary px-2   "
                 >
-                  <FaUser className="text-primary" /> IDK
+                  <FaUser className="text-primary" /> username
                 </label>
                 <input
+                  disabled
                   type="text"
                   name=""
                   value={userData.userId}
@@ -144,7 +145,7 @@ export default function LeftSideProfile() {
           <h1 class="text-gray-1500">My Address</h1>
 
           <div class="mt-5 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-2">
-            <div class="mt-2">
+            <div class="mt-2 col-span-2">
               <label
                 htmlFor="mail"
                 className="  text-base dark:peer-focus:text-primary text-primary px-2   "
@@ -159,7 +160,7 @@ export default function LeftSideProfile() {
                 onChange={handleChange}
               />
             </div>
-            <div class="mt-2">
+            {/* <div class="mt-2">
               <label
                 htmlFor="user-id"
                 className="  text-base dark:peer-focus:text-primary text-primary px-2   "
@@ -174,7 +175,7 @@ export default function LeftSideProfile() {
                 class="bg-backGround block w-full rounded-md border border-primary px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 onChange={handleChange}
               />
-            </div>
+            </div> */}
 
             <div class="sm:col-span-1">
               <div class="mt-2">
