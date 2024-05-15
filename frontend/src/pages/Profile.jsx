@@ -13,6 +13,12 @@ export default function Profile() {
 
   const navigate = useNavigate();
   const [userData, setUserData] = useState({});
+
+  const [email, setEmail] = useState();
+  const [name, setName] = useState();
+  const [phoneNumber, setphoneNumber] = useState();
+  const [address, setAddress] = useState();
+
   let username = JSON.parse(localStorage.getItem("currentUser")).username;
   useEffect(() => {
     const fetchData = async () => {
@@ -22,7 +28,13 @@ export default function Profile() {
         );
         if (response.ok) {
           const data = await response.json();
-          setUserData(data);
+          // setUserData(data);
+
+          setName(data.name);
+          setEmail(data.email);
+          setphoneNumber(data.phoneNumber);
+          setAddress(data.address);
+          setImagePreviewUrl(data.profileImage);
         } else {
           throw new Error("Request failed");
         }
@@ -34,9 +46,7 @@ export default function Profile() {
     fetchData();
   }, []);
 
-  // Cleanup preview URL to avoid memory leaks
   useEffect(() => {
-    // This will be called before the component unmounts or when imagePreviewUrl changes
     return () => {
       if (imagePreviewUrl) {
         URL.revokeObjectURL(imagePreviewUrl);
@@ -44,8 +54,8 @@ export default function Profile() {
     };
   }, [imagePreviewUrl]);
 
-  const handleChange = (event) => {
-    setUserData(event.target.value);
+  const handleChangeName = (event) => {
+    setName(event.target.value);
   };
   const logout = () => {
     localStorage.clear();
@@ -61,21 +71,25 @@ export default function Profile() {
   };
 
   const saveUserData = async () => {
-    try {
-      console.log("Clicked");
+    const formData = new FormData();
 
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("phoneNumber", phoneNumber);
+    formData.append("address", address);
+    formData.append("image", selectedFile);
+    formData.append("username", username);
+
+    try {
       const response = await fetch(
         `http://localhost:5000/api/v1/users/updateUser`,
         {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userData),
+          method: "PATCH",
+          body: formData, // No need to set Content-Type manually
         }
       );
       if (response.ok) {
-        console.log("User data updated sucessfully");
+        console.log("User data updated successfully");
         alert("User Updated");
       } else {
         throw new Error("Request failed");
@@ -105,9 +119,9 @@ export default function Profile() {
                     type="text"
                     name="name"
                     id="name"
-                    value={userData.userName}
+                    value={name}
                     class="bg-backGround block w-full rounded-md border border-primary px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    onChange={handleChange}
+                    onChange={handleChangeName}
                   />
                 </div>
                 <div class="mt-2">
@@ -121,10 +135,9 @@ export default function Profile() {
                     disabled
                     type="text"
                     name=""
-                    value={userData.userId}
+                    value={username}
                     id="last-name"
                     class="bg-backGround block w-full rounded-md border border-primary px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    // onChange={handleChange}
                   />
                 </div>
               </div>
@@ -137,12 +150,14 @@ export default function Profile() {
                     <HiMail className="text-primary" /> Email
                   </label>
                   <input
-                    type="mail"
+                    type="email"
                     name="mail"
                     id="mail"
-                    value={userData.userMail}
+                    value={email}
                     class="bg-backGround block w-full rounded-md border border-primary px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
                   />
                 </div>
                 <div class="mt-2">
@@ -156,9 +171,11 @@ export default function Profile() {
                     type="tel"
                     name="number"
                     id="number"
-                    value={userData.userNumber}
+                    value={phoneNumber}
                     class="bg-backGround block w-full rounded-md border border-primary px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      setphoneNumber(e.target.value);
+                    }}
                   />
                 </div>
               </div>
@@ -177,27 +194,13 @@ export default function Profile() {
                 <input
                   type="text"
                   name="mail"
-                  value={userData.userAddress}
+                  value={userData.address}
                   class="bg-backGround block w-full rounded-md border border-primary px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    setAddress(e.target.value);
+                  }}
                 />
               </div>
-              {/* <div class="mt-2">
-              <label
-                htmlFor="user-id"
-                className="  text-base dark:peer-focus:text-primary text-primary px-2   "
-              >
-                <IoMdFingerPrint className="text-primary" /> ID
-              </label>
-              <input
-                type="text"
-                name="user-id"
-                id="user-id"
-                value={userData.userId}
-                class="bg-backGround block w-full rounded-md border border-primary px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                onChange={handleChange}
-              />
-            </div> */}
 
               <div class="sm:col-span-1">
                 <div class="mt-2">
@@ -232,9 +235,12 @@ export default function Profile() {
         >
           <div className="w-full flex flex-col items-center">
             <div className="h-32 w-32">
+              <div className="font-bold">profile image</div>
               <img
                 src={
-                  imagePreviewUrl ? imagePreviewUrl : <>image form backend</>
+                  userData.profileImage
+                    ? profileImage.profileImage
+                    : imagePreviewUrl
                 }
                 alt="Profile"
                 className="h-32 w-32 rounded-full" // Adjusted profile size and shape
@@ -253,7 +259,7 @@ export default function Profile() {
             <div class="mt-2 hidden">
               <input
                 id="bookImage"
-                name="bookImage"
+                name="image"
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
@@ -277,18 +283,6 @@ export default function Profile() {
               />
             </div>
             <div className="h-4" />
-            {/* 
-          <div class="mt-2">
-            <input
-              type="button"
-              onClick={() => navigate("/newOffer")}
-              value="Create a New Offer"
-              name="last-name"
-              id="last-name"
-              autocomplete="family-name"
-              class="bg-primary block w-full rounded-md border-0 py-1.5 text-white shadow-sm  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            />
-          </div> */}
 
             <div class="mt-4">
               <Link to={`/seller?username=${username}`}>
@@ -304,8 +298,6 @@ export default function Profile() {
             </div>
           </div>
         </div>
-        {/* <LeftSideProfile/>
-        <RightSideProfile /> */}
       </div>
 
       <Footer></Footer>
