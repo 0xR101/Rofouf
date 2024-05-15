@@ -9,42 +9,6 @@ const HorizontalBookSlider = ({ user = "" }) => {
   const [booksShown, setBooksShown] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1079,
-        settings: {
-          slidesToShow: 4,
-        },
-      },
-      {
-        breakpoint: 880,
-        settings: {
-          slidesToShow: 3,
-        },
-      },
-
-      {
-        breakpoint: 680,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-
-      {
-        breakpoint: 490,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-  };
-
   useEffect(() => {
     setLoading(true);
     const queryParams = new URLSearchParams({
@@ -75,8 +39,43 @@ const HorizontalBookSlider = ({ user = "" }) => {
       });
   }, [user]);
 
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: Math.min(5, booksShown.length),
+    slidesToScroll: 1,
+    variableWidth: booksShown.length < 5,
+    responsive: [
+      {
+        breakpoint: 1079,
+        settings: {
+          slidesToShow: Math.min(4, booksShown.length),
+        },
+      },
+      {
+        breakpoint: 880,
+        settings: {
+          slidesToShow: Math.min(3, booksShown.length),
+        },
+      },
+      {
+        breakpoint: 680,
+        settings: {
+          slidesToShow: Math.min(2, booksShown.length),
+        },
+      },
+      {
+        breakpoint: 490,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
   return (
-    <Slider className="bg-lightBrown50 rounded-xl shadow-md   " {...settings}>
+    <Slider className="bg-lightBrown50 rounded-xl shadow-md" {...settings}>
       {booksShown}
     </Slider>
   );
