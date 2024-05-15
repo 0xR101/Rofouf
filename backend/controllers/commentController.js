@@ -2,11 +2,11 @@ const User = require("../database/schemas/users");
 const Book = require("../database/schemas/books");
 const Comment = require("../database/schemas/comments");
 
-exports.addComment = async (req, res) => {
+exports.getComment = async (req, res) => {
 	try {
 		const commentId = req.body.id;
 
-		const comment = await Comment.findOne({ _id: commentId });
+		const comment = await Comment.findOne({ commentId });
 
 		if (comment) {
 			res.status(200).json(comment);
@@ -19,4 +19,9 @@ exports.addComment = async (req, res) => {
 	}
 };
 
-exports.getComments = async (req) => {};
+exports.addComment = async (req,res) => {
+
+    
+
+
+};
