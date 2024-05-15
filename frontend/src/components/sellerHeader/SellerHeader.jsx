@@ -12,7 +12,7 @@ function SellerHeader({ seller }) {
   useEffect(() => {
     const newData = JSON.parse(localStorage.getItem("currentUser"));
     setUserData(newData);
-  }, [localStorage.getItem("currentUser")]);
+  }, []);
 
   const handleChatClick = () => {
     const url = "https://api.chatengine.io/chats/";
@@ -70,7 +70,7 @@ function SellerHeader({ seller }) {
   };
 
   return (
-    <header className="bg-lightBrown50 rounded-xl shadow-md flex flex-col items-center  sm:flex-row sm:justify-between">
+    <header className="bg-lightBrown50 rounded-xl shadow-md flex flex-col items-center sm:flex-row sm:justify-between">
       <div className="flex flex-col items-center sm:flex-row sm:items-center sm:space-x-4 p-3 xxs:p-4 xs:p-5 s:px-5 s:py-4 sm:py-5">
         <img
           src={seller.profileImage}
@@ -81,14 +81,11 @@ function SellerHeader({ seller }) {
           <h2 className="text-lg xxs:text-xl xs:text-2xl sm:text-3xl text-primary font-bold font-semibold m-0">
             {seller.name}
           </h2>
-          {/* <p className="text-xs xxs:text-sm sm:text-md text-primary text-opacity-80 my-1">
-            joined in {joinDate}
-          </p> */}
           <StarRating rating={seller.rating} />
-          <div className="flex items-center justify-center sm:justify-start mt-2 ">
+          <div className="flex items-center justify-center sm:justify-start mt-2">
             <img
               className="w-4 h-4 xxs:w-5 xxs:h-5"
-              src="\src\assets\loc.svg"
+              src="/src/assets/loc.svg"
               alt="Location"
             />
             <span className="text-xs xxs:text-sm sm:text-md text-primary text-opacity-80 ml-2">
@@ -100,18 +97,26 @@ function SellerHeader({ seller }) {
 
       <div className="p-3 xxs:p-4 xs:p-5 s:px-5 s:py-4 sm:py-5">
         <button
-          className="   sm:mt-0 bg-secondaryBackground text-primary px-6 py-3 rounded-md border-none transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl focus:outline-none hover:bg-primary hover:text-secondaryBackground"
+          className={`sm:mt-0 bg-secondaryBackground text-primary px-6 py-3 rounded-md border-none transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl focus:outline-none hover:bg-primary hover:text-secondaryBackground ${
+            userData?.username === seller.username ? "hidden" : ""
+          }`}
           onClick={handleChatClick}
         >
           <span className="font-bold text-md sm:text-lg">Start Chat</span>
         </button>
       </div>
-
-      {/* <div className="absolute w-full h-full bg-black z-20">
-
-      </div> */}
     </header>
   );
 }
+
+SellerHeader.propTypes = {
+  seller: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    profileImage: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    address: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default SellerHeader;
