@@ -1,17 +1,17 @@
 import NavBar from "./../components/nav/NavBar.jsx";
 import Footer from "./../components/footer/Footer.jsx";
 import CommentSection from "./../components/CommentSection/CommentSection.jsx";
+import { Link, useSearchParams } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
 import StarRating from "../components/StarRating/StarRating.jsx";
-import { useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 function BookDescription() {
   const navigate = useNavigate();
 
-  const handleNavigation = () => {
-    navigate("/seller?");
+  const handleNavigation = (sellerUsername) => {
+    navigate(`/seller?username=${sellerUsername}`);
     // Replace '/profile' with the actual profile route
   };
 
@@ -63,18 +63,24 @@ function BookDescription() {
             </div>
             <div className="bg-white rounded-lg p-5 flex flex-col gap-1 shadow-2xl w">
               <div className="flex gap-3">
-                <img
-                  className="rounded-md"
-                  src="\src\assets\profile.png"
-                  alt=""
-                  onClick={handleNavigation}
-                />
+                <Link to={`/seller?username=${data.book?.seller}`}>
+                  {loading ? "loading" : data.book?.seller}
+
+                  <img
+                    className="rounded-md"
+                    src="\src\assets\profile.png"
+                    alt=""
+                  />
+                </Link>
                 <div className="flex flex-col gap-1">
                   <StarRating rating={4.4} />
                 </div>
               </div>
-              <div className="text-primary" onClick={handleNavigation}>
-                Seller Name : {loading ? "loading" : data.book.seller}
+              <div className="text-primary">
+                Seller Name :
+                <Link to={`/seller?username=${data.book?.seller}`}>
+                  {loading ? "loading" : data.book?.seller}
+                </Link>
               </div>
               <div>
                 <img src="\src\assets\loc.svg" alt="" />

@@ -105,7 +105,6 @@ exports.updateUser = async (req, res) => {
 		// 		},
 		// 	},
 		// );
-
 		// console.log(data);
 		// res.json(data);
 	} catch (error) {
@@ -128,6 +127,55 @@ exports.getUser = async (req, res) => {
 		res.json(data);
 	} catch (error) {
 		console.error(error);
+	}
+};
+
+exports.getUserInfo = async (req, res) => {
+	try {
+		const { username } = req.query;
+		// Fetch the user and exclude the password field
+		const user = await User.findOne({ username: username }).select(
+			"-password",
+		);
+
+		const rating = user.comments.length
+			? user.comments.reduce((acc, comment) => acc + comment.rating, 0) /
+				user.comments.length
+			: 0;
+
+		// add rating to user data
+
+		// Construct response data
+		const data = {
+			_id: user._id,
+			name: user.name,
+			email: user.email,
+			username: user.username,
+			profileImage:
+				user.profileImage || "http://localhost:5000/images/profile.png",
+			phoneNumber: user.phoneNumber || "No phone number provided",
+			address: user.address || "No address provided",
+			comments: user.comments,
+			books: user.books,
+			rating: rating,
+		};
+
+		if (!user) {
+			return res.status(404).json({
+				status: "fail",
+				message: "User not found",
+			});
+		}
+
+		res.status(200).json({
+			status: "success",
+			data: data,
+		});
+	} catch (error) {
+		res.status(500).json({
+			status: "fail",
+			message: error.message,
+		});
 	}
 };
 

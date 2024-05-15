@@ -4,9 +4,7 @@ import StarRating from "./../StarRating/StarRating.jsx";
 import { useNavigate } from "react-router-dom";
 import { projectIP } from "./../../constants/chat.jsx";
 
-function SellerHeader({
-  seller: { id, name, joinDate, rating, profilePic, location },
-}) {
+function SellerHeader({ seller }) {
   const navigate = useNavigate();
 
   const [userData, setUserData] = useState(null);
@@ -50,7 +48,7 @@ function SellerHeader({
         };
 
         const data = {
-          username: "ayed",
+          username: seller.username,
         };
 
         fetch(url, {
@@ -62,33 +60,31 @@ function SellerHeader({
           .then((responseData) => {
             console.log("add user");
             navigate(
-              `/Chat?user=${userData.username}&password=${userData.password}&username=${name}`
+              `/Chat?user=${userData.username}&password=${userData.password}&username=${seller.username}`
             );
           });
       })
       .catch((error) => {
         console.error("Error:", error);
       });
-
-    console.log(id);
   };
 
   return (
     <header className="bg-lightBrown50 rounded-xl shadow-md flex flex-col items-center  sm:flex-row sm:justify-between">
       <div className="flex flex-col items-center sm:flex-row sm:items-center sm:space-x-4 p-3 xxs:p-4 xs:p-5 s:px-5 s:py-4 sm:py-5">
         <img
-          src={profilePic}
-          alt={`${name}'s profile`}
+          src={seller.profileImage}
+          alt={`${seller.name}'s profile`}
           className="w-16 h-16 rounded-full border-2 border-white mb-3 sm:mb-0 sm:w-20 sm:h-20"
         />
         <div>
           <h2 className="text-lg xxs:text-xl xs:text-2xl sm:text-3xl text-primary font-bold font-semibold m-0">
-            {name}
+            {seller.name}
           </h2>
-          <p className="text-xs xxs:text-sm sm:text-md text-primary text-opacity-80 my-1">
+          {/* <p className="text-xs xxs:text-sm sm:text-md text-primary text-opacity-80 my-1">
             joined in {joinDate}
-          </p>
-          <StarRating rating={rating} />
+          </p> */}
+          <StarRating rating={seller.rating} />
           <div className="flex items-center justify-center sm:justify-start mt-2 ">
             <img
               className="w-4 h-4 xxs:w-5 xxs:h-5"
@@ -96,7 +92,7 @@ function SellerHeader({
               alt="Location"
             />
             <span className="text-xs xxs:text-sm sm:text-md text-primary text-opacity-80 ml-2">
-              {location}
+              {seller.address}
             </span>
           </div>
         </div>
@@ -117,16 +113,5 @@ function SellerHeader({
     </header>
   );
 }
-
-SellerHeader.propTypes = {
-  seller: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    joinDate: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    profilePic: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default SellerHeader;

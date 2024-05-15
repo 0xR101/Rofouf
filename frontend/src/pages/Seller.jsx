@@ -3,18 +3,46 @@ import Footer from "./../components/footer/Footer.jsx";
 import CommentsSection from "../components/CommentSection/CommentSection.jsx";
 import SellerHeader from "./../components/sellerHeader/SellerHeader.jsx";
 import HorizontalBookSlider from "../components/HorizontalBookSlider/HorizontalBookSlider.jsx";
+import { useState, useEffect } from "react";
 
-// Example seller data with an ID property
-const sellerInfo = {
-  id: 123, // Example seller ID
-  name: "Ahmad Al-ali",
-  joinDate: "2024",
-  rating: 3.8,
-  profilePic: "./src/assets/person.png", // Replace with actual image path
-  location: "Amman, Jordan",
-};
+import { useSearchParams } from "react-router-dom";
 
 function Seller() {
+  const [searchParams] = useSearchParams();
+  const sellerUsername = searchParams.get("username");
+
+  const [sellerInfo, setSellerInfo] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchSellerInfo = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/v1/users/getUserInfo?username=${sellerUsername}`
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error: Status ${response.status}`);
+        }
+        const sellerData = await response.json();
+        setSellerInfo(sellerData.data);
+        setError(null);
+      } catch (err) {
+        setError(err.message);
+        setSellerInfo(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSellerInfo();
+  }, [sellerUsername]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
+  console.log(sellerInfo);
+
   return (
     <>
       <NavBar />
