@@ -51,9 +51,7 @@ function Seller() {
         <SellerHeader seller={sellerInfo} />
         <div>
           <h1 className="text-3xl font-bold mb-4 text-primary">All Offers</h1>
-          <HorizontalBookSlider
-            username={sellerUsername}
-          ></HorizontalBookSlider>
+          <HorizontalBookSlider user={sellerUsername}></HorizontalBookSlider>
         </div>
         <div>
           <h1 className="text-3xl font-bold mb-4 text-primary">All Comments</h1>
