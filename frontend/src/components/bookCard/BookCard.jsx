@@ -20,7 +20,7 @@ function BookCard({
   return (
     <>
       <div className="flex flex-row w-full max-sm:flex-col max-sm:shadow-bottom-lg">
-        <div className="w-60 h-80">
+        <div className="w-60 h-80 max-h-80 max-w-80">
           {image != null ? (
             <img
               className="object-cover w-full h-full rounded-2xl"
