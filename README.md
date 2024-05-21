@@ -48,15 +48,40 @@ Clone the project
 https://github.com/0xR101/Rofouf.git
 ```
 
-### :gear: Installation and run
+#### :gear: Installation and Running Instructions for Each Folder
 
-```bash
-npm install or npm i
-```
+This repository contains two separate folders: `frontend` and `backend`. Each folder represents a distinct component of the application. To successfully install and run the application, follow the instructions below for each folder individually.
 
-```bash
-npm run dev
-```
+**Frontend Folder:**
+
+1. Open your command line interface (CLI) or terminal.
+2. Navigate to the `frontend` folder using the `cd frontend` command.
+3. Run the following command to install the necessary dependencies:
+   ```bash
+   npm install or npm i
+   ```
+4. After the installation is complete, start the development server by running the following command:
+   ```bash
+   npm run dev
+   ```
+
+**Backend Folder:**
+
+1. Open another command line interface (CLI) or terminal window.
+2. Navigate to the `backend` folder using the `cd backend` command.
+3. Run the following command to install the required dependencies:
+   ```bash
+   npm install or npm i
+   ```
+4. Once the installation finishes, start the backend server by executing the following command:
+   ```bash
+   npm run dev
+   ```
+
+By following these steps, you will have two separate servers running simultaneously—one for the frontend and one for the backend. This setup enables the proper functioning of the application, allowing both components to communicate and collaborate effectively.
+
+Please note that it's essential to execute the commands in the respective folders to ensure the correct installation and execution of the frontend and backend components.
+
 
 ## :compass: Roadmap
 
